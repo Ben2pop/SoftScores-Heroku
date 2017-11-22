@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="">
+  <div class="row">
+    <div class="col HRimg">
+
+    </div>
+    <div class="col">
+      <div class="form-area">
+        <div class="intr-text">
+          <h2>Recruiter Area Login</h2>
+          <hr class="title-separator">
+          <h4>Please login in order to access the application</h4>
+        </div>
+
+        <form action="{% url 'registration:HRlogin' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="email">Email: </label>
+            <input type="text" name="email" placeholder="Enter Email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Password: </label>
+            <input type="password" name="password" value="" class="form-control">
+          </div>
+          <div class="offset-md-10">
+            <input type="submit" name="" value="Login" class="btn btn-primary btn-lg btnsmallfont">
+          </div>
+
+
+        </form>
+        <div class="notmember">
+          <h7>Not a member ? Please signIn <a href="{% url 'registration:hr_register' %}">here</a></h7>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

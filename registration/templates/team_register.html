@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container paddingtop100">
+  <div class="jumbotron">
+    <div class="title">
+      <h2>Invite your Team members</h2>
+      <h3>You can choose up to 7 team members</h3>
+    </div>
+  </div>
+
+     <form method="post">
+       {% csrf_token %}
+
+       {{ formset.management_form }}
+
+       {% for form in formset %}
+           <div class="link-formset">
+
+                 {{ form.label_tag }}  {{ form }}
+
+
+            </div>
+
+        {% endfor %}
+
+       <div>
+         <input type="submit" value="Send Invitations" class="btn btn-primary"/>
+       </div>
+
+    </form>
+
+
+</div>
+         <!-- Include formset plugin - including jQuery dependency -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script>
+    $('.link-formset').formset({
+        addText: 'add member',
+        deleteText: 'remove'
+             });
+</script>
+
+
+{% endblock %}

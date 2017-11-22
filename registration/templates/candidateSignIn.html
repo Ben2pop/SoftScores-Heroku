@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="">
+  <div class="row">
+    <div class="col HRimg">
+
+    </div>
+    <div class="col">
+      <div class="form-area">
+        <div class="intr-area">
+          <h2>Employee Area SignIn</h2>
+          <hr class="title-separator">
+          <h4>Please Sign-in order to access the application</h4>
+        </div>
+
+  <form method="post">
+    {% csrf_token %}
+      {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="display: none">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+      {% endfor %}
+      <div class="offset-md-10">
+    <button type="submit" class="btn btn-primary btn-lg btnsmallfont">Sign In</button>
+      </div>
+  </form>
+
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

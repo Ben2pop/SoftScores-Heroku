@@ -1,0 +1,87 @@
+{% load bootstrap %}
+{% load static %}
+{% load i18n %}
+{% load survey_extras %}
+
+<table class="table">
+    <!--<thead>
+      <tr>
+        <th> Question  </th>
+        <th> Answers </th>
+      </tr>
+    </thead> -->
+    <tbody>
+{% for form in response_form %}
+	{% if form.field.widget.attrs.category == category.name or not form.field.widget.attrs.category %}
+        <tr class="{% if form.errors%} danger {% endif %}">
+            <td>
+              <div class="question-title">
+                <h4>{{ form.label|safe }}</h4>
+              </div>
+
+	            {% if form.field.required %}
+	                <span class="glyphicon glyphicon-asterisk" style="color:red"> </span>
+	            {% endif %}
+	            <span class="help-inline" style="color:red">
+	                <strong> {% for error in  form.errors %}{{ error }}{% endfor %} </strong>
+	            </span> <br>
+
+              <div class="answers">
+                {% for field in form %}
+                      <ul>
+                        {{ field }}
+                      </ul>
+                  {% endfor%}
+                  {% if "hidden" in form.field.widget.attrs %}
+                      <br>
+                      {% for scale in scales %}
+                          {{ scale|safe }}
+                          <div id="rate" class="scale">
+                          </div>
+                          <div class="scale-title">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col scaleleft">
+                                  0%
+                                </div>
+                                <div class="col scaleright">
+                                  100%
+                                </div>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+                          <br>
+                      {% endfor %}
+                  {% endif %}
+              </div>
+
+            </td>
+        </tr>
+	{% endif %}
+{% endfor %}
+    </tbody>
+</table>
+
+<!-- Popper -->
+
+
+<!-- Initialize Bootstrap functionality -->
+<script>
+// Initialize tooltip component
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Initialize popover component
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+</script>

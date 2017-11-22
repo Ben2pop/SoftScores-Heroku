@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="paddingtop100">
+  <div class="jumbotron">
+    <h1>Welcome to SoftScores.com</h1>
+    <h2>Team analytics platfom</h2>
+    <h3>Welcome to {{User.username}}, it is your Page</h3>
+  </div>
+  <div class="container">
+    <div class="">
+      Create a new project :<a href="{% url 'website:addproject' %}"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}

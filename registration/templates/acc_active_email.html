@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user }},
+Please click on the link to confirm your registration,
+
+http://{{ domain }}{% url 'registration:CandidateSignIn' uidb64=uid token=token %}
+{% endautoescape %}
+
+
+<!--uidb64=uid token=token-->

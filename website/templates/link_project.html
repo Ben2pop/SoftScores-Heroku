@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container paddingtop100">
+
+    <div class="jumbotron">
+      <h2>Select one of your team and link it to your project</h2>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+<form class=""  method="post">
+    {% csrf_token %}
+        {{ select_form.as_p }}
+
+        {% for i  in team_list %}
+        <div class="col-md-4">
+          <div class="radio">
+            <label><input type="radio" name="optradio">  {{ i }}</label> - details
+          </div>
+        </div>
+
+        {% endfor %}
+        <div class="col-md-4 col-md-offset-10">
+          <button type="submit" class="btn btn-primary">Select</button>
+          <button type="#" class="btn btn-secondary">Back</button>
+        </div>
+
+</form>
+    </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,195 @@
+.bg {
+    /* The image used */
+    background-image: url("/static/images/indexbg.jpeg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Login/SignIn Page */
+
+.HRimg{
+background-image: url("/static/images/ImgBackground.png");
+background-size: 100%;
+height: 100vh;
+}
+
+.HRimg2{
+background-image: url("/static/images/ImgBackground2.png");
+background-size: 100%;
+height: 100vh;
+}
+
+.HRimg3{
+background-image: url("/static/images/ImgBackground3.png");
+background-size: 100%;
+height: 100vh;
+}
+
+
+.form-area{
+margin-right:12%;
+margin-left:8%;
+margin-top:20%;
+font-family: 'Ubuntu', sans-serif;
+}
+
+.intr-text{
+  margin-bottom: 10%;
+
+}
+
+.title-separator{
+border-top: 1px solid #67a4d0;
+max-width: 500px;
+margin: 2em 0;
+}
+
+/*----------------------------------------------------------------------------*/
+
+/* NavBar */
+.navbar{
+  border-radius: 0;
+  margin-bottom: 0;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.navbar-brand>img {
+  width: 50%;
+}
+
+
+/*----------------------------------------------------------------------------*/
+
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.invite-team{
+  text-align: center;
+}
+
+.invite-teammembers{
+  text-align: center;
+}
+
+.jumbo-button{
+  margin-top:20px;
+}
+
+.success{
+  text-align: center;
+}
+
+.circle{
+  border-radius: 50%;
+	width: 20px;
+	height: 20px;
+  background-color: green;
+  color:white;
+  text-align: center;
+  margin-left: auto ;
+  margin-right: auto ;
+  }
+
+
+.team-container{
+  text-align:center;
+}
+
+
+
+.margintop10{
+  margin-top: 10px;
+}
+
+.marginbottom30{
+  margin-bottom:30px;
+}
+
+.survey-description{
+
+}
+
+.survey-listing{
+  margin-top: 30px;
+}
+
+.survey-list{
+  margin-top: 30px;
+}
+
+.question-title, .answers{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.question-title{
+  color:#66bb9e;
+}
+
+.answers{
+  background-color: rgba(102, 187, 158, 0.1);
+  border-radius: 25px;
+  padding-top: 15px;
+  padding-bottom:5px;
+  padding-left: 15px;
+  padding-right:15px;
+}
+
+.suveysubmit{
+
+}
+
+.surveysubmitcontent{
+
+}
+
+
+.notregistredyet{
+  font-size: 0.7rem;
+}
+
+.container .team-container .col{
+  padding: 15px;
+}
+
+.container .team-container .profil_pic{
+  text-align:center;
+  border-radius: 0px;
+  background-color: rgba(192,192,192,0.2);
+  padding-top: 30px;
+  padding-bottom: 15px;
+
+}
+
+.bord{
+  border: 1px solid lightgray;
+}
+
+.OuterContent{
+  border-left:1px solid lightgray;
+  border-right:1px solid lightgray;
+  border-bottom:1px solid lightgray;
+  height: 100px;
+}
+
+.InnerContent{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.warning{
+  padding-top:30px;
+}

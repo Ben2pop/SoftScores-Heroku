@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container paddingtop100">
+  <div class="jumbotron">
+    <div class="paddingbottom10">
+      <h5>Welcome to the project creation page, please select a Project name to start the process</h5>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form class="form-inline" method="POST">
+            {% csrf_token %}
+            {% include 'form-template.html' %}
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock%}
