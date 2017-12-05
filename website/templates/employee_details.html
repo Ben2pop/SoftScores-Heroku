@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <div class="container paddingtop80 marginbottom30">
+    <div class="jumbotron greenback">
+      <h4>Welcome to the {{  employee_name.first_name }} {{employee_name.last_name}} Detail page</h4>
+    </div>
+
+   {% include "survey/dashboard.html" %}
+  </div>
+{% endblock%}

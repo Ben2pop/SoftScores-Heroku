@@ -76,6 +76,14 @@ def TeamRegister2(request):
             for i in formset:
                 mail = i.cleaned_data['Email']
                 if MyUser.objects.filter(email = mail).exists():
+                    user = MyUser.objects.get(email=mail)
+                    u1 = user.id # get user ID
+                    a1 = MyUser.objects.get(email = request.user.email) #get user email
+                    a2 = Project.objects.filter(project_hr_admin = a1)  #get all project created by the user
+                    a3 = a2.latest('id') # extract the last project
+                    a4 = a3.team_id # extract the team linked to the project
+                    a4.members.add(user) # add the member to the team
+
                     invited_user = MyUser.objects.get(email = mail)
                     current_site = get_current_site(request)
                     message = render_to_string('acc_join_email.html', {
@@ -93,12 +101,12 @@ def TeamRegister2(request):
                     user.is_active = False
                     user.is_employee = True
                     user.save()
-                    u1 = user.id
-                    a1 = MyUser.objects.get(email = request.user.email)
-                    a2 = Project.objects.filter(project_hr_admin = a1)
-                    a3 = a2.latest('id')
-                    a4 = a3.team_id
-                    a4.members.add(u1)
+                    u1 = user.id #get user id
+                    a1 = MyUser.objects.get(email = request.user.email) #get user email
+                    a2 = Project.objects.filter(project_hr_admin = a1)  #get all project created by the user
+                    a3 = a2.latest('id') # extract the last project
+                    a4 = a3.team_id # extract the team linked to the project
+                    a4.members.add(u1) # add the member to the team
 
                     current_site = get_current_site(request)
                     message = render_to_string('acc_active_email.html', {

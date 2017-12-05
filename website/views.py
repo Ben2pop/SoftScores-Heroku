@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Project, Team
@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from survey.models.survey import Survey
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 class HomePage(TemplateView):
     template_name= 'index.html'
@@ -103,15 +105,46 @@ class ProjectDetailView(generic.DetailView, LoginRequiredMixin):
     model = Project
     template_name = 'project_details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        try:
+            team_name = Project.objects.get(id=self.kwargs['pk']).team_id.members.all()
+            context['team_name'] = team_name
+        except AttributeError:
+            pass
+        return context
+
+
+class EmployeeDetailView(generic.DetailView, LoginRequiredMixin):
+    #import pdb; pdb.set_trace()
+    model = MyUser
+    template_name = 'Employee_Details.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(MyUser, pk=self.kwargs['pk2'], members__project=self.kwargs['pk1'])
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeDetailView, self).get_context_data(**kwargs)
+        employee_name = MyUser.objects.get(id=self.kwargs['pk2'])
+        team_list = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
+        team_list_pop = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all().exclude(id=self.kwargs['pk2'])
+        context={
+            'employee_name' : employee_name,
+            'team_list' : team_list,
+            'team_list_pop' : team_list_pop
+        }
+        return context
+
 
 
 class TeamCreate(CreateView):
+
     model = Team
     fields = ['team_name']
     template_name = 'team_form.html'
 
     def form_valid(self, form):
-        #import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         valid = super(TeamCreate, self).form_valid(form)
         form.instance.team_hr_admin = self.request.user
         obj = form.save()
@@ -126,3 +159,139 @@ class TeamCreate(CreateView):
         #import pdb; pdb.set_trace()
         project = Project.objects.get(team_id=None, project_hr_admin=self.request.user)
         return project.get_absolute_url()
+
+
+class EmployeeChartData(APIView):
+    #import pdb; pdb.set_trace()
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None, *args, **kwargs):
+
+        project_name = Project.objects.get(id=kwargs['pk1']).name
+        team_name_list = Project.objects.get(id=kwargs['pk1']).team_id.members.all()
+        team_member_count = Project.objects.get(id=kwargs['pk1']).team_id.members.count()
+        main_items2 = [1,2,3,-4,5,6,-7,8,9,-10,-11,12,13,14,15,16]
+        info_process_data = [4,6,2,8,4]
+        info_process_data2 = [8,2,5,2,4]
+        action_process_data = [5,3,9]
+        motivation_data = [4,5,1,8]
+        behaviour_data = [6,3,9,1]
+
+        data = {
+            #labels
+
+            "labels_main_graph":labels_main_graph,
+            "information_processing_label": information_processing_label,
+            "action_process_label": action_process_label,
+            "motivation_label": motivation_label,
+            "behaviour_label":behaviour_label,
+            #data
+
+            "main2": main_items2,
+            "info_process_data": info_process_data,
+            "info_process_data2": info_process_data2,
+            "action_process_data": action_process_data,
+            "motivation_data":motivation_data,
+            "behaviour_data":behaviour_data,
+            #other
+            "project_name":project_name,
+            "team_member_count":team_member_count,
+            #"team_name_list":team_name_list
+
+        }
+        return Response(data)
+
+
+
+
+class ChartData(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+
+    def get(self, request, format=None, *args, **kwargs):
+
+        team_name = Project.objects.get(id=kwargs['pk']).team_id.team_name
+
+        main_items = [user_count, project_count,team_member_count,28,12,32]
+        main_items2 = [1,2,3,-4,5,6,-7,8,9,-10,-11,12,13,14,15,16]
+        info_process_data = [4,6,2,8,4]
+        info_process_data2 = [8,2,5,2,4]
+        action_process_data = [5,3,9]
+        motivation_data = [4,5,1,8]
+        behaviour_data = [6,3,9,1]
+        data = {
+            #labels
+            "labels":labels,
+            "labels_main_graph":labels_main_graph,
+            "information_processing_label": information_processing_label,
+            "action_process_label": action_process_label,
+            "motivation_label": motivation_label,
+            "behaviour_label":behaviour_label,
+            #data
+            "main":main_items,
+            "main2": main_items2,
+            "info_process_data": info_process_data,
+            "info_process_data2": info_process_data2,
+            "action_process_data": action_process_data,
+            "motivation_data":motivation_data,
+            "behaviour_data":behaviour_data,
+
+            #other
+            "team_name":team_name,
+            "team_list":team_list
+        }
+        return Response(data)
+
+
+# labels data #
+labels_main_graph = [
+                         ["ProActive", "Reactive"],
+                         ["General","Details"],
+                         ["Black/White", "Continuum"],
+                         ["Best Scenario","Worst Scenerio"],
+                         ["Toward","Away from"],
+                         ["Option","Procedure"],
+                         ["Frame of reference"],
+                         ["Externally referenced", "Internally Referenced"],
+                         ["Perceiving Process"],
+                         ["Affiliation Management"],
+                         ["Knowledge sort"],
+                         ["Time Sense"],
+                         ["Variety", "Routine"],
+                         ["Matching","Mismatching"],
+                         ["Representational Sort"],
+                         ["Preferences Sort"],
+                        ]
+
+information_processing_label = [
+                                    "Black/White - Continuum",
+                                    "Best Scenario - Worst Scenerio",
+                                    "General-Details",
+                                    "Matching VS Mismatching",
+                                    "Time Sense"
+                                   ]
+
+action_process_label = [
+                    ["Option - Procedure", ""],
+                    ["","Knowledge sort"],
+                    ["","ProActive - Reactive"]
+                     ]
+
+motivation_label = [
+                        "Toward - Away from",
+                        "Variety VS Routine",
+                        "Preferences-Sort",
+                        "Representational Sort"
+                      ]
+
+behaviour_label = [
+              "Frame of reference",
+              "Externally referenced – Internally Referenced",
+              "Perceiving Process",
+              "Affiliation – Management"
+              ]
+
+#end labels

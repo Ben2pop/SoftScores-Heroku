@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'survey',
     'bootstrapform',
     'rosetta',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

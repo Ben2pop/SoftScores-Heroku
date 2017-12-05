@@ -114,7 +114,7 @@ class Question(models.Model):
         return choices_list
 
     def get_clean_multiple_scale(self):
-        
+
         """ Return split and stripped list of scale questions with no null values. """
         if self.multiple_questions_scale is None:
             return []
@@ -128,7 +128,6 @@ class Question(models.Model):
     @property
     def answers_as_text(self):
         """ Return answers as a list of text.
-
         :rtype: List """
         answers_as_text = []
         for answer in self.answers.all():
@@ -159,7 +158,6 @@ class Question(models.Model):
                             filter=None, other_question=None):
         """ Return a dictionary with answers as key and cardinality (int or
             dict) as value
-
         :param int min_cardinality: The minimum of answer we need to take it
             into account.
         :param dict group_together: A dictionary of value we need to group
@@ -206,7 +204,6 @@ class Question(models.Model):
                               filter, standardized_filter, other_question):
         """ Return an ordered dict but the insertion order is the order of
         the related manager (ie question.answers).
-
         If you want something sorted use sorted_answers_cardinality with a set
         sort_answer parameter. """
         cardinality = OrderedDict()
@@ -257,7 +254,6 @@ class Question(models.Model):
                                    group_by_slugify=None, filter=None,
                                    sort_answer=None, other_question=None):
         """ Mostly to have reliable tests, but marginally nicer too...
-
         The ordering is reversed for same cardinality value so we have aa
         before zz. """
         cardinality = self.answers_cardinality(

@@ -167,20 +167,18 @@ body {
 .container .team-container .profil_pic{
   text-align:center;
   border-radius: 0px;
-  background-color: rgba(192,192,192,0.2);
+  background-color: rgba(102, 187, 158, 0.1);
   padding-top: 30px;
   padding-bottom: 15px;
 
 }
 
 .bord{
-  border: 1px solid lightgray;
+  border: 1px solid rgba(102, 187, 158, 0.2);
 }
 
 .OuterContent{
-  border-left:1px solid lightgray;
-  border-right:1px solid lightgray;
-  border-bottom:1px solid lightgray;
+
   height: 100px;
 }
 
@@ -192,4 +190,64 @@ body {
 
 .warning{
   padding-top:30px;
+}
+
+.main-graph{
+  border: 1px solid rgba(102, 187, 158, 0.3);
+  border-radius: 15px;
+  background-color: rgba(102, 187, 158, 0.05);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.graph-info, .motivation-info{
+  padding-left: 0;
+  padding-right:5px;
+}
+
+.action-info, .behaviour-info{
+  padding-right:0;
+  padding-left:5px;
+}
+
+
+
+.radar-container{
+  margin-top:30px;
+}
+
+.classWithPad {
+  border: 1px solid rgba(102, 187, 158, 0.3);
+  border-radius: 15px;
+  background-color: rgba(102, 187, 158, 0.05);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.radar-container .row{
+  margin-bottom:15px;
+}
+
+.classWithPad h2{
+  text-align: center;
+  background-color: #292B2C;
+  color: white;
+}
+
+.greenback{
+  background-color: rgba(102, 187, 158, 0.1);
+}
+
+.result-link{
+  font-size: 0.8rem;
+}
+
+.btn-canvas{
+  border-radius: 0 !important;
+  background-color: rgba(102, 187, 158, 1);
+  font-size: 0.7rem;
+}
+
+.dropdown-menu{
+  font-size:0.7rem;
 }
