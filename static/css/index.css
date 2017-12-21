@@ -318,3 +318,10 @@ header.masthead {
   display: block;
   margin:auto;
 }
+
+.button-validate{
+  margin-bottom:15px;
+}
+.button-validate input{
+  margin-right:15%;
+}

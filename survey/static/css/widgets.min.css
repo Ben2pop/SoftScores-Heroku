@@ -1,7 +1,7 @@
 .scale{
     display: inline-flex;
     border: black 1px solid;
-    width:71%;
+    width:70%;
     margin:auto;
     display: -webkit-box;
     display: -moz-box;
@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .numbers{
     width: 5px;
@@ -20,6 +21,10 @@
 
 .numbers:hover {
     background-color: #fa7770;
+}
+
+.number::selection{
+  background-color: #fabc70;
 }
 
 .scale-title{

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <h5 class="card-header text-center bg-dark text-white">title Test</h5>
+          <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
           <div class="card-body">
             <canvas id="mainGraph" width: "1200"; height="500"></canvas>
           </div>
@@ -19,39 +19,39 @@
         <div class="col graph-info">
 
             <div class="card">
-              <h5 class="card-header text-center bg-dark text-white">title Test</h5>
+              <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
               <div class="card-body">
-                <div class="dropdown">
-                <button class="btn btn-secondary btn-sm btn-canvas dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Compare with
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {% for i in team_list_pop %}
-                  <a class="dropdown-item" id="{{i.first_name}}_{{i.last_name}}" href="#">{{i.first_name}} {{i.last_name}}</a>
-                 {% endfor %}
-                </div>
-                </div>
+                <div class="dropdown-container">
+          				<form>
+          					<select id="pick-chart" class="form-control pick-chart">
+          						<option value="0">Compare with</option>
+                      {% for i in team_list_pop %}
+                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                     {% endfor %}
+          					</select>
+          				</form>
+          			</div>
+
                 <canvas id="info_process"></canvas>
               </div>
           </div>
 
       </div>
       <div class="col action-info">
-
             <div class="card">
-              <h5 class="card-header text-center bg-dark text-white">title Test</h5>
+              <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
               <div class="card-body">
-                <div class="dropdown">
-                <button class="btn btn-secondary btn-sm btn-canvas dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Compare with
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {% for i in team_list_pop %}
-                  <a class="dropdown-item" id="{{i.first_name}}_{{i.last_name}}" href="#">{{i.first_name}} {{i.last_name}}</a>
-                 {% endfor %}
-                </div>
-                </div>
-                <canvas id="info_process2"></canvas>
+                <div class="dropdown-container">
+          				<form>
+          					<select id="pick-chart2" class="form-control pick-chart2">
+          						<option value="0">Compare with</option>
+                      {% for i in team_list_pop %}
+                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                     {% endfor %}
+          					</select>
+          				</form>
+          			</div>
+                <canvas id="action"></canvas>
               </div>
             </div>
 
@@ -61,17 +61,17 @@
       <div class="col motivation-info">
 
           <div class="card">
-            <h5 class="card-header text-center bg-dark text-white">title Test</h5>
+            <h5 class="card-header text-center bg-dark text-white">Action</h5>
             <div class="card-body">
-              <div class="dropdown">
-              <button class="btn btn-secondary btn-sm btn-canvas dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Compare with
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for i in team_list_pop %}
-                <a class="dropdown-item" id="{{i.first_name}}_{{i.last_name}}" href="#">{{i.first_name}} {{i.last_name}}</a>
-               {% endfor %}
-              </div>
+              <div class="dropdown-container">
+                <form>
+                  <select id="pick-chart3" class="form-control pick-chart3">
+                    <option value="0">Compare with</option>
+                    {% for i in team_list_pop %}
+                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                   {% endfor %}
+                  </select>
+                </form>
               </div>
               <canvas id="motivation"></canvas>
             </div>
@@ -81,19 +81,19 @@
       <div class="col behaviour-info">
 
           <div class="card">
-            <h5 class="card-header text-center bg-dark text-white">title Test</h5>
+            <h5 class="card-header text-center bg-dark text-white">To define</h5>
             <div class="card-body">
-              <div class="dropdown">
-              <button class="btn btn-secondary btn-sm btn-canvas dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Compare with
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for i in team_list_pop %}
-                <a class="dropdown-item" id="{{i.first_name}}_{{i.last_name}}" href="#">{{i.first_name}} {{i.last_name}}</a>
-               {% endfor %}
+              <div class="dropdown-container">
+                <form>
+                  <select id="pick-chart4" class="form-control pick-chart4">
+                    <option value="0">Compare with</option>
+                    {% for i in team_list_pop %}
+                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                   {% endfor %}
+                  </select>
+                </form>
               </div>
-              </div>
-              <canvas id="behaviour"></canvas>
+              <canvas id="other"></canvas>
             </div>
         </div>
 
@@ -107,7 +107,6 @@
 {% block extrajs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=" crossorigin="anonymous"></script>
 
 <script>
@@ -120,26 +119,31 @@ $.ajax({
   success: function(data){
     console.log(data)
     //Labels comming from wevsite.views//
-    team = data.team_list
-    labels = data.labels
-    labels_main = data.labels_main_graph
-    labels_info = data.information_processing_label
-    label_action = data.action_process_label
-    label_motivation = data.motivation_label
-    label_behaviour = data.behaviour_label
-    //Data comming from wevsite.views//
-    Main_Data = data.main
-    Main_Data2 = data.main2
-    info_data = data.info_process_data
-    info_data2 = data.info_process_data2
-    action_data = data.action_process_data
-    motivation_data= data.motivation_data
-    behaviour_data = data.behaviour_data
-    //other
-    team_name = data.team_name
-    team_member_count = data.team_member_count
-    team_name_list = data.team_name_list
+    complete_label = data.complete_label,
+    processing_information_label = data.processing_information_label,
+    motivation_label = data.motivation_label,
+    action_label = data.action_label,
+    other_data_label = data.other_data_label,
 
+
+    //Data comming from wevsite.views//
+    complete = data.complete
+    info_array = data.info_array
+    motivation_array = data.motivation_array
+    action_array = data.action_array
+    behaviour_array = data.behaviour_array
+
+    team_name_list2 = data.team_name_list2
+
+    current_user = data.current_user
+    team_list_id = data.team_list_id
+
+    info_fixed_array = info_array[current_user]
+    motivation_fixed_array = motivation_array[current_user]
+    action_fixed_array = action_array[current_user]
+    behaviour_fixed_array = behaviour_array[current_user]
+
+    var array = [];
     var bar_color = [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -158,54 +162,82 @@ $.ajax({
         'rgba(255, 220, 89, 0.2)',
         'rgba(255, 192, 35, 0.2)',
     ]
+
     function random_color(){
       var color = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256))+ ',' + 0.2 + ')';
     return color
     }
 
-    function getRandomColor() {
-      var letters = '0123456789ABCDEF'.split('');
-      var color = '#';
-      for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+
     //ctx//
     var ctx = document.getElementById("mainGraph").getContext('2d');
     var ctx2 = document.getElementById("info_process").getContext('2d');
-    var ctx3 = document.getElementById("info_process2").getContext('2d');
+    var ctx3 = document.getElementById("action").getContext('2d');
     var ctx4 = document.getElementById("motivation").getContext('2d');
-    var ctx5 = document.getElementById("behaviour").getContext('2d');
+    var ctx5 = document.getElementById("other").getContext('2d');
 
-    //test var //
-    var datasetValue = [];
-    for (var j=0; j<team_member_count; j++) {
-        datasetValue[j] = {
-            backgroundColor: random_color(),
-            label : name[j],
-            data : info_data,
-        };
-    }
-    var looped_data = datasetValue
-
-    //end test //
-
-
+    $(".pick-chart").change(function (e) {
+        e.preventDefault();
+        var val = $(this).val();
+        if (val != 0) {
+                    info_process.data.datasets[1].data = info_array[val];
+                    info_process.update();
+                } else {
+            info_process.data.datasets[1].data = [];
+        }
+        info_process.update();
+    });
+    $(".pick-chart2").change(function (e) {
+        e.preventDefault();
+        var val = $(this).val();
+        if (val != 0) {
+                    motivation.data.datasets[1].data = motivation_array[val];
+                    motivation.update();
+                } else {
+            motivation.data.datasets[1].data = [];
+        }
+        motivation.update();
+    });
+    $(".pick-chart3").change(function (e) {
+        e.preventDefault();
+        var val = $(this).val();
+        if (val != 0) {
+                    action.data.datasets[1].data = action_array[val];
+                    action.update();
+                } else {
+                  action.data.datasets[1].data = [];
+        }
+        action.update();
+    });
+    $(".pick-chart4").change(function (e) {
+        e.preventDefault();
+        var val = $(this).val();
+        if (val != 0) {
+                    other.data.datasets[1].data = behaviour_array[val];
+                    other.update();
+                } else {
+                  other.data.datasets[1].data = [];
+        }
+        other.update();
+    });
 
 
     //Graph 1//
     var mainGraph = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels_main,
+            labels: complete_label,
             datasets: [{
-                data: Main_Data2,
+                data: complete,
                 backgroundColor: bar_color ,
 
             }]
         },
         options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
             responsive:true,
             maintainAspectRatio: false,
             scales: {
@@ -221,114 +253,147 @@ $.ajax({
     var info_process = new Chart(ctx2,{
       type: 'radar',
       data: {
-        labels: labels_info,
-        datasets: looped_data
+            labels: processing_information_label,
+            datasets:[{
+                    data: info_fixed_array, //processing_information_data,
+                    backgroundColor: 'rgba(102, 187, 158,0.2)',
+                    borderColor: 'rgb(102,187,158)',
+                    pointBackgroundColor:'rgb(67, 122, 103)',
+                      },
+                      {
+                      backgroundColor: 'rgba(188,101,47,0.2)',
+                      borderColor: 'rgb(168,101,47)',
+                      pointBackgroundColor:'rgb(155, 21, 6)',
+                      data: []
+                      }]
             },
-        options: {
-           scale: {display: true,
-                   ticks: {
-                     beginAtZero: true,
-     }
-                  },
-           responsive:true,
-           maintainAspectRatio: true,
-          }
-    });
+      options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            scale: {
+                  display: true,
+                  ticks: {
+                        beginAtZero: true,
+                          }
+                   },
+            responsive:true,
+            maintainAspectRatio: true,
+               }
+        });
+        //end graph 2//
     //end graph 2//
 
     //graph 3//
-    var info_process = new Chart(ctx3,{
+    var motivation = new Chart(ctx3,{
       type: 'radar',
       data: {
-        labels: label_action,
-        datasets: [{data: action_data,
-                    label: team_name,
-                    backgroundColor: "rgba(102, 187, 158, 0.2)",
-                    borderColor: "rgba(102, 187, 158, 0.9)",
-                    pointBackgroundColor: "black",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "yellow",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
-
-        }]
+            labels: motivation_label,
+            datasets:[{
+                    data: motivation_fixed_array, //processing_information_data,
+                    backgroundColor: 'rgba(102, 187, 158,0.2)',
+                    borderColor: 'rgb(102,187,158)',
+                    pointBackgroundColor:'rgb(67, 122, 103)',
+                      },
+                      {
+                      backgroundColor: 'rgba(188,101,47,0.2)',
+                      borderColor: 'rgb(168,101,47)',
+                      pointBackgroundColor:'rgb(155, 21, 6)',
+                      data: []
+                      }]
             },
-        options: {
-           scale: {display: true,
-                   ticks: {
-                     beginAtZero: true,
-     }
+      options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            scale: {
+                  display: true,
+                  ticks: {
+                        beginAtZero: true,
+                          }
+                   },
+            responsive:true,
+            maintainAspectRatio: true,
+               }
+        });
+   //end graph 3//
+
+   //graph 4//
+   var action = new Chart(ctx4,{
+     type: 'radar',
+     data: {
+           labels:action_label,
+           datasets:[{
+                   data: action_fixed_array, //processing_information_data,
+                   backgroundColor: 'rgba(102, 187, 158,0.2)',
+                   borderColor: 'rgb(102,187,158)',
+                   pointBackgroundColor:'rgb(67, 122, 103)',
+                     },
+                     {
+                     backgroundColor: 'rgba(188,101,47,0.2)',
+                     borderColor: 'rgb(168,101,47)',
+                     pointBackgroundColor:'rgb(155, 21, 6)',
+                     data: []
+                     }]
+           },
+     options: {
+           legend: {
+               position: 'top',
+               display: false
+           },
+           scale: {
+                 display: true,
+                 ticks: {
+                       beginAtZero: true,
+                         }
                   },
            responsive:true,
            maintainAspectRatio: true,
-          }
-    });
-    //end graph 3//
+              }
+       });
+  //end graph 4//
 
-    //graph 4//
-    var motivation = new Chart(ctx4,{
-      type: 'radar',
-      data: {
-        labels: label_motivation,
-        datasets: [{data: motivation_data,
-                    label: team_name,
-                    backgroundColor: "rgba(102, 187, 158, 0.2)",
-                    borderColor: "rgba(102, 187, 158, 0.9)",
-                    pointBackgroundColor: "black",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "yellow",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
+  //graph 5//
+  var other = new Chart(ctx5,{
+    type: 'radar',
+    data: {
+          labels:other_data_label,
+          datasets:[{
+                  data: behaviour_fixed_array, //processing_information_data,
+                  backgroundColor: 'rgba(102, 187, 158,0.2)',
+                  borderColor: 'rgb(102,187,158)',
+                  pointBackgroundColor:'rgb(67, 122, 103)',
+                    },
+                    {
+                    backgroundColor: 'rgba(188,101,47,0.2)',
+                    borderColor: 'rgb(168,101,47)',
+                    pointBackgroundColor:'rgb(155, 21, 6)',
+                    data: []
+                    }]
+          },
+    options: {
+          legend: {
+              position: 'top',
+              display: false
+          },
+          scale: {
+                display: true,
+                ticks: {
+                      beginAtZero: true,
+                        }
+                 },
+          responsive:true,
+          maintainAspectRatio: true,
+             }
+      });
+ //end graph 5//
 
-        }]
-            },
-        options: {
-           scale: {display: true,
-                   ticks: {
-                     beginAtZero: true,
-     }
-                  },
-           responsive:true,
-           maintainAspectRatio: true,
-          }
-    });
-    //end graph 4//
 
-    //graph 5//
-    var motivation = new Chart(ctx5,{
-      type: 'radar',
-      data: {
-        labels: label_behaviour,
-        datasets: [{data: behaviour_data,
-                    label: team_name,
-                    backgroundColor: "rgba(102, 187, 158, 0.2)",
-                    borderColor: "rgba(102, 187, 158, 0.9)",
-                    pointBackgroundColor: "black",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "yellow",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
 
-        }]
-            },
-        options: {
-           scale: {display: true,
-                   ticks: {
-                     beginAtZero: true,
-     }
-                  },
-           responsive:true,
-           maintainAspectRatio: true,
-          }
-    });
-    //end graph 5//
-
-//ending sucess
-  },
-
-  error: function(error_data){
-    console.log("error")
-    console.log(error_data)
-  }
+}
 })
-
 
 
 </script>

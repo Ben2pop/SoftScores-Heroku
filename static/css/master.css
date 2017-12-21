@@ -138,6 +138,14 @@ body {
   color:#66bb9e;
 }
 
+.question-title .col-7{
+  margin:auto;
+}
+
+.question-title .col-7 h5{
+  line-height: 1.7rem
+}
+
 .answers{
   background-color: rgba(102, 187, 158, 0.1);
   border-radius: 25px;
@@ -250,4 +258,18 @@ body {
 
 .dropdown-menu{
   font-size:0.7rem;
+}
+
+.questionbox input{
+  margin-left:35%;
+}
+
+.questionbox .col-11{
+  padding-left:7%;
+  padding-right:15%;
+  word-wrap: break-word;
+}
+
+.select.form-control:not([size]):not([multiple]) {
+    height: calc(1.25rem + 2px);
 }

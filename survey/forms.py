@@ -33,6 +33,7 @@ class ResponseForm(models.ModelForm):
         Question.SELECT_IMAGE: ImageSelectWidget,
         Question.SELECT_MULTIPLE: forms.CheckboxSelectMultiple,
         Question.SCALE: forms.TextInput,
+        Question.CHOICE_SCALE: forms.TextInput
     }
 
     class Meta(object):
@@ -59,16 +60,16 @@ class ResponseForm(models.ModelForm):
                 continue
             else:
                 try:
-                    self.scales = question.get_multiple_scales()
+                    self.scales = question
                 except:
                     self.scales = None
                 self.add_question(question, data)
 
     def get_multiple_scale(self):
         mscale = []
-        for items in self.scales:
+        for items in self.scales.get_multiple_scales():
             index, question = items
-            tag = "<p class='tagged'>{}</p>".format(question)
+            tag = "<div class='col-11 tagged'>{}</div>".format(question)
             mscale.append(tag)
         return mscale
 
@@ -171,6 +172,7 @@ class ResponseForm(models.ModelForm):
             Question.SELECT_MULTIPLE: forms.MultipleChoiceField,
             Question.INTEGER: forms.IntegerField,
             Question.SCALE: forms.CharField,
+            Question.CHOICE_SCALE: forms.CharField
         }
         # logging.debug("Args passed to field %s", kwargs)
         try:
@@ -180,13 +182,16 @@ class ResponseForm(models.ModelForm):
         except:
             return forms.CharField(**kwargs)
 
+    def get_widget_type(self):
+        return self.scales.type
+
     def add_question(self, question, data):
         """ Add a question to the form.
 
         :param Question question: The question to add.
         :param dict data: The pre-existing values from a post request. """
         kwargs = {"label": question.text,
-                  "required": question.required, }
+                  "required": question.required,}
         initial = self.get_question_initial(question, data)
         if initial:
             kwargs["initial"] = initial
@@ -201,7 +206,7 @@ class ResponseForm(models.ModelForm):
             field.widget.attrs["category"] = question.category.name
         else:
             field.widget.attrs["category"] = ""
-        if question.type == Question.SCALE:
+        if question.type == Question.SCALE or question.type == Question.CHOICE_SCALE:
             field.widget.attrs["hidden"] = ""
             field.widget.attrs["id"] = "enter"
         # logging.debug("Field for %s : %s", question, field.__dict__)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import (
-    absolute_import, division, print_function, unicode_literals
+    absolute_import, division#, print_function, unicode_literals
 )
 
 from django.conf import settings
@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from future import standard_library
 from survey.forms import ResponseForm
-from survey.models import Category, Survey
+from survey.models import Category, Survey, Response, Answer
 
 standard_library.install_aliases()
 
@@ -18,6 +18,7 @@ standard_library.install_aliases()
 class SurveyDetail(View):
 
     def get(self, request, *args, **kwargs):
+        #import pdb; pdb.set_trace()
         survey = get_object_or_404(Survey, is_published=True, id=kwargs['id'])
         if survey.template is not None and len(survey.template) > 4:
             template_name = survey.template
@@ -33,13 +34,17 @@ class SurveyDetail(View):
                             step=kwargs.get('step', 0))
         try:
             get_scale = form.get_multiple_scale()
+            widget_type = form.get_widget_type()
         except:
             get_scale = None
+            widget_type = None
         context = {
             'response_form': form,
             'survey': survey,
             'categories': categories,
-            'scales': get_scale
+            'scales': get_scale,
+            'type': widget_type,
+            
         }
 
         return render(request, template_name, context)

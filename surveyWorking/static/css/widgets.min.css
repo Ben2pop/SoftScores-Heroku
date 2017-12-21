@@ -1,0 +1,62 @@
+.scale{
+    display: inline-flex;
+    border: black 1px solid;
+    width:71%;
+    margin:auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.numbers{
+    width: 5px;
+    height: 40px;
+    background-color: #66bb9e;
+    margin-right: 2px;
+}
+
+.numbers:hover {
+    background-color: #fa7770;
+}
+
+.scale-title{
+  display: inline-flex;
+  width:71%;
+  margin:auto;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+
+.scaleleft{
+font-size: 0.7rem;
+text-align: left;
+}
+
+.scaleright{
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.answers p{
+  margin-bottom: 3rem;
+}
+
+.scale-title .container .row .col{
+padding-right:0;
+padding-left: 0;
+}
+
+.tooltip-inner {
+    background-color:#fa7770;
+    margin-bottom: 3px;
+    font-weight: 400;
+    font-family: Ubuntu;
+}

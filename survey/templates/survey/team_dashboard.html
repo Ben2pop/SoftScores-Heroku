@@ -1,0 +1,129 @@
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
+          <div class="card-body">
+            <canvas id="mainGraph" width: "1200"; height="500"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+
+  <div class="container radar-container">
+    <div class="row">
+        <div class="col graph-info">
+
+            <div class="card">
+              <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
+              <div class="card-body">
+                <div class="dropdown-container">
+          				<form>
+          					<select id="pick-chart" class="form-control pick-chart">
+          						<option value="0">Compare with</option>
+                      {% for i in team_list_pop %}
+                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                     {% endfor %}
+          					</select>
+          				</form>
+          			</div>
+
+                <canvas id="info_process"></canvas>
+              </div>
+          </div>
+
+      </div>
+      <div class="col action-info">
+            <div class="card">
+              <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
+              <div class="card-body">
+                <div class="dropdown-container">
+          				<form>
+          					<select id="pick-chart2" class="form-control pick-chart2">
+          						<option value="0">Compare with</option>
+                      {% for i in team_list_pop %}
+                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                     {% endfor %}
+          					</select>
+          				</form>
+          			</div>
+                <canvas id="action"></canvas>
+              </div>
+            </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col motivation-info">
+
+          <div class="card">
+            <h5 class="card-header text-center bg-dark text-white">Action</h5>
+            <div class="card-body">
+              <div class="dropdown-container">
+                <form>
+                  <select id="pick-chart3" class="form-control pick-chart3">
+                    <option value="0">Compare with</option>
+                    {% for i in team_list_pop %}
+                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                   {% endfor %}
+                  </select>
+                </form>
+              </div>
+              <canvas id="motivation"></canvas>
+            </div>
+        </div>
+
+      </div>
+      <div class="col behaviour-info">
+
+          <div class="card">
+            <h5 class="card-header text-center bg-dark text-white">To define</h5>
+            <div class="card-body">
+              <div class="dropdown-container">
+                <form>
+                  <select id="pick-chart4" class="form-control pick-chart4">
+                    <option value="0">Compare with</option>
+                    {% for i in team_list_pop %}
+                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+                   {% endfor %}
+                  </select>
+                </form>
+              </div>
+              <canvas id="other"></canvas>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% block extrajs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=" crossorigin="anonymous"></script>
+
+<script>
+var endpoint = 'api/chart/data2'
+
+
+$.ajax({
+  method: "GET",
+  url: endpoint,
+  success: function(data){
+    console.log(data)
+
+}
+})
+
+
+</script>
+
+
+{% endblock %}

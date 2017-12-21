@@ -35,6 +35,6 @@ class Response(models.Model):
         verbose_name_plural = _('responses')
 
     def __str__(self):
-        msg = u"Response to {} by {}".format(self.survey, self.user)
-        msg += u" on {}".format(self.created)
+        msg = u"Response id {} to {} by {}".format(self.id,self.survey, self.user)
+        #msg += u" on {}".format(self.created)
         return msg

@@ -65,7 +65,8 @@ class Question(models.Model):
     SELECT_IMAGE = 'select_image'
     SELECT_MULTIPLE = 'select-multiple'
     INTEGER = 'integer',
-    SCALE = 'scale'
+    SCALE = 'scale',
+    CHOICE_SCALE = 'choice-scale'
 
     QUESTION_TYPES = (
         (TEXT, _(u'text (multiple line)')),
@@ -76,6 +77,7 @@ class Question(models.Model):
         (SELECT_IMAGE, _(u'Select Image')),
         (INTEGER, _(u'integer')),
         (SCALE, _(u'scale')),
+        (CHOICE_SCALE, _(u'Choice Scale'))
     )
 
     text = models.TextField()
@@ -114,7 +116,6 @@ class Question(models.Model):
         return choices_list
 
     def get_clean_multiple_scale(self):
-
         """ Return split and stripped list of scale questions with no null values. """
         if self.multiple_questions_scale is None:
             return []
@@ -372,7 +373,7 @@ class Question(models.Model):
         return choices_tuple
 
     def __str__(self):
-        msg = u"Question '{}' ".format(self.text)
+        msg = u"Question id: '{}' '{}' ".format(self.id,self.text)
         if self.required:
             msg += u"(*) "
         msg += u"{}".format(self.get_clean_choices())
