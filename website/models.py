@@ -20,7 +20,7 @@ class Project(models.Model):
     candidat_answers = models.ManyToManyField('survey.response')
 
     def get_absolute_url(self):
-        return reverse('website:ProjectDetails', kwargs = {'pk' : self.pk})
+        return reverse('website:ProjectDetails', kwargs = {'pk1' : self.pk})
 
     def __str__(self):
         return self.name

@@ -1,0 +1,48 @@
+{% load static %}
+
+<h3>{{project.team_id}}</h3>
+<div class="team-container">
+  <div class="row">
+  {% for member in project.team_id.members.all %}
+    <div class="col">
+      <div class="bord">
+          <div class="profil_pic">
+          {% if member.first_name == None or member.last_name == None%}
+          <img src="{% static "images/peoplebw.png" %}" alt="" style="height:100px">
+          {% else %}
+          <img src="{% static "images/people.png" %}" alt="" style="height:100px">
+          {% endif %}
+        </div>
+          <div class="OuterContent">
+              <div class="InnerContent">
+                {% if member.first_name == None or member.last_name == None%}
+                <div class="name_content">
+                    <div class="email">
+                       {{ member.email }}
+                    </div>
+                    <div class="notregistredyet">
+                      Not Registred yet
+                    </div>
+                </div>
+                {% else %}
+                <div class="name_content">
+                    {{ member.first_name}} {{ member.last_name}}
+                </div>
+                  <div class="survey-taken">
+                    {% if member.response_set.count > 0 %}
+                        Survey has been taken - <span class="fa fa-thumbs-o-up" aria-hidden="true" style="color:green"></span>
+                        <div class="result-link">
+                          <span class="fa fa-id-card-o" aria-hidden="true"><a href="{% url 'website:EmployeDetails' pk1=project.id pk2=member.id %}"> Show Results</a>
+                        </div>
+                    {% else %}
+                        Survey has not been taken yet - <span class="fa fa-thumbs-o-down" aria-hidden="true" style="color:red"></span>
+                   {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+          </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>

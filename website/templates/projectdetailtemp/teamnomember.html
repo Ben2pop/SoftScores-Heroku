@@ -1,0 +1,11 @@
+{% load static %}
+<div class="invite-teammembers">
+  <div class="jumbotron greenback">
+    <div class="jumbo-text">
+      <h7>The team {{ project.team_id }} has beed created, we now need to add TeamMembers</h7>
+    </div>
+      <div class="jumbo-button">
+        <a href="{% url 'registration:team_register3' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span>   Add Team Members</a>
+      </div>
+  </div>
+</div>

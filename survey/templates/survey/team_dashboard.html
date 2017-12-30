@@ -118,6 +118,63 @@ $.ajax({
   url: endpoint,
   success: function(data){
     console.log(data)
+    complete_data = data.team_complete,
+    info_data = data.team_info_score,
+    motiv_data = data.team_motiv_score,
+    action_data = data.team_action_score,
+    behaviour_data = data.team_behaviour_score,
+
+    complete_label = data.complete_label
+
+    var bar_color = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 220, 89, 0.2)',
+        'rgba(255, 192, 35, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 220, 89, 0.2)',
+        'rgba(255, 192, 35, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(255, 99, 132, 0.2)'
+
+    ]
+    var ctx = document.getElementById("mainGraph").getContext('2d');
+
+    var mainGraph = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: complete_label,
+            datasets: [{
+                data: complete_data,
+                backgroundColor: bar_color ,
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false}
+                     }]
+                    }
+                 },
+    });
+    //end graph 1//
 
 }
 })

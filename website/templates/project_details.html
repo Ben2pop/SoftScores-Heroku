@@ -8,84 +8,18 @@
 
 <!-- case 1 = if there is not team created or linked -->
     {% if project.team_id == None  %}
-      <div class="invite-team">
-        <div class="jumbotron greenback">
-          <div class="jumbo-text">
-            <h7>Your project has been created, It is time to link a team or create a new for your project</h3>
-          </div>
-            <div class="jumbo-button">
-              <a href="{% url 'website:team_select'%}" class="btn btn-secondary" role="button"><span class="fa fa-link"></span>   Link an existing team</a>
-              <a href="{% url 'website:add_team' %}" class="btn btn-success" role="button"><span class="fa fa-plus-circle"></span>   Create a new team</a>
-            </div>
-        </div>
-      </div>
+      {% include "projectdetailtemp/noteamcreated.html" %}<
 <!-- case 2 = if there is a team created but no team members -->
     {% elif project.team_id and project.team_id.members.count == 0 %}
-  <div class="invite-teammembers">
-    <div class="jumbotron greenback">
-      <div class="jumbo-text">
-        <h7>The team {{ project.team_id }} has beed created, we now need to add TeamMembers</h7>
-      </div>
-        <div class="jumbo-button">
-          <a href="{% url 'registration:team_register3' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span>   Add Team Members</a>
-        </div>
-    </div>
-  </div>
-
+      {% include "projectdetailtemp/teamnomember.html" %}<
 <!-- any other situation -->
     {% else %}
-        <h3>{{project.team_id}}</h3>
-        <div class="team-container">
-          <div class="row">
-          {% for member in project.team_id.members.all %}
-            <div class="col">
-              <div class="bord">
-                  <div class="profil_pic">
-                  {% if member.first_name == None or member.last_name == None%}
-                  <img src="{% static "images/peoplebw.png" %}" alt="" style="height:100px">
-                  {% else %}
-                  <img src="{% static "images/people.png" %}" alt="" style="height:100px">
-                  {% endif %}
-                </div>
-                  <div class="OuterContent">
-                      <div class="InnerContent">
-                        {% if member.first_name == None or member.last_name == None%}
-                        <div class="name_content">
-                            <div class="email">
-                               {{ member.email }}
-                            </div>
-                            <div class="notregistredyet">
-                              Not Registred yet
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="name_content">
-                            {{ member.first_name}} {{ member.last_name}}
-                        </div>
-                          <div class="survey-taken">
-                            {% if member.response_set.count > 0 %}
-                                Survey has been taken - <span class="fa fa-thumbs-o-up" aria-hidden="true" style="color:green"></span>
-                                <div class="result-link">
-                                  <span class="fa fa-id-card-o" aria-hidden="true"><a href="{% url 'website:EmployeDetails' pk1=project.id pk2=member.id %}"> Show Results</a>
-                                </div>
-                            {% else %}
-                                Survey has not been taken yet - <span class="fa fa-thumbs-o-down" aria-hidden="true" style="color:red"></span>
-                           {% endif %}
-                          </div>
-                        {% endif %}
-                      </div>
-                  </div>
-              </div>
-            </div>
-          {% endfor %}
-          </div>
-        </div>
-
-      {% endif %}
+      {% include "projectdetailtemp/other.html" %}
+    {% endif %}
 
 
 {% if project.team_id and project.team_id.members.count > 0  %}
-  {% include "survey/dashboard.html" %}
+  {% include "survey/team_dashboard.html" %}
 {% endif %}
 </div>
 {% endblock%}

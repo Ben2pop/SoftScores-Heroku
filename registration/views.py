@@ -66,7 +66,7 @@ def HR_login(request):
 
 
 def TeamRegister2(request):
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     InviteFormSet = formset_factory(InviteForm2)
 
     if request.method == 'POST':
@@ -120,7 +120,7 @@ def TeamRegister2(request):
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
             messages.success(request, 'testouille la fripouille')
-            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk':a3.id}))
+            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1':a3.id}))
         else:
             print("The entered form is not valid")
 

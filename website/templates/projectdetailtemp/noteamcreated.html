@@ -1,0 +1,12 @@
+{% load static %}
+<div class="invite-team">
+  <div class="jumbotron greenback">
+    <div class="jumbo-text">
+      <h7>Your project has been created, It is time to link a team or create a new for your project</h3>
+    </div>
+      <div class="jumbo-button">
+        <a href="{% url 'website:team_select' pk1=project.id %}" class="btn btn-secondary" role="button"><span class="fa fa-link"></span>   Link an existing team</a>
+        <a href="{% url 'website:add_team' pk1=project.id %}" class="btn btn-success" role="button"><span class="fa fa-plus-circle"></span>   Create a new team</a>
+      </div>
+  </div>
+</div>
