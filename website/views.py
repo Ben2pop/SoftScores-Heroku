@@ -139,6 +139,7 @@ class EmployeeDetailView(generic.DetailView, LoginRequiredMixin):
         employee_name = MyUser.objects.get(id=self.kwargs['pk2'])
         team_list = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
         team_list_pop = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all().exclude(id=self.kwargs['pk2'])
+
         context={
             'employee_name' : employee_name,
             'team_list' : team_list,
@@ -1009,6 +1010,10 @@ class TeamChartData(APIView):
         behav_team = get_behaviour_action_score(self)
         team_complete = get_team_complete_data(self)
         cohesiveness_score = get_team_cohesivenss_score(self)
+        info_dist = get_question_similarities(self)[0]
+        motiv_dist = get_question_similarities(self)[1]
+        action_dist = get_question_similarities(self)[2]
+        behav_dist = get_question_similarities(self)[3]
 
         processing_information_label = [
                                        ["General","Details"],
@@ -1018,14 +1023,12 @@ class TeamChartData(APIView):
                                        ["Best Scenario","Worst Scenario"],
                                        ["Binary","Shades"],
                                        ]
-
         motivation_label =[
                           ["External","Internal"],
                           ["Go Away","Toward"],
                           [[motiv_team[1]['label']]],
                           ["Variety","Routine"],
                           ]
-
         action_label = [
                        ["Active","Reaction"],
                        [[action_team[1]['label']]],
@@ -1033,16 +1036,12 @@ class TeamChartData(APIView):
                        ["Perfection","Optimizing"],
                        ["Sensor","Intuition"]
                        ]
-
-
         other_data_label = [
                            ["External locus","Internal locus"],
                            ["Strong Will","Compliant"],
                            ["In time","Through time"],
                            [[behav_team[1]['label']]],
                            ]
-
-
         complete_label = [
                          ["General","Details"],
                          ["Sameness","Difference"],
@@ -1071,9 +1070,20 @@ class TeamChartData(APIView):
             "team_action_score":action_team,
             "team_behaviour_score":behav_team,
             "team_complete":team_complete,
-            'cohesiveness_score':cohesiveness_score,
-
+            "cohesiveness_score":cohesiveness_score[0],
+            "users":cohesiveness_score[1],
+            "user_dist":cohesiveness_score[2],
+            "info_dist":info_dist,
+            "motiv_dist": motiv_dist,
+            "action_dist":action_dist,
+            "behav_dist":behav_dist,
             "complete_label":complete_label,
+
+            "info_label":processing_information_label,
+            "motivation_label": motivation_label,
+            "action_label":action_label,
+            "behav_label":other_data_label,
+
         }
         return Response(data)
 
@@ -1089,7 +1099,6 @@ def get_team_complete_data(self, format=None, *args, **kwargs):
 
 def get_weighted_average_array(team_values):
     team_values_list = list(team_values)
-    #
     np_team_values_list = np.array(team_values_list)
     numb = (list(range(len(np_team_values_list[0]))))
     team_score = []
@@ -1119,7 +1128,6 @@ def get_team_info_score(self, format=None, *args, **kwargs):
     return info_scores
 
 def euclidean_distance(x,y):
-
     return sqrt(sum(pow(a-b,2) for a, b in zip(x, y)))
 
 
@@ -1220,15 +1228,78 @@ def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
             temp_dict.update({j:array_dict[j]})
         final_dic.append(temp_dict)
 
+    dist_list = []
     max_dist = math.sqrt(19*(200**2))
-    test_dict = {}
+    similarity_dict = {}
+    users=[]
     for val in final_dic:
         x = list(val.values())
         x_keys = list(val.keys())
         x_keys_str = str(x_keys[0]) + "-" + str(x_keys[1])
 
         distance = (euclidean_distance(x[0],x[1]))
-        disct_score= round((1-(distance/max_dist))*100)
-        test_dict.update({x_keys_str:disct_score})
+        dist_score= round((1-(distance/max_dist))*100)
+        dist_list.append(dist_score)
+        user_1 = MyUser.objects.get(id = x_keys[0]).first_name + " " + MyUser.objects.get(id = x_keys[0]).last_name
+        user_2 = MyUser.objects.get(id = x_keys[1]).first_name + " " + MyUser.objects.get(id = x_keys[1]).last_name
+        user_pair = user_1 + ' - ' +  user_2
+        users.append(user_pair)
+        similarity_dict.update({user_pair:dist_score})
+    #print("Similarity bewteen users :{0}".format(simalarity_dict))
     team_score = round(np.mean(dist_list))
-    return team_score, test_dict
+    return team_score,users,dist_list
+
+def get_question_similarities(self, format=None, *args, **kwargs):
+    team_info_tupple =  get_info_array(self)[0]
+    team_motivation_tupple =  get_motivation_array(self)[0]
+    team_action_tupple =  get_action_array(self)[0]
+    team_behaviour_tupple =  get_behaviour_array(self)[0]
+    dict_user_answers ={}
+    for a in team_info_tupple:
+        w = team_info_tupple[a]
+        x = team_motivation_tupple[a]
+        y = team_action_tupple[a]
+        z = team_behaviour_tupple[a]
+        merged_array = w + x + y + z
+        dict_user_answers.update({a:merged_array})
+
+
+    numb_answers = len(list(dict_user_answers.values())[0])
+    list_answers_values =list(dict_user_answers.values())
+
+    answer_per_question = []
+    for number in range(0,numb_answers):
+        temp_array=[]
+        for val in list_answers_values:
+            answer_value = val[number]
+            temp_array.append(answer_value)
+        answer_per_question.append(temp_array)
+    question_similarities = euclid_array(answer_per_question)
+    info_index = len((list(team_info_tupple.values())[0]))
+    info_similarities = question_similarities[0:info_index]
+    motiv_index = info_index + len((list(team_motivation_tupple.values())[0]))
+    motiv_similarities = question_similarities[(info_index):motiv_index]
+    action_index = motiv_index + len((list(team_action_tupple.values())[0]))
+    action_similarities = question_similarities[motiv_index:action_index]
+    behav_index = action_index + len((list(team_behaviour_tupple.values())[0]))
+    behav_similarities = question_similarities[action_index:behav_index]
+    print(action_similarities)
+    print(behav_similarities)
+    return info_similarities,motiv_similarities,action_similarities,behav_similarities
+
+
+
+def euclid_array(answer_per_question):
+    go = []
+    max_dist = round(math.sqrt(len(answer_per_question[0]*(200**2))))
+    for i in answer_per_question:
+        combi = list(it.combinations(i, 2))
+        #print(combi)
+        sum_diff = 0
+        for lst in combi:
+            diff = (lst[0] - lst[1])**2
+            sum_diff = sum_diff + diff
+        sqrd_val= math.sqrt(sum_diff)
+        final_val = round((1-(sqrd_val/max_dist))*100)
+        go.append(final_val)
+    return go

@@ -246,6 +246,10 @@ body {
   background-color: rgba(102, 187, 158, 0.1);
 }
 
+.redback{
+  background-color: rgba(216, 0, 0, 0.1);
+}
+
 .result-link{
   font-size: 0.8rem;
 }
@@ -272,4 +276,8 @@ body {
 
 .select.form-control:not([size]):not([multiple]) {
     height: calc(1.25rem + 2px);
+}
+
+.graph-container .row{
+  margin-bottom: 20px;
 }

@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="graph-container">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -11,28 +11,32 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <h5 class="card-header text-center bg-dark text-white">Members Similarities</h5>
+          <div class="card-body">
+            <canvas id="mainGraph2" width: "1200"; height="400"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
 </div>
 
 
-  <div class="container radar-container">
+<div class="container radar-container">
     <div class="row">
         <div class="col graph-info">
 
             <div class="card">
               <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
               <div class="card-body">
-                <div class="dropdown-container">
-          				<form>
-          					<select id="pick-chart" class="form-control pick-chart">
-          						<option value="0">Compare with</option>
-                      {% for i in team_list_pop %}
-                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
-                     {% endfor %}
-          					</select>
-          				</form>
-          			</div>
-
-                <canvas id="info_process"></canvas>
+                <canvas id="mainGraphLine1"></canvas>
               </div>
           </div>
 
@@ -41,17 +45,7 @@
             <div class="card">
               <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
               <div class="card-body">
-                <div class="dropdown-container">
-          				<form>
-          					<select id="pick-chart2" class="form-control pick-chart2">
-          						<option value="0">Compare with</option>
-                      {% for i in team_list_pop %}
-                      <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
-                     {% endfor %}
-          					</select>
-          				</form>
-          			</div>
-                <canvas id="action"></canvas>
+                <canvas id="mainGraphLine2"></canvas>
               </div>
             </div>
 
@@ -63,17 +57,7 @@
           <div class="card">
             <h5 class="card-header text-center bg-dark text-white">Action</h5>
             <div class="card-body">
-              <div class="dropdown-container">
-                <form>
-                  <select id="pick-chart3" class="form-control pick-chart3">
-                    <option value="0">Compare with</option>
-                    {% for i in team_list_pop %}
-                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
-                   {% endfor %}
-                  </select>
-                </form>
-              </div>
-              <canvas id="motivation"></canvas>
+              <canvas id="mainGraphLine3"></canvas>
             </div>
         </div>
 
@@ -83,17 +67,7 @@
           <div class="card">
             <h5 class="card-header text-center bg-dark text-white">To define</h5>
             <div class="card-body">
-              <div class="dropdown-container">
-                <form>
-                  <select id="pick-chart4" class="form-control pick-chart4">
-                    <option value="0">Compare with</option>
-                    {% for i in team_list_pop %}
-                    <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
-                   {% endfor %}
-                  </select>
-                </form>
-              </div>
-              <canvas id="other"></canvas>
+              <canvas id="mainGraphLine4"></canvas>
             </div>
         </div>
 
@@ -104,15 +78,23 @@
 
 
 
+
 {% block extrajs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js" integrity="sha256-65VrZtDIgFNXMsE+kzBqH4uB8vpABjMijjAnb9x8ViY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js" integrity="sha256-Olnajf3o9kfkFGloISwP1TslJiWUDd7IYmfC+GdCKd4=" crossorigin="anonymous"></script>
+
 
 <script>
 var endpoint = 'api/chart/data2'
 
-
+function getAvg(grades) {
+  return grades.reduce(function (p, c) {
+    return p + c;
+  }) / grades.length;
+}
 $.ajax({
   method: "GET",
   url: endpoint,
@@ -123,7 +105,16 @@ $.ajax({
     motiv_data = data.team_motiv_score,
     action_data = data.team_action_score,
     behaviour_data = data.team_behaviour_score,
-
+    user_list = data.users,
+    user_dist = data.user_dist,
+    info_dist = data.info_dist,
+    motiv_dist = data.motiv_dist,
+    action_dist  = data.action_dist,
+    behav_dist = data.behav_dist,
+    info_label = data.info_label,
+    motivation_label = data.motivation_label,
+    action_label = data.action_label,
+    behav_label = data.behav_label,
     complete_label = data.complete_label
 
     var bar_color = [
@@ -146,9 +137,13 @@ $.ajax({
         'rgba(54, 162, 235, 0.2)',
         'rgba(255, 206, 86, 0.2)',
         'rgba(255, 99, 132, 0.2)'
-
     ]
     var ctx = document.getElementById("mainGraph").getContext('2d');
+    var ctx2 = document.getElementById("mainGraph2").getContext('2d');
+    var ctx3 = document.getElementById("mainGraphLine1").getContext('2d');
+    var ctx4 = document.getElementById("mainGraphLine2").getContext('2d');
+    var ctx5 = document.getElementById("mainGraphLine3").getContext('2d');
+    var ctx6 = document.getElementById("mainGraphLine4").getContext('2d');
 
     var mainGraph = new Chart(ctx, {
         type: 'bar',
@@ -176,10 +171,262 @@ $.ajax({
     });
     //end graph 1//
 
+    //graph 2 //
+    var mainGraph2 = new Chart(ctx2, {
+        type: 'horizontalBar',
+        data: {
+            labels: user_list,
+            datasets: [{
+                data: user_dist,
+                backgroundColor: bar_color ,
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false,
+                        beginAtZero: true,
+                        }
+              }]
+            },
+            annotation: {
+              annotations: [
+                        {
+                          type: "line",
+                          mode: "vertical",
+                          scaleID: "x-axis-0",
+                          value: getAvg(user_dist),
+                          borderColor: "rgba(216, 138, 138, 1)",
+                          label: {
+                            content: "AVERAGE",
+                            fontFamily:'Ubuntu',
+                            enabled: true,
+                            position: "middle",
+                            fontSize: 10,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                          }
+                        }
+                      ]
+                    }
+                 },
+    });
+    //end graph 2//
+
+    //graph 3 //
+    var mainGraphLine1 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: info_label,
+            datasets: [{
+                data: info_dist,
+                backgroundColor: 'rgba(102, 187, 158, 0.2)' ,
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false,
+                        beginAtZero: true,
+                        }
+              }],
+              yAxes: [{
+              ticks: {min: 0, max:100}
+            }],
+            },
+            annotation: {
+              annotations: [
+                        {
+                          type: "line",
+                          mode: "horizontal",
+                          scaleID: "y-axis-0",
+                          value: getAvg(info_dist),
+                          borderColor: "rgba(216, 138, 138, 1)",
+                          borderWidth: 0.5,
+                          label: {
+                            content: "AVERAGE",
+                            fontFamily:'Ubuntu',
+                            enabled: true,
+                            position: "middle",
+                            fontSize: 8,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                          }
+                        }
+                      ]
+                    }
+                 },
+    });
+    //end graph 3//
+
+    //graph 4 //
+    var mainGraphLine2 = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: motivation_label,
+            datasets: [{
+                data: motiv_dist,
+                backgroundColor: 'rgba(102, 187, 158, 0.2)' ,
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false,
+                        beginAtZero: true,
+                        }
+              }],
+              yAxes: [{
+              ticks: {min: 0, max:100}
+            }],
+            },
+            annotation: {
+              annotations: [
+                        {
+                          type: "line",
+                          mode: "horizontal",
+                          scaleID: "y-axis-0",
+                          value: getAvg(motiv_dist),
+                          borderColor: "rgba(216, 138, 138, 1)",
+                          borderWidth: 0.5,
+                          label: {
+                            content: "AVERAGE",
+                            fontFamily:'Ubuntu',
+                            enabled: true,
+                            position: "middle",
+                            fontSize: 8,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                          }
+                        }
+                      ]
+                    }
+                 },
+    });
+    //end graph 4//
+    //graph 5 //
+    var mainGraphLine3 = new Chart(ctx5, {
+        type: 'line',
+        data: {
+            labels: action_label,
+            datasets: [{
+                data: action_dist,
+                backgroundColor: 'rgba(102, 187, 158, 0.2)' ,
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false,
+                        beginAtZero: true,
+                        }
+              }],
+              yAxes: [{
+              ticks: {min: 0, max:100}
+            }],
+            },
+            annotation: {
+              annotations: [
+                        {
+                          type: "line",
+                          mode: "horizontal",
+                          scaleID: "y-axis-0",
+                          value: getAvg(action_dist),
+                          borderColor: "rgba(216, 138, 138, 1)",
+                          borderWidth: 0.5,
+                          label: {
+                            content: "AVERAGE",
+                            fontFamily:'Ubuntu',
+                            enabled: true,
+                            position: "middle",
+                            fontSize: 8,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                          }
+                        }
+                      ]
+                    }
+                 },
+    });
+    //end graph 5//
+
+    //graph 6 //
+    var mainGraphLine4 = new Chart(ctx6, {
+        type: 'line',
+        data: {
+            labels: behav_label,
+            datasets: [{
+                data:behav_dist,
+                backgroundColor: 'rgba(102, 187, 158, 0.2)',
+
+            }]
+        },
+        options: {
+            legend: {
+                position: 'top',
+                display: false
+            },
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                ticks: {autoSkip: false,
+                        beginAtZero: true,
+                        }
+              }],
+              yAxes: [{
+                ticks: {min: 0, max:100}
+            }],
+            },
+            annotation: {
+              annotations: [
+                        {
+                          type: "line",
+                          mode: "horizontal",
+                          scaleID: "y-axis-0",
+                          value: getAvg(behav_dist),
+                          borderColor: "rgba(216, 138, 138, 0.8)",
+                          borderWidth: 0.5,
+                          label: {
+                            content: "AVERAGE",
+                            fontFamily:'Ubuntu',
+                            enabled: true,
+                            position: "middle",
+                            fontSize: 8,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                          }
+                        }
+                      ]
+                    }
+                 },
+    });
+    //end graph 6//
 }
 })
-
-
 </script>
 
 

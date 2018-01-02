@@ -1,6 +1,7 @@
 from django.db import models
 from registration.models import MyUser
 
+
 from django.core.urlresolvers import reverse
 
 # Create your models here.
@@ -21,6 +22,16 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('website:ProjectDetails', kwargs = {'pk1' : self.pk})
+
+    def has_member_responses(self):
+        x = Project.objects.get(id = self.id).team_id.members.all()
+        for i in x:
+            result = 1
+            if i.response_set.exists():
+                result = result * True
+            else:
+                result = result * False
+        return result
 
     def __str__(self):
         return self.name

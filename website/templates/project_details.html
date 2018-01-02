@@ -2,9 +2,29 @@
 {% load static %}
 {% block body %}
 <div class="container paddingtop80 marginbottom30">
-  <div class="jumbotron greenback">
-    <h4>Welcome to the Project "{{  project.name }}" Detail page</h4>
+<div class="row">
+{% if project.has_member_responses %}
+  <div class="col-8">
+    <div class="jumbotron greenback">
+      <h4>Welcome to the Project test "{{  project.name }}" Detail page</h4>
+    </div>
   </div>
+  <div class="col-4">
+    <div class="jumbotron greenback">
+      <h6>Team Score</h6>
+      <h4>{{team_score}}</h4>
+    </div>
+
+  </div>
+
+    {% else %}
+      <div class="col">
+        <div class="jumbotron greenback">
+          <h4>Welcome to the Project "{{  project.name }}" Detail page</h4>
+        </div>
+      </div>
+    {%endif%}
+</div>
 
 <!-- case 1 = if there is not team created or linked -->
     {% if project.team_id == None  %}
@@ -18,8 +38,14 @@
     {% endif %}
 
 
-{% if project.team_id and project.team_id.members.count > 0  %}
+{% if project.has_member_responses %}
   {% include "survey/team_dashboard.html" %}
+{% else %}
+
+  <div class="jumbotron redback">
+      We are still waiting for all members to answer the team questionnaire
+  </div>
+
 {% endif %}
 </div>
 {% endblock%}
