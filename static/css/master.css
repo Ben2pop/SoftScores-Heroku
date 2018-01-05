@@ -281,3 +281,19 @@ body {
 .graph-container .row{
   margin-bottom: 20px;
 }
+
+.inner-score{
+  text-align: center
+}
+
+.jumbotron.greenback{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mar20{
+  margin-top:25px;
+  margin-bottom:25px;
+}

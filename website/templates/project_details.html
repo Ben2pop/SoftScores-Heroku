@@ -4,6 +4,7 @@
 <div class="container paddingtop80 marginbottom30">
 <div class="row">
 {% if project.has_member_responses %}
+
   <div class="col-8">
     <div class="jumbotron greenback">
       <h4>Welcome to the Project test "{{  project.name }}" Detail page</h4>
@@ -11,8 +12,16 @@
   </div>
   <div class="col-4">
     <div class="jumbotron greenback">
-      <h6>Team Score</h6>
-      <h4>{{team_score}}</h4>
+      <div class="inner-score">
+        <div class="score-title">
+          <h6>Team Score</h6>
+        </div>
+        <div class="score-value">
+          <h2>{{score}}</h2>
+          <h8>Cohessive team</h8>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -49,3 +58,21 @@
 {% endif %}
 </div>
 {% endblock%}
+
+{% block extrajs %}
+<script>
+$(document).ready(function() {
+
+  var jumboMaxHeight = 0
+
+  $(".jumbotron").each(function(){
+    if ($(this).height() > jumboMaxHeight) {
+      jumboMaxHeight = $(this).height() }
+    })
+
+  $(".jumbotron").height(jumboMaxHeight)
+
+})
+  </script>
+
+{% endblock %}

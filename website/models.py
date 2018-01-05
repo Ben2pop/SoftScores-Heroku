@@ -15,6 +15,7 @@ class Team(models.Model):
 
 
 class Project(models.Model):
+
     name = models.CharField(max_length=250)
     team_id = models.ForeignKey(Team, blank=True, null=True)
     project_hr_admin = models.ForeignKey('registration.MyUser', blank=True, null=True)
@@ -24,14 +25,17 @@ class Project(models.Model):
         return reverse('website:ProjectDetails', kwargs = {'pk1' : self.pk})
 
     def has_member_responses(self):
-        x = Project.objects.get(id = self.id).team_id.members.all()
-        for i in x:
-            result = 1
-            if i.response_set.exists():
-                result = result * True
-            else:
-                result = result * False
-        return result
+        try:
+            x = Project.objects.get(id = self.id).team_id.members.all()
+            for i in x:
+                result = 1
+                if i.response_set.exists():
+                    result = result * True
+                else:
+                    result = result * False
+            return result
+        except AttributeError:
+            pass
 
     def __str__(self):
         return self.name

@@ -1,3 +1,9 @@
+<div class="dhasboard-summary">
+    <div class="row">
+        {{cohesiveness_score}}
+    </div>
+</div>
+
 
 <div class="graph-container">
     <div class="row">
@@ -35,8 +41,8 @@
 
             <div class="card">
               <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
-              <div class="card-body">
-                <canvas id="mainGraphLine1"></canvas>
+              <div class="card-body mar20">
+                <canvas id="mainGraphLine1" height="250"></canvas>
               </div>
           </div>
 
@@ -44,8 +50,8 @@
       <div class="col action-info">
             <div class="card">
               <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
-              <div class="card-body">
-                <canvas id="mainGraphLine2"></canvas>
+              <div class="card-body mar20">
+                <canvas id="mainGraphLine2" height="250"></canvas>
               </div>
             </div>
 
@@ -57,7 +63,7 @@
           <div class="card">
             <h5 class="card-header text-center bg-dark text-white">Action</h5>
             <div class="card-body">
-              <canvas id="mainGraphLine3"></canvas>
+              <canvas id="mainGraphLine3" height="250"></canvas>
             </div>
         </div>
 
@@ -67,7 +73,7 @@
           <div class="card">
             <h5 class="card-header text-center bg-dark text-white">To define</h5>
             <div class="card-body">
-              <canvas id="mainGraphLine4"></canvas>
+              <canvas id="mainGraphLine4" height="250"></canvas>
             </div>
         </div>
 
@@ -115,7 +121,8 @@ $.ajax({
     motivation_label = data.motivation_label,
     action_label = data.action_label,
     behav_label = data.behav_label,
-    complete_label = data.complete_label
+    complete_label = data.complete_label,
+    cohesiveness_score = data.cohesiveness_score
 
     var bar_color = [
         'rgba(255, 99, 132, 0.2)',
