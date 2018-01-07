@@ -6,7 +6,8 @@ import dj_database_url
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
