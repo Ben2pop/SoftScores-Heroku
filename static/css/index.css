@@ -298,7 +298,7 @@ header.masthead {
 
 }
 .team-img{
-  padding: 3rem 0;
+  padding: 3rem 2rem;
   text-align: center;
 }
 
@@ -324,4 +324,55 @@ header.masthead {
 }
 .button-validate input{
   margin-right:15%;
+}
+
+.padding-20{
+}
+
+.box-question{
+  background-color: rgb(249, 249, 249);
+  border: 1px solid #E5E5E5;
+  margin: 20px 0 30px 0;
+  text-align:center;
+  height:200px;
+  padding: 46px 37px 30px 37px;
+}
+
+.img-icon{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.box-question .h3{
+    color: #343434;
+    margin: 10px 0 2px 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+
+.box-question > p{
+  color: #343434;
+  margin: 20px 0 0 0;
+  display: block;
+  display: -webkit-box;
+  font-size: 16px;
+  max-height: calc(16px * 22px * 5);
+  line-height: 22px;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.onecol .box-question{
+  margin:0;
+  height:160px;
 }
