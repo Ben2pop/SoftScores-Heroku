@@ -297,3 +297,17 @@ body {
   margin-top:25px;
   margin-bottom:25px;
 }
+
+.question{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.margin20{
+  margin-bottom: 30px;
+}
+
+.question-section{
+  padding: 3rem 0;
+}
