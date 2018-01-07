@@ -128,10 +128,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-
 AUTH_USER_MODEL = 'registration.MyUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
