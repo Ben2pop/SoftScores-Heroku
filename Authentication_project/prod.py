@@ -17,8 +17,8 @@ DATABASES = {
 }
 
 
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST = ''
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'softscoresapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'SoftScoresTelAviv'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
