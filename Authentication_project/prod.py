@@ -16,6 +16,7 @@ DATABASES = {
     'default': dj_database_url.config(conn_max_age=600),
 }
 
+
 # EMAIL_HOST_USER = ''
 # EMAIL_HOST = ''
 # EMAIL_PORT = 587
