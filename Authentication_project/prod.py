@@ -23,6 +23,6 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=465
 EMAIL_HOST_USER = 'softscoresapp@gmail.com'
-EMAIL_HOST_PASSWORD = SoftScoresTelAviv
+EMAIL_HOST_PASSWORD = 'SoftScoresTelAviv'
 DEFAULT_EMAIL_FROM = 'softscoresapp@gmail.com'
 EMAIL_USE_TLS = True
