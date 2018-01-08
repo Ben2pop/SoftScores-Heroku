@@ -667,8 +667,8 @@ def get_preference_sort2(current_response):
     answer_question1 = current_response.answers.get(question_id = 4)
     answer_question2 = current_response.answers.get(question_id = 18)
 
-    json_answer_question1 = json.loads(answer_question1.body)
-    json_answer_question2 = json.loads(answer_question2.body)
+    json_answer_question1 = json.loads(answer_question1.body, encoding="utf-8")
+    json_answer_question2 = json.loads(answer_question2.body, encoding="utf-8")
 
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
