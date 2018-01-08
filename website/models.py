@@ -28,7 +28,8 @@ class Project(models.Model):
         try:
             x = Project.objects.get(id = self.id).team_id.members.all()
             for i in x:
-                global result = 1
+                global result
+                result = 1
                 if i.response_set.exists():
                     result = result * True
                 else:
