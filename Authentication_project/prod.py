@@ -18,8 +18,7 @@ DATABASES = {
 }
 
 
-
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=465
 EMAIL_HOST_USER = 'softscoresapp@gmail.com'
