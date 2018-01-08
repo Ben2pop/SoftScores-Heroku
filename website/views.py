@@ -134,7 +134,7 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
 class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
     #import pdb; pdb.set_trace()
     model = MyUser
-    template_name = 'Employee_Details.html'
+    template_name = 'employee_details.html'
 
 
     def get_object(self, queryset=None):
