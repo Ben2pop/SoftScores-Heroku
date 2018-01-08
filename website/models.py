@@ -24,7 +24,8 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse('website:ProjectDetails', kwargs = {'pk1' : self.pk})
 
-    def has_member_responses(self):
+    def has_member_responses(self,result):
+
         try:
             x = Project.objects.get(id = self.id).team_id.members.all()
             for i in x:
