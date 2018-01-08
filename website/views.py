@@ -321,7 +321,7 @@ def get_current_team(self, format=None, *args, **kwargs):
 
 def get_user_response(member_id):
     current_user = MyUser.objects.get(id = member_id) #current_user
-    survey_team = Survey.objects.get(name= 'Survey SoftScore') #survey team (to change to final one)
+    survey_team = Survey.objects.get(name= 'Survey SoftScores') #survey team (to change to final one)
     if ResponseModel.objects.filter(user = current_user, survey = survey_team):
         current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
         return current_response
