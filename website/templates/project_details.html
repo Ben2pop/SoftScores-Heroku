@@ -38,7 +38,7 @@
       {% include "projectdetailtemp/noteamcreated.html" %}
 <!-- case 2 = if there is a team created but no team members -->
     {% elif project.team_id and project.team_id.members.count == 0 %}
-      {% include "projectdetailtemp/teamnomember.html" %}<
+      {% include "projectdetailtemp/teamnomember.html" %}
 <!-- any other situation -->
     {% else %}
       {% include "projectdetailtemp/other.html" %}

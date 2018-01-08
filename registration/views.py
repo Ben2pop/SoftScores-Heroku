@@ -65,7 +65,7 @@ def HR_login(request):
 
 
 
-def TeamRegister2(request):
+def TeamRegister2(request, pk1=None):
     #import pdb; pdb.set_trace()
     InviteFormSet = formset_factory(InviteForm2)
 

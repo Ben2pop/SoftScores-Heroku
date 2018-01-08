@@ -293,7 +293,6 @@ class EmployeeChartData(APIView):
 
 
 def get_current_user(self):
-    print(self.kwargs)
     current_user = MyUser.objects.get(id = self.kwargs['pk2'])
     current_user_id = current_user.id
     return current_user_id
@@ -323,15 +322,20 @@ def get_current_team(self, format=None, *args, **kwargs):
 def get_user_response(member_id):
     current_user = MyUser.objects.get(id = member_id) #current_user
     survey_team = Survey.objects.get(name= 'Survey SoftScore') #survey team (to change to final one)
-    current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
+    if ResponseModel.objects.filter(user = current_user, survey = survey_team):
+        current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
+        return current_response
+    else:
+        pass
 
-    return current_response
 
 def get_current_response(self, format=None, *args, **kwargs):
     current_user = MyUser.objects.get(id = self.kwargs['pk2']) #current_user
     survey_team = Survey.objects.get(name= 'Survey SoftScore') #survey team (to change to final one)
-    current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
-
+    if ResponseModel.objects.filter(user = current_user, survey = survey_team):
+        current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
+    else:
+        pass
     return current_response
 
 
