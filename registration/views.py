@@ -66,7 +66,7 @@ def HR_login(request):
 
 
 def TeamRegister2(request, pk1=None):
-    #import pdb; pdb.set_trace()
+    #heroku run --app=your-app "ipython --pdb"
     InviteFormSet = formset_factory(InviteForm2)
 
     if request.method == 'POST':
@@ -165,7 +165,7 @@ def CandidateSignIn(request, uidb64, token):
 
     registered  = False
     if request.method == "POST":
-        form = TeamMembersFormUpdate(data=request.POST, instance=request.user)
+        form = TeamMembersFormUpdate(data=request.POST, instance=user)
 
         if form.is_valid():
             user = form.save()
