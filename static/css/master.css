@@ -319,3 +319,23 @@ body {
   padding-top: 20px;
   margin: auto;
 }
+
+.warning-text p{
+  font-size: 14px;
+}
+
+.warning .jumbotron{
+  padding: 3rem 2rem 1rem
+}
+
+.img-warning{
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.warn-container{
+  margin-top:35px;
+}

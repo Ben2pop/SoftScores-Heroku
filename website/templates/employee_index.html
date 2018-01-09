@@ -4,50 +4,48 @@
 {% block body %}
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col HRimg3">
+    <div class="row">
+        <div class="col-5 HRimg3">
 
-    </div>
-    <div class="col take-survey">
-      <div class="warning">
-       <div class="container-fluid">
+        </div>
 
-         <div class="row">
-           <div class="col">
+        <div class="col take-survey">
+            <div class="warning">
+                <div class="container-fluid warn-container">
+                  <div class="row justify-content-center">
+                    <div class="col-2">
+                      <div class="img-warning">
+                        <img src="{% static 'images/warning.png'%}" class="img-fluid" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="jumbotron warning-text">
+                          <p>
+                            Welcome to our application, we are glad you got here.  We built this app with one goal in mind, help companies build better teams, and help employees be less frustrated, be more productive and feel better.
+                          </p>
+                          <p>We all have been in that situation where we felt an incompatible in team work environment and other where we felt that everything flows magically no matter how skilled the teammates are. In the next step you will be asked to answer a 20-Minutes survey. It is not a personality test; we don’t care if you are an Introvert or Extravert or other boxes like this. We care only about processes so there are no good or wrong answers, don’t try to look good, be yourself and we take care of the rest.
+                          </p>
+                          <p>
+                            “It is not our differences that divide us. It is our inability to recognize, accept, and celebrate those differences”
+                          </p>
+                          <p>
+                            Nb: We built a test validation score in order to prevent users that would tend to not answer in a consistent way
+                          </p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    {% include "survey/list.html" %}
+                  </div>
+              </div>
 
-           </div>
-           <div class="col-10">
-             <div class="jumbotron">
-               <div class="container-fluid">
-                 <div class="row">
-                   <div class="col-8">
-                    Warning-content
-                   </div>
-                   <div class="col">
-                     <img src="{% static 'images/warning.png'%}" class="img-fluid" alt="">
-                   </div>
-
-                 </div>
-
-               </div>
-             </div>
-           </div>
-           <div class="col">
-
-           </div>
-
-         </div>
-       </div>
-
-      </div>
-      <div class="survey-list">
-        {% include "survey/list.html" %}
-      </div>
-
-    </div>
+          </div>
   </div>
 
 
+</div>
 </div>
 
 
