@@ -27,9 +27,9 @@ class Project(models.Model):
     def has_member_responses(self, result=None):
         try:
             x = Project.objects.get(id = self.id).team_id.members.all()
-            result = 1
-            for i in x:
 
+            for i in x:
+                result = 1
                 if i.response_set.exists():
                     result = result * True
                 else:
