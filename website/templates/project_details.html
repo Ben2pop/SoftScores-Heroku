@@ -45,13 +45,13 @@
     {% endif %}
 
 
-{% if project.has_member_responses %}
+{% if project.has_member_responses  %}
   {% include "survey/team_dashboard.html" %}
-{% else %}
-
+{% elif project.team_id and project.team_id.members.count > 0 %}
   <div class="jumbotron redback">
       We are still waiting for all members to answer the team questionnaire
   </div>
+  {% else %}
 
 {% endif %}
 </div>

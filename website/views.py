@@ -31,7 +31,6 @@ from .serializers import MyUserSerializer, ProjectSerializer, TeamSerializer
 from rest_framework.renderers import TemplateHTMLRenderer
 
 
-
 class HomePage(TemplateView):
     template_name= 'index.html'
 

@@ -4,7 +4,7 @@ from .settings import *
 import dj_database_url
 
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','.softscores.com']
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
