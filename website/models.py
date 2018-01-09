@@ -28,8 +28,9 @@ class Project(models.Model):
         try:
             import pdb; pdb.set_trace()
             x = Project.objects.get(id = self.id).team_id.members.all()
-            result = 1
+
             for i in x:
+                result = 1
                 if i.response_set.exists():
                     result = result * True
                 else:
