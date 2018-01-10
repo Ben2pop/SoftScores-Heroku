@@ -315,7 +315,7 @@ def get_current_team(self, format=None, *args, **kwargs):
         member_id = member.id
         member_response = get_user_response(member_id)
         members_response_list.append({member_id:member_response})
-
+    #print(members_response_list)
     return members_response_list
 
 def get_user_response(member_id):
@@ -330,7 +330,7 @@ def get_user_response(member_id):
 
 def get_current_response(self, format=None, *args, **kwargs):
     current_user = MyUser.objects.get(id = self.kwargs['pk2']) #current_user
-    survey_team = Survey.objects.get(name= 'Survey SoftScore') #survey team (to change to final one)
+    survey_team = Survey.objects.get(name= 'Survey SoftScores') #survey team (to change to final one)
     if ResponseModel.objects.filter(user = current_user, survey = survey_team):
         current_response = ResponseModel.objects.filter(user = current_user, survey = survey_team)[0]
     else:
@@ -365,7 +365,7 @@ def get_info_array(self, format=None, *args, **kwargs):
     member_info_array = {}
     for response_dic in current_response_list:
         current_response = list(response_dic.values())[0]
-        #print(dir(current_response))
+        #print(current_response)
         chunk_score = get_chunk_score3(current_response)
         chunk_score_10 = (abs(get_chunk_score3(current_response)))/10
         info_score = get_info_relationship3(current_response)
@@ -390,87 +390,74 @@ def get_info_array(self, format=None, *args, **kwargs):
 #------------------------------------------------------#
 
 def get_chunk_score3(current_response):
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 3)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 2)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
     if answer_key_question1 == "1" or "3":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #general
     else:
-        score1 = -list(json_answer_question1.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #details
 
     if answer_key_question2 == "1" or "3":
-        score2 = list(json_answer_question2.values())[0]
+        score2 = list(json_answer_question2.values())[0] #General
     else:
-        score2 = -list(json_answer_question2.values())[0]
+        score2 = -list(json_answer_question2.values())[0] #detail
 
     chunk_score = math.ceil((score1+score2)/2)
-            # chunk_list.append({current_response.user_id:chunk_score})
-    #print("chunk:{0}".format(chunk_score))
-            # if chunk_score > 0:
-            #     print("Chunk - General, Score: {0}" .format(chunk_score))
-            # else:
-            #     print("Chunk - Details, Score: {0}" .format(chunk_score))
+
     return chunk_score
 
 def get_info_relationship3(current_response):
 
-    answer_question1 = current_response.answers.get(question_id = 6)
-    answer_question2 = current_response.answers.get(question_id = 17)
+    answer_question1 = current_response.answers.get(question__quest_numb = 5)
+    answer_question2 = current_response.answers.get(question__quest_numb = 17)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
     if answer_key_question1 == "1" or "2":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #Sameness
     else:
-        score1 = -list(json_answer_question1.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #Difference
 
 
     if answer_key_question2 == "1" or "2":
-        score2 = list(json_answer_question2.values())[0]
+        score2 = list(json_answer_question2.values())[0]  #sameness
     else:
-        score2 = -list(json_answer_question2.values())[0]
+        score2 = -list(json_answer_question2.values())[0] #difference
 
     info_relationship_score = math.ceil((score1+score2)/2)
 
-    # print("info : {0}".format(info_relationship_score))
-    # if info_relationship_score > 0:
-    #     print("Info RelationShip - Sameness, Score: {0}".format(info_relationship_score))
-    # else:
-    #     print("Info RelationShip - Difference, Score: {0}".format(info_relationship_score))
     return info_relationship_score
 
 def get_rep_system3(current_response):
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
     if answer_key_question1 == "1" or "2":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #visual
     else:
-        score1 = -list(json_answer_question1.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #auditory
 
 
     if answer_key_question2 == "2" or "3":
-        score2 = list(json_answer_question2.values())[0]
+        score2 = list(json_answer_question2.values())[0] #visual
     else:
-        score2 = -list(json_answer_question2.values())[0]
+        score2 = -list(json_answer_question2.values())[0] #auditory
 
     rep_system_score = math.ceil((score1+score2)/2)
-    # if rep_system_score > 0:
-    #     print("Rep.System - Visual, Score: {0}".format(rep_system_score))
-    # else:
-    #     print("Rep.System - Auditory, Score: {0}".format(rep_system_score))
+
     return rep_system_score
 
 def get_reality_structure3(current_response):
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
@@ -486,60 +473,39 @@ def get_reality_structure3(current_response):
     else:
         score2 = -list(json_answer_question2.values())[0]
     info_relationship_score = math.ceil((score1+score2)/2)
-    # if info_relationship_score > 0:
-    #     print("Reality Structure: {0}".format(info_relationship_score))
-    # else:
-    #     print("Reality Structure: {0}".format(info_relationship_score))
+
     return info_relationship_score
 
 def get_scenario_thinking3(current_response):
-    answer_question1 = current_response.answers.get(question_id = 7)
+    answer_question1 = current_response.answers.get(question__quest_numb = 6)
     #answer_question2 = current_response.answers.get(question_id = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     #json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     #answer_key_question2 = list(json_answer_question2.keys())[0][0]
     if answer_key_question1 == "2" or "4":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #best scenario
     else:
-        score1 = -list(json_answer_question1.values())[0]
-
-
-    # if answer_key_question2 == "2" or "3":
-    #     score2 = list(json_answer_question2.values())[0]
-    # else:
-    #     score2 = -list(json_answer_question2.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #worst scenario
 
     scenario_thinking_score = math.ceil((score1))
-    # if scenario_thinking_score > 0:
-    #     print("Scenario Thinking - Best Scenario, Score: {0}".format(scenario_thinking_score))
-    # else:
-    #     print("Scenario Thinking - Worst Scenario, Score: {0}".format(scenario_thinking_score))
+
     return scenario_thinking_score
 
 def get_perceptual_category3(current_response):
-    answer_question1 = current_response.answers.get(question_id = 6)
+    answer_question1 = current_response.answers.get(question__quest_numb = 5)
     #answer_question2 = current_response.answers.get(question_id = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     #json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     #answer_key_question2 = list(json_answer_question2.keys())[0][0]
     if answer_key_question1 == "1":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #Binary
     else:
-        score1 = -list(json_answer_question1.values())[0]
-
-
-    # if answer_key_question2 == "2" or "3":
-    #     score2 = list(json_answer_question2.values())[0]
-    # else:
-    #     score2 = -list(json_answer_question2.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #Shades
 
     perceptual_category_score = math.ceil(score1)
-    # if perceptual_category_score > 0:
-    #     print("Perceptual Category Binary, Score: {0}".format(perceptual_category_score))
-    # else:
-    #     print("Perceptual Category Shades, Score: {0}".format(perceptual_category_score))
+
     return perceptual_category_score
 
 
@@ -583,10 +549,10 @@ def get_motivation_array(self, format=None, *args, **kwargs):
 
 def get_frame_reference2(current_response):
 
-    answer_question1 = current_response.answers.get(question_id = 16)
-    answer_question2 = current_response.answers.get(question_id = 5)
-    answer_question3 = current_response.answers.get(question_id = 9)
-    answer_question4 = current_response.answers.get(question_id = 13)
+    answer_question1 = current_response.answers.get(question__quest_numb = 16)
+    answer_question2 = current_response.answers.get(question__quest_numb = 4)
+    answer_question3 = current_response.answers.get(question__quest_numb = 8)
+    answer_question4 = current_response.answers.get(question__quest_numb = 12)
 
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
@@ -599,36 +565,33 @@ def get_frame_reference2(current_response):
     answer_key_question4 = list(json_answer_question4.keys())[0][0]
 
     if answer_key_question1 == "1" or "2":
-        score1 = list(json_answer_question1.values())[0]
+        score1 = list(json_answer_question1.values())[0] #external
     else:
-        score1 = -list(json_answer_question1.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #internal
 
     if answer_key_question2 == "2" or "4":
-        score2 = list(json_answer_question2.values())[0]
+        score2 = list(json_answer_question2.values())[0] #external
     else:
-        score2 = -list(json_answer_question2.values())[0]
+        score2 = -list(json_answer_question2.values())[0] #internal
 
     if answer_key_question3 == "2":
-        score3 = list(json_answer_question3.values())[0]
+        score3 = list(json_answer_question3.values())[0] #external
     else:
-        score3 = -list(json_answer_question3.values())[0]
+        score3 = -list(json_answer_question3.values())[0] #internal
 
     if answer_key_question4 == "1" or "4":
-        score4 = list(json_answer_question4.values())[0]
+        score4 = list(json_answer_question4.values())[0] #external
     else:
-        score4= -list(json_answer_question4.values())[0]
+        score4= -list(json_answer_question4.values())[0] #internal
 
     frame_reference_score = math.ceil((score1+score2+score3+score4)/4)
-    # if frame_reference_score > 0:
-    #     print("Frame reference - External, Score: {0}".format(frame_reference_score))
-    # else:
-    #     print("Frame reference - Internal, Score: {0}".format(frame_reference_score))
+
     return frame_reference_score
 
 def get_motivation_direction2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 15)
-    answer_question2 = current_response.answers.get(question_id = 8)
-    answer_question3 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 15)
+    answer_question2 = current_response.answers.get(question__quest_numb = 7)
+    answer_question3 = current_response.answers.get(question__quest_numb = 4)
 
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
@@ -638,33 +601,30 @@ def get_motivation_direction2(current_response):
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
     answer_key_question3 = list(json_answer_question3.keys())[0][0]
 
-    if answer_key_question1 == "1" or "2":
-        score1 = list(json_answer_question1.values())[0]
+    if answer_key_question1 == "1":
+        score1 = list(json_answer_question1.values())[0] #toward
     else:
-        score1 = -list(json_answer_question1.values())[0]
+        score1 = -list(json_answer_question1.values())[0] #away from
 
-    if answer_key_question2 == "3" or "4":
-        score2 = list(json_answer_question2.values())[0]
+    if answer_key_question2 == "1" or "2":
+        score2 = list(json_answer_question2.values())[0] #toward
     else:
-        score2 = -list(json_answer_question2.values())[0]
+        score2 = -list(json_answer_question2.values())[0] #away from
 
-    if answer_key_question3 == "1":
-        score3 = list(json_answer_question3.values())[0]
+    if answer_key_question3 == "1" or "2":
+        score3 = list(json_answer_question3.values())[0] #toward
     else:
-        score3 = -list(json_answer_question3.values())[0]
+        score3 = -list(json_answer_question3.values())[0] #away from
 
 
     motivation_direction_score = math.ceil((score1+score2+score3)/3)
-    # if motivation_direction_score > 0:
-    #     print("Motivation Direction - Go Away, Score: {0}".format(motivation_direction_score))
-    # else:
-    #     print("Motivation Direction - Toward, Score: {0}".format(motivation_direction_score))
+
     return motivation_direction_score
 
 def get_preference_sort2(current_response):
 
-    answer_question1 = current_response.answers.get(question_id = 4)
-    answer_question2 = current_response.answers.get(question_id = 18)
+    answer_question1 = current_response.answers.get(question__quest_numb = 3)
+    answer_question2 = current_response.answers.get(question__quest_numb = 18)
 
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
@@ -672,44 +632,48 @@ def get_preference_sort2(current_response):
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
     answer_key_question2 = list(json_answer_question2.keys())[0][0]
 
-
-    if answer_key_question1 or answer_key_question2 == "1":
-        pref_label = "People"
-    elif answer_key_question1 == "2" or answer_key_question2 == "3":
-        pref_label = "Place"
-    elif answer_key_question1 == "3" or answer_key_question2 == "2":
-        pref_label = "Things"
-    else:
-        pref_label = "Intellect"
-
-
     score1 = list(json_answer_question1.values())[0]
     score2 = list(json_answer_question2.values())[0]
 
     if answer_key_question1 == "1" and answer_key_question2 == "1":
-        pref_sort_score = math.ceil((score1+score2)/2)
-        # print("Pref Score - People, score: {0}".format(pref_sort_score))
+        pref_sort_score = math.ceil((score1+score2)/2) ## case both are people
+        pref_label = "People"
     elif answer_key_question1 == "2" and answer_key_question2 == "3":
-        pref_sort_score = math.ceil((score1+score2)/2)
-        # print("Pref Score - Place, score: {0}".format(pref_sort_score))
+        pref_sort_score = math.ceil((score1+score2)/2) ## case both are Places
+        pref_label = "Place"
     elif answer_key_question1 == "3" and answer_key_question2 == "2":
-        pref_sort_score = math.ceil((score1+score2)/2)
-        # print("Pref Score - Things, score: {0}".format(pref_sort_score))
+        pref_sort_score = math.ceil((score1+score2)/2) ## case both are things
+        pref_label = "Things"
     elif answer_key_question1 == "4" and answer_key_question2 == "4":
-        pref_sort_score = math.ceil((score1+score2)/2)
-        # print("Pref Score - Intellect, score: {0}".format(pref_sort_score))
+        pref_sort_score = math.ceil((score1+score2)/2) ## case both are Intellect
+        pref_label = "Intellect"
 
     else:
         if score1>score2:
-            pref_sort_score = score1
-            # print("Pref Score Diff - {0}, score:{1}".format(pref_label,pref_sort_score))
+            pref_sort_score = score1 - score2
+            if answer_key_question1 == "1":
+                pref_label = "People"
+            elif answer_key_question1 == "2":
+                pref_label = "Place"
+            elif answer_key_question1 == "3":
+                pref_label = "Things"
+            else:
+                pref_label = "Intellect"
         else:
-            pref_sort_score = score2
-            # print("Pref Score Diff - {0}, score: {1}".format(pref_label, pref_sort_score))
+            pref_sort_score = score2 - score1
+            if answer_key_question1 == "1":
+                pref_label = "People"
+            elif answer_key_question1 == "3":
+                pref_label = "Place"
+            elif answer_key_question1 == "2":
+                pref_label = "Things"
+            else:
+                pref_label = "Intellect"
+
     return pref_sort_score, pref_label
 
 def get_openess2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 8)
+    answer_question1 = current_response.answers.get(question__quest_numb = 7)
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
@@ -763,7 +727,7 @@ def get_action_array(self, format=None, *args, **kwargs):
 #---------------------------------------------------------------#
 
 def get_active_reactive2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 15)
+    answer_question1 = current_response.answers.get(question__quest_numb = 14)
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
@@ -781,7 +745,7 @@ def get_active_reactive2(current_response):
     return act_score
 
 def get_affliation_management2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 11)
+    answer_question1 = current_response.answers.get(question__quest_numb = 10)
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
@@ -797,9 +761,9 @@ def get_affliation_management2(current_response):
     return act_score, affiliation_label
 
 def get_option_proc2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 3)
-    answer_question2 = current_response.answers.get(question_id = 15)
-    answer_question3 = current_response.answers.get(question_id = 7)
+    answer_question1 = current_response.answers.get(question__quest_numb = 2)
+    answer_question2 = current_response.answers.get(question__quest_numb = 14)
+    answer_question3 = current_response.answers.get(question__quest_numb = 6)
 
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
@@ -826,15 +790,12 @@ def get_option_proc2(current_response):
 
 
     option_proc = math.ceil((score1+score2+score3)/3)
-    # if option_proc > 0:
-    #     print("Option/Procedure - Options, Score:{0}".format(option_proc))
-    # else:
-    #     print("Option/Procedure - Procedure, Score: {0}".format(option_proc))
+
     return option_proc
 
 def get_expectation2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
@@ -858,7 +819,7 @@ def get_expectation2(current_response):
     return expect_score
 
 def get_sensor_intuition2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 13)
+    answer_question1 = current_response.answers.get(question__quest_numb = 12)
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
@@ -908,8 +869,8 @@ def get_behaviour_array(self, format=None, *args, **kwargs):
 #---------------------------------------------------------------#
 
 def get_locus_control2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
@@ -934,8 +895,8 @@ def get_locus_control2(current_response):
 
 def get_temper_to_instruction2(current_response):
 
-    answer_question1 = current_response.answers.get(question_id = 2)
-    answer_question2 = current_response.answers.get(question_id = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 1)
+    answer_question2 = current_response.answers.get(question__quest_numb = 16)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
@@ -959,8 +920,8 @@ def get_temper_to_instruction2(current_response):
     return temper_score
 
 def get_time_sorting2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 14)
-    answer_question2 = current_response.answers.get(question_id = 19)
+    answer_question1 = current_response.answers.get(question__quest_numb = 13)
+    answer_question2 = current_response.answers.get(question__quest_numb = 19)
     json_answer_question1 = json.loads(answer_question1.body)
     json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
@@ -973,14 +934,11 @@ def get_time_sorting2(current_response):
 
 
     time_sorting_score = math.ceil(score1)
-    # if time_sorting_score > 0:
-    #     print("Time Sorting - In Time: %s" % time_sorting_score)
-    # else:
-    #     print("Time Sorting - Through Time: %s" % time_sorting_score)
+
     return time_sorting_score
 
 def get_knowledge_sort2(current_response):
-    answer_question1 = current_response.answers.get(question_id = 12)
+    answer_question1 = current_response.answers.get(question__quest_numb = 11)
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
@@ -1221,6 +1179,7 @@ def get_trend(analyzed_array, index):
 
 
 def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
+    #import pdb; pdb.set_trace()
     team_info_tupple =  get_info_array(self)[0]
     team_motivation_tupple =  get_motivation_array(self)[0]
     team_action_tupple =  get_action_array(self)[0]
@@ -1297,7 +1256,7 @@ def get_question_similarities(self, format=None, *args, **kwargs):
     question_similarities[11] = action_trend
     behav_trend = get_dist_multiple_variable(get_behaviour_array(self),3)
     question_similarities[11] = behav_trend
-    print(question_similarities)
+    #print(question_similarities)
 
     info_index = len((list(team_info_tupple.values())[0]))
     info_similarities = question_similarities[0:info_index]

@@ -82,6 +82,7 @@ class Question(models.Model):
 
     text = models.TextField()
     order = models.IntegerField()
+    quest_numb = models.IntegerField(default=0)
     required = models.BooleanField()
     category = models.ForeignKey(Category, blank=True, null=True,
                                  related_name="questions")
