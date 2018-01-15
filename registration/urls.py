@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^auth_logout/$',views.user_logout,name='logout'),
     #url(r'^auth_team_register3/$', views.TeamRegister2, name='team_register3'),
     url(r'^project/(?P<pk1>[0-9]+)/auth_team_register3/$', views.TeamRegister2, name='team_register3'),
+    url(r'^project/(?P<pk1>[0-9]+)/auth_applicant_register3/$', views.applicantregister2, name='applicant_register3'),
 
 ]

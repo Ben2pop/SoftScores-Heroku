@@ -35,3 +35,13 @@ class InviteForm2(forms.Form):
                         'placeholder': "Member's mail",
                     }),
                     required=False)
+
+class ApplicantForm2(forms.Form):
+    """
+    Form for member email invite
+    """
+    Email = forms.EmailField(
+                    widget=forms.EmailInput(attrs={
+                        'placeholder': "Member's mail",
+                    }),
+                    required=False)

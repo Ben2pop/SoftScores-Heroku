@@ -29,7 +29,7 @@ from rest_framework.response import Response
 from survey.models.response import Response as ResponseModel
 from .serializers import MyUserSerializer, ProjectSerializer, TeamSerializer
 from rest_framework.renderers import TemplateHTMLRenderer
-
+from django.template.defaulttags import register
 
 class HomePage(TemplateView):
     template_name= 'index.html'
@@ -148,9 +148,32 @@ class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
         context={
             'employee_name' : employee_name,
             'team_list' : team_list,
-            'team_list_pop' : team_list_pop
+            'team_list_pop' : team_list_pop,
         }
         return context
+
+class CandidateDetailView(LoginRequiredMixin, generic.DetailView):
+    #import pdb; pdb.set_trace()
+    model = MyUser
+    template_name = 'applicant_details.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(MyUser, pk=self.kwargs['pk2'])
+
+    def get_context_data(self, **kwargs):
+        context = super(CandidateDetailView, self).get_context_data(**kwargs)
+        team_score = get_team_cohesivenss_score(self)[0]
+        applicant_score = get_applicant_cohesivenss_score(self)[0][0]
+        diff_score = get_applicant_cohesivenss_score(self)[0][0] - get_team_cohesivenss_score(self)[0]
+        team_list_pop = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all().exclude(id=self.kwargs['pk2'])
+        context['team_score'] = team_score
+        context['applicant_score'] = applicant_score
+        context['diff_score'] = diff_score
+        context['team_list_pop'] = team_list_pop
+
+        return context
+
+
 
 class TeamCreate(CreateView):
 
@@ -194,18 +217,22 @@ class EmployeeChartData(APIView):
     def get(self, request, format=None, *args, **kwargs):
         current_project = get_current_team(self)
         #info Process
-
-        info_array = get_info_array(self)[1]
-        motivation_array = get_motivation_array(self)[1]
-        action_array = get_action_array(self)[1]
-        behaviour_array = get_behaviour_array(self)[1]
+        info_array2 = get_employee_info_array(self)
+        motivation_array2 = get_employee_motivation_array(self)
+        action_array2 = get_employee_action_array(self)
+        behav_array2 = get_employee_behav_array(self)
+        #info_array = get_info_array(self)[1]
+        #motivation_array = get_motivation_array(self)[1]
+        #action_array = get_action_array(self)[1]
+        #behaviour_array = get_behaviour_array(self)[1]
         complete = get_complete_data(self)
         current_user = get_current_user(self)
         current_team_member_id = get_current_team_member_id(self)
 
-        label_pref = get_motivation_array(self)[2][int(self.kwargs['pk2'])]
-        affiliation_label = get_action_array(self)[2][int(self.kwargs['pk2'])]
-        knowledge_label = get_behaviour_array(self)[2][int(self.kwargs['pk2'])]
+        label_pref = get_employee_motivation_array(self)[2][int(self.kwargs['pk2'])]
+        affiliation_label = get_employee_action_array(self)[2][int(self.kwargs['pk2'])]
+        knowledge_label = get_employee_behav_array(self)[2][int(self.kwargs['pk2'])]
+
 
 
 
@@ -271,10 +298,10 @@ class EmployeeChartData(APIView):
         data = {
             #data
             "complete":complete,
-            "info_array":info_array,
-            "motivation_array":motivation_array,
-            "action_array": action_array,
-            "behaviour_array":behaviour_array,
+            #"info_array":info_array,
+            #"motivation_array":motivation_array,
+            #"action_array": action_array,
+            #"behaviour_array":behaviour_array,
 
             #labels
             "complete_label":complete_label,
@@ -285,7 +312,11 @@ class EmployeeChartData(APIView):
 
             #other
             "current_user":current_user,
-            "current_team_member_id":current_team_member_id
+            "current_team_member_id":current_team_member_id,
+            "info_array2":info_array2,
+            "motivation_array2":motivation_array2,
+            "action_array2":action_array2,
+            'behav_array2':behav_array2
 
         }
         return Response(data)
@@ -315,7 +346,7 @@ def get_current_team(self, format=None, *args, **kwargs):
         member_id = member.id
         member_response = get_user_response(member_id)
         members_response_list.append({member_id:member_response})
-    #print(members_response_list)
+
     return members_response_list
 
 def get_user_response(member_id):
@@ -340,32 +371,31 @@ def get_current_response(self, format=None, *args, **kwargs):
 
 ############ Complete Data ##############
 def get_complete_data(self, format=None, *args, **kwargs):
-    #current_response = get_current_response(self)
-    #print(current_response)
-    total_array = [get_info_array(self)[0],get_motivation_array(self)[0],get_action_array(self)[0],get_behaviour_array(self)[0]]
-    test = get_motivation_array(self)[2]
+
+    total_array = [get_employee_info_array(self)[0],get_employee_motivation_array(self)[0],get_employee_action_array(self)[0],get_employee_behav_array(self)[0]]
+    test = get_employee_motivation_array(self)[2]
     complete_array = []
     for i in total_array:
         f = i[int(self.kwargs['pk2'])]
         complete_array = complete_array + f
-    #print(complete_array)
-    #print(total_array)
-    #print(total_array)
 
     return complete_array
 
 ############ Processing Informations ##############
 
+def get_employee_info_array(self, format=None, *args, **kwargs):
+    response_list = get_current_team(self)
+    info_array = get_info_array(response_list)
+    return info_array
 
-def get_info_array(self, format=None, *args, **kwargs):
-
-    current_response_list = get_current_team(self)
-    #print(current_response_list)
+def get_info_array(array):
+    #import pdb; pdb.set_trace()
+    #current_response_list = get_current_team(self)
+    current_response_list = array
     member_info_array_10 = {}
     member_info_array = {}
     for response_dic in current_response_list:
         current_response = list(response_dic.values())[0]
-        #print(current_response)
         chunk_score = get_chunk_score3(current_response)
         chunk_score_10 = (abs(get_chunk_score3(current_response)))/10
         info_score = get_info_relationship3(current_response)
@@ -383,8 +413,6 @@ def get_info_array(self, format=None, *args, **kwargs):
         member_info_array_10.update({current_response.user_id:info_array_10})
         info_array = [chunk_score,info_score,rep_system,reality,scenario,perceptual]
         member_info_array.update({current_response.user_id:info_array})
-    #print(member_info_array)
-    #print(member_info_array_10)
     return member_info_array, member_info_array_10
 
 #------------------------------------------------------#
@@ -466,7 +494,7 @@ def get_reality_structure3(current_response):
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
-        #print(score1)
+
 
     if answer_key_question2 == "2" or "3":
         score2 = list(json_answer_question2.values())[0]
@@ -513,17 +541,22 @@ def get_perceptual_category3(current_response):
 
 ############ Motivation ##############
 
-def get_motivation_array(self, format=None, *args, **kwargs):
+def get_employee_motivation_array(self, format=None, *args, **kwargs):
+    response_list = get_current_team(self)
+    motiv_array = get_motivation_array(response_list)
+    return motiv_array
 
-    current_response_list = get_current_team(self)
+def get_motivation_array(array):
 
-    #print(current_response_list)
+    current_response_list = array
+
+
     member_motivation_array = {}
     member_motivation_array_10 = {}
     pref_label_array = {}
     for response_dic in current_response_list:
         current_response = list(response_dic.values())[0]
-        #print(current_response)
+
         frame_reference = get_frame_reference2(current_response)
         frame_10 = (abs(frame_reference))/10
         motivation_direction = get_motivation_direction2(current_response)
@@ -534,15 +567,13 @@ def get_motivation_array(self, format=None, *args, **kwargs):
         openess_10 = (abs(openess))/10
 
 
-        #print(pref_sort_label)
-
         pref_sort_label = get_preference_sort2(current_response)[1]
         pref_label_array.update({current_response.user_id:pref_sort_label})
         motivation_array = [frame_reference,motivation_direction,pref_sort,openess]
         member_motivation_array.update({current_response.user_id:motivation_array})
         motivation_array_10 = [frame_10,motivation_direction_10,pref_sort_10,openess_10]
         member_motivation_array_10.update({current_response.user_id:motivation_array_10})
-    #print(pref_label_array)
+
     return member_motivation_array,member_motivation_array_10,pref_label_array
 
 #---------------------------------------------------------------#
@@ -684,20 +715,23 @@ def get_openess2(current_response):
         score1 = -list(json_answer_question1.values())[0]
 
     openess_score = math.ceil(score1)
-    # if openess_score > 0:
-    #     print("Openess - Open, Score: {0}".format(openess_score))
-    # else:
-    #     print("Openess - Routine, Score: {0}".format(openess_score))
+
     return openess_score
 
 ############ End Motivation ##############
 
 ############ Action sort ##############
 
-def get_action_array(self, format=None, *args, **kwargs):
+def get_employee_action_array(self, format=None, *args, **kwargs):
+    response_list = get_current_team(self)
+    action_array = get_action_array(response_list)
 
-    current_response_list = get_current_team(self)
-    #print(current_response_list)
+    return action_array
+
+
+def get_action_array(array):
+
+    current_response_list = array
     member_action_array = {}
     member_action_array_10 = {}
     affil_label_array = {}
@@ -721,7 +755,7 @@ def get_action_array(self, format=None, *args, **kwargs):
         member_action_array.update({current_response.user_id:action_array})
         action_array_10 = [active_10,affiliation_10,option_10,expect_10,sensor_10]
         member_action_array_10.update({current_response.user_id:action_array_10})
-    #print(affil_label_array)
+
     return member_action_array,member_action_array_10,affil_label_array
 
 #---------------------------------------------------------------#
@@ -738,10 +772,7 @@ def get_active_reactive2(current_response):
         score1 = -list(json_answer_question1.values())[0]
 
     act_score = math.ceil(score1)
-    # if act_score > 0:
-    #     print("Active/Reactive - Active, Score: {0}".format(act_score))
-    # else:
-    #     print("Active/Reactive - Reactive, Score: {0}".format(act_score))
+
     return act_score
 
 def get_affliation_management2(current_response):
@@ -757,7 +788,7 @@ def get_affliation_management2(current_response):
         affiliation_label = "Team Player independant"
 
     act_score = list(json_answer_question1.values())[0]
-    # print("Affilation Management - {0}, Score: {1}".format(affiliation_label,act_score))
+
     return act_score, affiliation_label
 
 def get_option_proc2(current_response):
@@ -804,7 +835,7 @@ def get_expectation2(current_response):
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
-        #print(score1)
+
 
     if answer_key_question2 == "2" or "3":
         score2 = list(json_answer_question2.values())[0]
@@ -812,10 +843,7 @@ def get_expectation2(current_response):
         score2 = -list(json_answer_question2.values())[0]
 
     expect_score = math.ceil((score1+score2)/2)
-    # if info_relationship_score > 0:
-    #     print("Perfection: {0}".format(info_relationship_score))
-    # else:
-    #     print("Optimizing:{0}".format(info_relationship_score))
+
     return expect_score
 
 def get_sensor_intuition2(current_response):
@@ -829,19 +857,22 @@ def get_sensor_intuition2(current_response):
         score1 = -list(json_answer_question1.values())[0]
 
     sensor_intuition_score = math.ceil(score1)
-    # if sensor_intuition_score > 0:
-    #     print("Sensor/Intuition - Sensor, Score:{0}".format(sensor_intuition_score))
-    # else:
-    #     print("Sensor/Intuition - Intuition, Score: {0}".format(sensor_intuition_score))
+
     return sensor_intuition_score
 
 ############ End Action sort ##############
 
 ############ To Define ##############
 
-def get_behaviour_array(self, format=None, *args, **kwargs):
+def get_employee_behav_array(self, format=None, *args, **kwargs):
+    response_list = get_current_team(self)
+    behav_array = get_behaviour_array(response_list)
+    return behav_array
 
-    current_response_list = get_current_team(self)
+
+def get_behaviour_array(array):
+
+    current_response_list = array
     member_behaviour_array_10 = {}
     member_behaviour_array = {}
     knowledge_label_array = {}
@@ -863,7 +894,7 @@ def get_behaviour_array(self, format=None, *args, **kwargs):
         behaviour_array_10 = [locus_10,temper_10,time_10,knowledge_10]
         member_behaviour_array.update({current_response.user_id:behaviour_array})
         member_behaviour_array_10.update({current_response.user_id:behaviour_array_10})
-    #print(knowledge_label_array)
+
     return member_behaviour_array,member_behaviour_array_10,knowledge_label_array
 
 #---------------------------------------------------------------#
@@ -879,7 +910,7 @@ def get_locus_control2(current_response):
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
-        #print(score1)
+
 
     if answer_key_question2 == "2" or "3":
         score2 = list(json_answer_question2.values())[0]
@@ -887,10 +918,7 @@ def get_locus_control2(current_response):
         score2 = -list(json_answer_question2.values())[0]
 
     locus_score = math.ceil((score1+score2)/2)
-    # if info_relationship_score > 0:
-    #     print("Locus of Control - Internal: {0}" .format(info_relationship_score))
-    # else:
-    #     print("Locus of Control - Internal: {0}" .format(info_relationship_score))
+
     return locus_score
 
 def get_temper_to_instruction2(current_response):
@@ -913,10 +941,7 @@ def get_temper_to_instruction2(current_response):
         score2 = -list(json_answer_question2.values())[0]
 
     temper_score = math.ceil((score1+score2)/2)
-    # if info_relationship_score > 0:
-    #     print("Temper to instruction - StrongWill: {0}".format(info_relationship_score))
-    # else:
-    #     print("Temper to instruction - Compliant: {0}".format(info_relationship_score))
+
     return temper_score
 
 def get_time_sorting2(current_response):
@@ -954,7 +979,7 @@ def get_knowledge_sort2(current_response):
     score1 = list(json_answer_question1.values())[0]
     knowledge_sort_score = math.ceil(score1)
 
-    # print("Knowledge Sort - {0}, Score: {1}".format(knowledge_sort_label,knowledge_sort_score))
+
     return knowledge_sort_score,knowledge_sort_label
 
 
@@ -975,6 +1000,9 @@ class TeamChartData(APIView):
 
 
     def get(self, request, format=None, *args, **kwargs):
+        test = get_team_response_context(self)
+        test2 = get_applicant_response_context(44)
+
         chunk_team = get_team_info_score(self)
         motiv_team = get_team_motivation_score(self)
         action_team = get_team_action_score(self)
@@ -1056,6 +1084,9 @@ class TeamChartData(APIView):
             "action_label":action_label,
             "behav_label":other_data_label,
 
+            "test":test,
+            "test2":test2,
+
         }
         return Response(data)
 
@@ -1066,14 +1097,14 @@ def get_team_complete_data(self, format=None, *args, **kwargs):
     complete_array = []
     for i in total_array:
         complete_array  = complete_array + i
-    #print(complete_array)
+
     return complete_array
 
 def get_weighted_average_array(team_values):
     team_values_list = team_values ## get the array to average
     np_team_values_list = np.array(team_values_list) # transform it to a numpay array
     numb = (list(range(len(np_team_values_list[0])))) # get list of items in previous array to be used as index
-    #print(numb)
+
     team_score = []
     for n in numb:
         col = np_team_values_list[:,n]
@@ -1093,7 +1124,7 @@ def get_weighted_average_array(team_values):
 
 def get_team_info_score(self, format=None, *args, **kwargs):
 
-    team_info_tupple =  get_info_array(self) # --> get tupple
+    team_info_tupple =  get_employee_info_array(self) # --> get tupple
     team_info_array = team_info_tupple[0] # extract the dict needed
     team_info_values = team_info_array.values()
     team_values = list(team_info_values)
@@ -1105,12 +1136,12 @@ def euclidean_distance(x,y):
 
 
 def get_team_motivation_score(self, format=None, *args, **kwargs):
-    team_motivation_tupple =  get_motivation_array(self) ## extract {user id : [values]} + {user id : [values/100]} + {user id : label} for each user
+    team_motivation_tupple =  get_employee_motivation_array(self) ## extract {user id : [values]} + {user id : [values/100]} + {user id : label} for each user
     team_motivation_array = team_motivation_tupple[0]  ## extract {user id : [values]}
     team_motivation_values = team_motivation_array.values() ## extract dict values
     team_values = list(team_motivation_values) ## transform dict values to a list
     motiv_scores = get_weighted_average_array(team_values) ## call the weighted average method and return average
-    #print("motiv")
+
     interest = get_trend(team_motivation_tupple,2) #extract value for the interest question
     motiv_scores[2] = list(interest.values())[0]
     team_motive_labels = {"label":list(interest.keys())[0]}
@@ -1118,14 +1149,14 @@ def get_team_motivation_score(self, format=None, *args, **kwargs):
 
 def get_team_action_score(self, format=None, *args, **kwargs):
 
-    team_action_tupple =  get_action_array(self)
+    team_action_tupple =  get_employee_action_array(self)
     team_action_array = team_action_tupple[0]
     team_action_values = team_action_array.values()
     team_values = list(team_action_values)
 
     action_scores = get_weighted_average_array(team_values)
-    analyzed_array = get_action_array(self)
-    #print("action")
+    analyzed_array = get_employee_action_array(self)
+
     action = get_trend(analyzed_array,1)
     action_scores[1] = list(action.values())[0]
     team_action_labels = {"label":list(action.keys())[0]}
@@ -1134,15 +1165,15 @@ def get_team_action_score(self, format=None, *args, **kwargs):
 
 def get_behaviour_action_score(self, format=None, *args, **kwargs):
 
-    team_behaviour_tupple =  get_behaviour_array(self)
+    team_behaviour_tupple =  get_employee_behav_array(self)
     team_behaviour_array = team_behaviour_tupple[0]
     team_behaviour_values = team_behaviour_array.values()
     team_values = list(team_behaviour_values)
     behav_scores = get_weighted_average_array(team_values)
-    analyzed_array = get_behaviour_array(self)
+    analyzed_array = get_employee_behav_array(self)
     behav = get_trend(analyzed_array,3)
     behav_scores[3] = list(behav.values())[0]
-    #print(behav_scores)
+
     team_behaviour_labels = {"label":list(behav.keys())[0]}
 
     return behav_scores,team_behaviour_labels
@@ -1171,21 +1202,21 @@ def get_trend(analyzed_array, index):
         if y == max_value:
             tendence = x
             tendence_label.append(tendence)
-    #print("tendence label: {0}".format(tendence_label))
+
     max_label = random.choice(tendence_label)
     trend_array = {max_label:max_value}
-    #print("interest:{0}".format(interest_trend_array))
+
     return trend_array
 
 
-def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
-    #import pdb; pdb.set_trace()
-    team_info_tupple =  get_info_array(self)[0]
-    team_motivation_tupple =  get_motivation_array(self)[0]
-    team_action_tupple =  get_action_array(self)[0]
-    team_behaviour_tupple =  get_behaviour_array(self)[0]
-    array_dict ={}
 
+
+def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
+    team_info_tupple =  get_employee_info_array(self)[0]
+    team_motivation_tupple =  get_employee_motivation_array(self)[0]
+    team_action_tupple =  get_employee_action_array(self)[0]
+    team_behaviour_tupple =  get_employee_behav_array(self)[0]
+    array_dict ={}
     for a in team_info_tupple:
         w = team_info_tupple[a]
         x = team_motivation_tupple[a]
@@ -1194,15 +1225,21 @@ def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
         test = w + x + y + z
         array_dict.update({a:test})
 
+    score = get_team_cohesivenss_score2(array_dict)
+    return score
+
+def get_team_cohesivenss_score2(array_dict):
+    #import pdb; pdb.set_trace()
+
     list_keys = list(array_dict.keys())
     list_combi = list(it.combinations(list_keys, 2))
+
     final_dic = []
     for i in list_combi:
         temp_dict = {}
         for j in i:
             temp_dict.update({j:array_dict[j]})
         final_dic.append(temp_dict)
-
     dist_list = []
     max_dist = math.sqrt(19*(200**2))
     similarity_dict = {}
@@ -1220,15 +1257,15 @@ def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
         user_pair = user_1 + ' - ' +  user_2
         users.append(user_pair)
         similarity_dict.update({user_pair:dist_score})
-    #print("Similarity bewteen users :{0}".format(simalarity_dict))
+
     team_score = round(np.mean(dist_list))
     return team_score,users,dist_list
 
 def get_question_similarities(self, format=None, *args, **kwargs):
-    team_info_tupple =  get_info_array(self)[0]
-    team_motivation_tupple =  get_motivation_array(self)[0]
-    team_action_tupple =  get_action_array(self)[0]
-    team_behaviour_tupple =  get_behaviour_array(self)[0]
+    team_info_tupple =  get_employee_info_array(self)[0]
+    team_motivation_tupple =  get_employee_motivation_array(self)[0]
+    team_action_tupple =  get_employee_action_array(self)[0]
+    team_behaviour_tupple =  get_employee_behav_array(self)[0]
     dict_user_answers ={}
     for a in team_info_tupple:
         w = team_info_tupple[a]
@@ -1250,13 +1287,13 @@ def get_question_similarities(self, format=None, *args, **kwargs):
             temp_array.append(answer_value)
         answer_per_question.append(temp_array)
     question_similarities = euclid_array(answer_per_question)
-    motiv_trend = get_dist_multiple_variable(get_motivation_array(self),2)
+    motiv_trend = get_dist_multiple_variable(get_employee_motivation_array(self),2)
     question_similarities[8] = motiv_trend
-    action_trend = get_dist_multiple_variable(get_action_array(self),1)
+    action_trend = get_dist_multiple_variable(get_employee_action_array(self),1)
     question_similarities[11] = action_trend
-    behav_trend = get_dist_multiple_variable(get_behaviour_array(self),3)
+    behav_trend = get_dist_multiple_variable(get_employee_behav_array(self),3)
     question_similarities[11] = behav_trend
-    #print(question_similarities)
+
 
     info_index = len((list(team_info_tupple.values())[0]))
     info_similarities = question_similarities[0:info_index]
@@ -1275,7 +1312,7 @@ def euclid_array(answer_per_question):
     max_dist = round(math.sqrt(len(answer_per_question[0]*(200**2))))
     for i in answer_per_question:
         combi = list(it.combinations(i, 2))
-        #print(combi)
+
         sum_diff = 0
         for lst in combi:
             diff = (lst[0] - lst[1])**2
@@ -1308,3 +1345,250 @@ def get_dist_multiple_variable(array,index):
     euc_dist = sqrt(np.sum(list_dis))
     trend_similarity = round((1-(euc_dist/max_dist))*100)
     return trend_similarity
+
+
+
+## Recruitment Page ##
+
+class RecruitmentPage(generic.ListView):
+    #import pdb; pdb.set_trace()
+    model = Project
+    template_name = "recruitment_index.html"
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Project, id=self.kwargs['pk1'])
+
+    def get_context_data(self, **kwargs):
+
+        #import pdb; pdb.set_trace()
+        context = super(RecruitmentPage, self).get_context_data(**kwargs)
+        current_project_id = self.kwargs['pk1']
+        applicant_list = Project.objects.get(id = current_project_id).applicant.all()
+        team_score = get_team_cohesivenss_score(self)[0]
+
+        app_with_resp = []
+        app_without_resp = []
+        for i in applicant_list:
+            if len(i.response_set.all())>0:
+                app_with_resp.append(i)
+            else:
+                app_without_resp.append(i)
+
+        appli_score_list = {}
+        for i in app_with_resp:
+            list1 = get_applicant_response_context(i.id)
+            list2 = get_team_response_context(self)
+            list2.update(list1)
+            score = get_team_cohesivenss_score2(list2)[0]
+            score_with_id = {i:[score,score-team_score]}
+            appli_score_list.update(score_with_id)
+
+        context['current_project_id'] = current_project_id
+        context['applicant_list'] = applicant_list
+        context['app_with_resp'] = app_with_resp
+        context['app_without_resp'] = app_without_resp
+        context['team_score'] = team_score
+        context['appli_score_list'] = appli_score_list
+
+
+
+        return context
+
+class applicantChartData(APIView):
+    queryset = MyUser.objects.all()
+    serializer_class = MyUserSerializer, #ProjectSerializer
+    permission_classes = []
+    http_method_names = ['get',]
+    # renderer_classes = [TemplateHTMLRenderer]
+    # template_name = 'project_details.html'
+
+
+    def get_serializer_class(self):
+        return self.serializer_class
+
+
+    def get(self, request, format=None, *args, **kwargs):
+        applicant_info_array = get_applicant_info_array(self)
+        applicant_motivation_array = get_applicant_motivation_array(self)
+        applicant_action_array = get_applicant_action_array(self)
+        applicant_behav_array = get_applicant_behav_array(self)
+
+        score = get_team_cohesivenss_score(self)
+        applicant_cohesivenss_score = get_applicant_cohesivenss_score(self)
+        applicant_complete_data = get_applicant_complete_data(self)
+        current_user = get_current_user(self)
+
+        processing_information_label = [
+                                       ["General","Details"],
+                                       ["Sameness","Difference"],
+                                       ["Visual","Auditory"],
+                                       ["Static","Process"],
+                                       ["Best Scenario","Worst Scenario"],
+                                       ["Binary","Shades"],
+                                       ]
+        motivation_label =[
+                          ["External","Internal"],
+                          ["Go Away","Toward"],
+                          ["[motiv_team[1]['label']]"],
+                          ["Variety","Routine"],
+                          ]
+        action_label = [
+                       ["Active","Reaction"],
+                       ["[action_team[1]['label']]"],
+                       ["Option","Procedure"],
+                       ["Perfection","Optimizing"],
+                       ["Sensor","Intuition"]
+                       ]
+        other_data_label = [
+                           ["External locus","Internal locus"],
+                           ["Strong Will","Compliant"],
+                           ["In time","Through time"],
+                           ["[behav_team[1]['label']]"],
+                           ]
+        complete_label = [
+                         ["General","Details"],
+                         ["Sameness","Difference"],
+                         ["Visual","Auditory"],
+                         ["Static","Process"],
+                         ["Best Scenario","Worst Scenario"],
+                         ["Binary","Shades"],
+                         ["External","Internal"],
+                         ["Go Away","Toward"],
+                         ["[motiv_team[1]['label']]"],
+                         ["Variety","Routine"],
+                         ["Active","Reaction"],
+                         ["[action_team[1]['label']]"],
+                         ["Option","Procedure"],
+                         ["Perfection","Optimizing"],
+                         ["Sensor","Intuition"],
+                         ["External locus","Internal locus"],
+                         ["Strong Will","Compliant"],
+                         ["In time","Through time"],
+                         ["[behav_team[1]['label']]"]
+                         ]
+
+        data = {
+                ### data ###
+                'applicant_info_array':applicant_info_array,
+                'applicant_motivation_array':applicant_motivation_array,
+                'applicant_action_array':applicant_action_array,
+                'applicant_behav_array':applicant_behav_array,
+
+                ## Label ##
+                'complete_label':complete_label,
+                'applicant_sim_label': applicant_cohesivenss_score[1],
+                'applicant_sim_score' : applicant_cohesivenss_score[2],
+
+                'applicant_complete_data':applicant_complete_data,
+                'current_user':current_user,
+                'processing_information_label':processing_information_label,
+                'motivation_label':motivation_label,
+                'action_label':action_label,
+                'other_data_label':other_data_label,
+
+
+        }
+        return Response(data)
+
+
+def get_applicant_team_list(self, format=None, *args, **kwargs):
+    current_team_member = list(Project.objects.get(id = self.kwargs['pk1']).team_id.members.all())
+    current_applicant = MyUser.objects.get(id =self.kwargs['pk2'])
+    current_team_member.append(current_applicant)
+    applicant_response_list = []
+    for member in current_team_member:
+        applicant_id = member.id
+        applicant_response = get_user_response(applicant_id)
+        applicant_response_list.append({applicant_id:applicant_response})
+    return applicant_response_list
+
+def get_applicant_info_array(self, format=None, *args, **kwargs):
+    response_list = get_applicant_team_list(self)
+    info_array = get_info_array(response_list)
+    return info_array
+
+def get_applicant_motivation_array(self, format=None, *args, **kwargs):
+    response_list = get_applicant_team_list(self)
+    motiv_array = get_motivation_array(response_list)
+    return motiv_array
+
+def get_applicant_action_array(self, format=None, *args, **kwargs):
+    response_list = get_applicant_team_list(self)
+    action_array = get_action_array(response_list)
+    return action_array
+
+def get_applicant_behav_array(self, format=None, *args, **kwargs):
+    response_list = get_applicant_team_list(self)
+    behav_array = get_behaviour_array(response_list)
+    return behav_array
+
+
+def get_applicant_cohesivenss_score(self, format=None, *args, **kwargs):
+    team_info_tupple =  get_applicant_info_array(self)[0]
+    team_motivation_tupple =  get_applicant_motivation_array(self)[0]
+    team_action_tupple =  get_applicant_action_array(self)[0]
+    team_behaviour_tupple =  get_applicant_behav_array(self)[0]
+    array_dict ={}
+    for a in team_info_tupple:
+        w = team_info_tupple[a]
+        x = team_motivation_tupple[a]
+        y = team_action_tupple[a]
+        z = team_behaviour_tupple[a]
+        test = w + x + y + z
+        array_dict.update({a:test})
+
+    score = get_team_cohesivenss_score2(array_dict)
+
+    applicant  = MyUser.objects.get(id = self.kwargs['pk2'])
+    applicant_name = applicant.first_name + " "+applicant.last_name
+    applicant_index = []
+    for i in score[1]:
+        if applicant_name in i:
+            applicant_index.append(score[1].index(i))
+    applicant_diff_labels = []
+    applicant_diff_score = []
+    for i in applicant_index:
+        applicant_diff_labels.append(score[1][i])
+        applicant_diff_score.append(score[2][i])
+    return score, applicant_diff_labels, applicant_diff_score
+
+def get_applicant_complete_data(self, format=None, *args, **kwargs):
+    app_info = get_applicant_info_array(self)[0][int(self.kwargs['pk2'])]
+    app_motiv = get_applicant_motivation_array(self)[0][int(self.kwargs['pk2'])]
+    app_act = get_applicant_action_array(self)[0][int(self.kwargs['pk2'])]
+    app_behav = get_applicant_behav_array(self)[0][int(self.kwargs['pk2'])]
+
+    complete_app_array = app_info + app_motiv + app_act + app_behav
+    return complete_app_array
+
+def get_team_response_context(self, format=None, *args, **kwargs):
+    team_info_tupple =  get_employee_info_array(self)[0]
+    team_motivation_tupple =  get_employee_motivation_array(self)[0]
+    team_action_tupple =  get_employee_action_array(self)[0]
+    team_behaviour_tupple =  get_employee_behav_array(self)[0]
+    array_dict ={}
+    for a in team_info_tupple:
+        w = team_info_tupple[a]
+        x = team_motivation_tupple[a]
+        y = team_action_tupple[a]
+        z = team_behaviour_tupple[a]
+        test = w + x + y + z
+        array_dict.update({a:test})
+    return(array_dict)
+
+def get_applicant_response_context(app_id):
+    applicant_response = get_user_response(app_id)
+    applicant_response_dict = [{app_id:applicant_response}]
+    info_array = get_info_array(applicant_response_dict)[0]
+    motiv_array = get_motivation_array(applicant_response_dict)[0]
+    action_array = get_action_array(applicant_response_dict)[0]
+    behav_array = get_behaviour_array(applicant_response_dict)[0]
+    array_dict ={}
+    for a in info_array:
+        w = info_array[a]
+        x = motiv_array[a]
+        y = action_array[a]
+        z = behav_array[a]
+        test = w + x + y + z
+        array_dict.update({a:test})
+    return(array_dict)

@@ -1,6 +1,15 @@
 {% load static %}
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col">
+      <h3>{{project.team_id}}</h3>
+    </div>
+    <div class="col-3">
+        <a href="{% url 'website:recruitment' pk1=project.id %}" class="btn btn-success btn-text float-right" role="button"><span class="fa fa-link"></span>   Recruitment process page</a>
+    </div>
+  </div>
+</div>
 
-<h3>{{project.team_id}}</h3>
 <div class="team-container">
   <div class="row">
   {% for member in project.team_id.members.all %}

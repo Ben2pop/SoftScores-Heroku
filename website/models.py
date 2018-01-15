@@ -20,6 +20,7 @@ class Project(models.Model):
     team_id = models.ForeignKey(Team, blank=True, null=True)
     project_hr_admin = models.ForeignKey('registration.MyUser', blank=True, null=True)
     candidat_answers = models.ManyToManyField('survey.response')
+    applicant = models.ManyToManyField(MyUser, related_name="applicant")
 
     def get_absolute_url(self):
         return reverse('website:ProjectDetails', kwargs = {'pk1' : self.pk})

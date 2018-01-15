@@ -339,3 +339,25 @@ body {
 .warn-container{
   margin-top:35px;
 }
+
+.btn-text{
+  font-size:12px;
+}
+
+
+.candidate_list .row{
+  margin-bottom: 25px;
+}
+
+.applicant-dash .card-body{
+  text-align: center;
+}
+
+
+.applicant-dash .row{
+  margin-bottom:30px;
+}
+
+.model-list{
+  margin-bottom: 30px;
+}

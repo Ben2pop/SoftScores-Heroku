@@ -12,8 +12,11 @@ urlpatterns = [
     url(r'^project/(?P<pk1>[0-9]+)/linkteam2/$', views.TeamSelect, name='team_select'),
     url(r'^project/(?P<pk1>[0-9]+)/$',views.ProjectDetailView.as_view(), name='ProjectDetails'),
     url(r'^project/(?P<pk1>[0-9]+)/api/chart/data2/$',views.TeamChartData.as_view(), name='TeamChartData'),
-    url(r'^project/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/$',views.EmployeeDetailView.as_view(), name='EmployeDetails'),
-    url(r'^project/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/api/chart/data/$',views.EmployeeChartData.as_view(), name='EmployeeChartData'),
+    url(r'^project/employee/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/$',views.EmployeeDetailView.as_view(), name='EmployeDetails'),
+    url(r'^project/applicant/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/$',views.CandidateDetailView.as_view(), name='CandidateDetails'),
+    url(r'^project/employee/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/api/chart/data/$',views.EmployeeChartData.as_view(), name='EmployeeChartData'),
+    url(r'^project/applicant/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/api/chart/data3/$',views.applicantChartData.as_view(), name='CandidateChartData'),
+    url(r'^project/(?P<pk1>[0-9]+)/recruitment/$',views.RecruitmentPage.as_view(), name='recruitment')
     #url(r'^project/(?P<pk>[0-9]+)/api/chart/data/$', views.ChartData.as_view(), name='chartdata'),
 
 ]

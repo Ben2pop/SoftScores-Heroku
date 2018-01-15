@@ -4,7 +4,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from .forms import HRForm, TeamMembersForm, TeamMembersFormUpdate, InviteForm2
+from .forms import HRForm, TeamMembersForm, TeamMembersFormUpdate, InviteForm2, ApplicantForm2
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -54,7 +54,7 @@ def HR_login(request):
                 return HttpResponseRedirect(reverse('website:employee_index'))
             elif user.is_active & user.is_candidate & user.check_password(password):
                 login(request,user)
-                return HttpResponseRedirect(reverse('website:candidate_index'))
+                return HttpResponseRedirect(reverse('website:employee_index'))
             else:
                 HttpResponse("Account not active, please contact Admin")
         else:
@@ -127,6 +127,66 @@ def TeamRegister2(request, pk1=None):
     else:
         formset = InviteFormSet()
     return render(request,'team_register.html', {'formset':formset})
+
+def applicantregister2(request, pk1):
+    import pdb; pdb.set_trace()
+    InviteFormSet = formset_factory(ApplicantForm2)
+
+    if request.method == 'POST':
+        formset = InviteFormSet(request.POST)
+
+        if(formset.is_valid()):
+
+            for i in formset:
+                mail = i.cleaned_data['Email']
+                if MyUser.objects.filter(email = mail).exists():
+                    user = MyUser.objects.get(email=mail)
+                    u1 = user.id # get user ID
+                    a2 = Project.objects.get(id = pk1)
+                    a2.applicant.add(u1)
+
+                    invited_user = MyUser.objects.get(email = mail)
+                    current_site = get_current_site(request)
+                    message = render_to_string('acc_join_email.html', {
+                        'user': invited_user.first_name,
+                        'domain':current_site.domain,
+                        })
+                    mail_subject = 'You have been invited to SoftScores.com please LogIn to get access to the app'
+                    to_email = mail
+                    email = EmailMessage(mail_subject, message, to=[to_email])
+                    email.send()
+                else:
+                    user = MyUser(email = mail)
+                    password = MyUser.objects.make_random_password()
+                    user.set_password(password)
+                    user.is_active = False
+                    user.is_candidate = True
+                    user.save()
+                    u1 = user.id #get user id
+                    a2 = Project.objects.get(id = pk1)
+
+                    a2.applicant.add(u1)
+                    current_site = get_current_site(request)
+                    message = render_to_string('acc_active_email.html', {
+                    'user':user,
+                    'domain':current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                    })
+                    mail_subject = 'You have been invited to SoftScores.com please sign in to get access to the app'
+                    to_email = user.email
+                    email = EmailMessage(mail_subject, message, to=[to_email])
+                    email.send()
+            messages.success(request, 'testouille la fripouille')
+            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs= {'pk1':pk1}))
+        else:
+            print("The entered form is not valid")
+
+    else:
+        formset = InviteFormSet()
+    return render(request,'applicant_register.html', {'formset':formset})
+
+
 
 
 @login_required

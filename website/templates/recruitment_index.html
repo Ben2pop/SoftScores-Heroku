@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container candidate_list paddingtop80 marginbottom30">
+    <div class="jumbotron greenback">
+      <div class="container">
+        <div class="row justify-content-md-center">
+
+          <h5>Welcome to the recruitment panel</h5>
+        </div>
+        <div class="row justify-content-md-center">
+          <a href="{% url 'registration:applicant_register3' pk1=current_project_id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span>   Add Applicants</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h6 class="card-header text-center bg-dark text-white">Candidate that responsed</h6>
+                <div class="card-body">
+                      {% if app_with_resp|length == 0 %}
+                        <div class="no-candidate">
+                            No candidate have been invited yet
+                        </div>
+                      {% else %}
+                        <table class="table table-hover">
+                          <thead>
+                              <tr>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Survey Date</th>
+                                  <th>Score</th>
+                                  <th>Team Score</th>
+                                  <th>impact</th>
+                                  <th>Details</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for key, value in appli_score_list.items %}
+                              <tr>
+                                <td>{{key.first_name}}</td>
+                                <td>{{key.last_name}}</td>
+                                <td>17/06/86</td>
+                                <td>{{ value.0 }}</td>
+                                <td>{{team_score}}</td>
+                                <td>{{ value.1 }}</td>
+                                <td> <a href="{% url 'website:CandidateDetails' pk1=current_project_id pk2=key.id %}"> Details</a></td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+            <h6 class="card-header text-center bg-dark text-white">Invited candidates</h6>
+            <div class="card-body">
+              {% if app_without_resp|length == 0 %}
+                  <div class="no-candidate">
+                      No candidate have answered yet
+                  </div>
+              {% else %}
+              <table class="table table-hover">
+                <thead>
+                    <tr>
+                      <th>Email</th>
+                      <th>Registration Status</th>
+                      <th>Survey Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in app_without_resp %}
+                      <tr>
+                        <td>{{i}}</td>
+                        <td>Waiting for registration</td>
+                        <td>Waiting for answers</td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+                {% endif %}
+          </div>
+          </div>
+      </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+{% endblock %}
