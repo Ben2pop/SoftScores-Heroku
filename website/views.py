@@ -122,12 +122,13 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         try:
+            
             team_name = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
             score = get_team_cohesivenss_score(self)[0]
 
             all_user_response = 1
             for i in Project.objects.get(id=self.kwargs['pk1']).team_id.members.all():
-                if i.response.set.all().count() == 0:
+                if i.response_set.all().count() == 0:
                     all_user_response = all_user_response * 0
                 else:
                     all_user_response = all_user_response * 1
@@ -1009,8 +1010,10 @@ class TeamChartData(APIView):
 
 
     def get(self, request, format=None, *args, **kwargs):
-        test = get_team_response_context(self)
-        test2 = get_applicant_response_context(44)
+        project_id = id=self.kwargs['pk1']
+
+        #test = get_team_response_context(self)
+        #test2 = get_applicant_response_context(44)
 
         chunk_team = get_team_info_score(self)
         motiv_team = get_team_motivation_score(self)
@@ -1093,8 +1096,8 @@ class TeamChartData(APIView):
             "action_label":action_label,
             "behav_label":other_data_label,
 
-            "test":test,
-            "test2":test2,
+            #"test":test,
+            #"test2":test2,
 
         }
         return Response(data)

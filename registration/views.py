@@ -129,7 +129,7 @@ def TeamRegister2(request, pk1=None):
     return render(request,'team_register.html', {'formset':formset})
 
 def applicantregister2(request, pk1):
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     InviteFormSet = formset_factory(ApplicantForm2)
 
     if request.method == 'POST':
