@@ -124,8 +124,17 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
         try:
             team_name = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
             score = get_team_cohesivenss_score(self)[0]
+
+            all_user_response = 1
+            for i in Project.objects.get(id=self.kwargs['pk1']).team_id.members.all():
+                if i.response.set.all().count() == 0:
+                    all_user_response = all_user_response * 0
+                else:
+                    all_user_response = all_user_response * 1
+
             context['team_name'] = team_name
             context['score'] = score
+            context['all_user_response'] = all_user_response
         except AttributeError:
             pass
         return context
@@ -1365,7 +1374,6 @@ class RecruitmentPage(generic.ListView):
         current_project_id = self.kwargs['pk1']
         applicant_list = Project.objects.get(id = current_project_id).applicant.all()
         team_score = get_team_cohesivenss_score(self)[0]
-
         app_with_resp = []
         app_without_resp = []
         for i in applicant_list:
@@ -1387,10 +1395,8 @@ class RecruitmentPage(generic.ListView):
         context['applicant_list'] = applicant_list
         context['app_with_resp'] = app_with_resp
         context['app_without_resp'] = app_without_resp
-        context['team_score'] = team_score
         context['appli_score_list'] = appli_score_list
-
-
+        context['team_score'] = team_score
 
         return context
 
