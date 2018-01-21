@@ -377,3 +377,7 @@ header.masthead {
   margin:0;
   height:160px;
 }
+
+header.masthead h5{
+  font-weight:300;
+}
