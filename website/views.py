@@ -34,6 +34,9 @@ from django.template.defaulttags import register
 class HomePage(TemplateView):
     template_name= 'index.html'
 
+class PricingPage(TemplateView):
+    template_name="pricing.html"
+
 class LinkTeam(generic.ListView):
     template_name = 'link_project.html'
 
@@ -122,7 +125,7 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         try:
-            
+
             team_name = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
             score = get_team_cohesivenss_score(self)[0]
 
