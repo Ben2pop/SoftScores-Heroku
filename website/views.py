@@ -838,24 +838,16 @@ def get_option_proc2(current_response):
     return option_proc
 
 def get_expectation2(current_response):
-    answer_question1 = current_response.answers.get(question__quest_numb = 1)
-    answer_question2 = current_response.answers.get(question__quest_numb = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 9)
     json_answer_question1 = json.loads(answer_question1.body)
-    json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
-    answer_key_question2 = list(json_answer_question2.keys())[0][0]
-    if answer_key_question1 == "1" or "2":
+    if answer_key_question1 == "1":
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
 
 
-    if answer_key_question2 == "2" or "3":
-        score2 = list(json_answer_question2.values())[0]
-    else:
-        score2 = -list(json_answer_question2.values())[0]
-
-    expect_score = math.ceil((score1+score2)/2)
+    expect_score = math.ceil(score1)
 
     return expect_score
 
@@ -864,7 +856,7 @@ def get_sensor_intuition2(current_response):
     json_answer_question1 = json.loads(answer_question1.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
 
-    if answer_key_question1 == "1" or "2":
+    if answer_key_question1 == "1":
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
@@ -913,47 +905,29 @@ def get_behaviour_array(array):
 #---------------------------------------------------------------#
 
 def get_locus_control2(current_response):
-    answer_question1 = current_response.answers.get(question__quest_numb = 1)
-    answer_question2 = current_response.answers.get(question__quest_numb = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 20)
     json_answer_question1 = json.loads(answer_question1.body)
-    json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
-    answer_key_question2 = list(json_answer_question2.keys())[0][0]
-    if answer_key_question1 == "1" or "2":
+    if answer_key_question1 == "1":
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
 
-
-    if answer_key_question2 == "2" or "3":
-        score2 = list(json_answer_question2.values())[0]
-    else:
-        score2 = -list(json_answer_question2.values())[0]
-
-    locus_score = math.ceil((score1+score2)/2)
+    locus_score = math.ceil(score1)
 
     return locus_score
 
 def get_temper_to_instruction2(current_response):
 
-    answer_question1 = current_response.answers.get(question__quest_numb = 1)
-    answer_question2 = current_response.answers.get(question__quest_numb = 16)
+    answer_question1 = current_response.answers.get(question__quest_numb = 21)
     json_answer_question1 = json.loads(answer_question1.body)
-    json_answer_question2 = json.loads(answer_question2.body)
     answer_key_question1 = list(json_answer_question1.keys())[0][0]
-    answer_key_question2 = list(json_answer_question2.keys())[0][0]
-    if answer_key_question1 == "1" or "2":
+    if answer_key_question1 == "1":
         score1 = list(json_answer_question1.values())[0]
     else:
         score1 = -list(json_answer_question1.values())[0]
 
-
-    if answer_key_question2 == "2" or "3":
-        score2 = list(json_answer_question2.values())[0]
-    else:
-        score2 = -list(json_answer_question2.values())[0]
-
-    temper_score = math.ceil((score1+score2)/2)
+    temper_score = math.ceil(score1)
 
     return temper_score
 
