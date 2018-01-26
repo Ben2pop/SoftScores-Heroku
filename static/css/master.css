@@ -96,9 +96,9 @@ body {
 
 .circle{
   border-radius: 50%;
-	width: 20px;
-	height: 20px;
-  background-color: green;
+	width: 10px;
+	height:10px;
+  background-color: #66bb9e;
   color:white;
   text-align: center;
   margin-left: 2rem ;

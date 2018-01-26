@@ -7,6 +7,7 @@ from __future__ import (
 from django.contrib import admin
 from future import standard_library
 from survey.models import Answer, Category, Question, Response, Survey
+from tinymce.models import HTMLField
 
 from .actions import make_published
 
@@ -31,6 +32,7 @@ class SurveyAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'need_logged_user')
     inlines = [CategoryInline, QuestionInline]
     actions = [make_published]
+
 
 
 class AnswerBaseInline(admin.StackedInline):

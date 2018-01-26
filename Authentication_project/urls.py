@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^survey/', include('SurveyApp.urls')),
     url(r'^$', views.HomePage.as_view(), name='index'),
     url(r'^pricing', views.PricingPage.as_view(), name='pricing'),
-
+    url(r'^tinymce/', include('tinymce.urls')),
 ]
