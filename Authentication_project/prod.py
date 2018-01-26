@@ -3,7 +3,7 @@ import os
 from .settings import *
 import dj_database_url
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*','.softscores.com']
 
 
