@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'rosetta',
     'rest_framework',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
