@@ -89,6 +89,34 @@ class HRIndex(generic.ListView):
     template_name = "HR_index.html"
     model = Project
 
+
+    def get_queryset(self):
+        return Project.objects.filter(project_hr_admin_id = self.request.user).order_by('-created_at')
+
+
+
+    def get_context_data(self, **kwargs):
+        #import pdb; pdb.set_trace()
+        context = super(HRIndex,self).get_context_data(**kwargs)
+        status_dict = {}
+        for project in Project.objects.filter(project_hr_admin_id = self.request.user):
+            proj_team_id = project.team_id
+            proj_memb = proj_team_id.members.all()
+            open_close = 1
+            for memb in proj_memb:
+                if not list(memb.response_set.all()):
+                    status = False
+                else:
+                    status = True
+                open_close = open_close*status
+            status_dict.update({project.id:open_close})
+
+        context['status_dict'] = status_dict
+        return context
+
+
+
+
 class CandidateIndex(TemplateView):
     #import pdb; pdb.set_trace()
     template_name = "candidate_index.html"
@@ -1351,9 +1379,11 @@ class RecruitmentPage(generic.ListView):
 
         #import pdb; pdb.set_trace()
         context = super(RecruitmentPage, self).get_context_data(**kwargs)
+
         current_project_id = self.kwargs['pk1']
         applicant_list = Project.objects.get(id = current_project_id).applicant.all()
         team_score = get_team_cohesivenss_score(self)[0]
+
         app_with_resp = []
         app_without_resp = []
         for i in applicant_list:
@@ -1368,8 +1398,10 @@ class RecruitmentPage(generic.ListView):
             list2 = get_team_response_context(self)
             list2.update(list1)
             score = get_team_cohesivenss_score2(list2)[0]
-            score_with_id = {i:[score,score-team_score]}
+            resp_date = list(i.response_set.all())[0].created
+            score_with_id = {i:[score,score-team_score,resp_date]}
             appli_score_list.update(score_with_id)
+
 
         context['current_project_id'] = current_project_id
         context['applicant_list'] = applicant_list

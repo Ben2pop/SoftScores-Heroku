@@ -43,12 +43,19 @@
         <td>{{i.name}}</td>
         <td>{{i.team_id}}</td>
         <td>{{i.created_at}}</td>
-        <td><div class="circle"><span class="glyphicon glyphicon-ok"></span></div></td>
-
+        {% for key,val in status_dict.items %}
+          {% if key ==  i.id  %}
+            {% if val == True %}
+              <td><div class="circle"><span class="glyphicon glyphicon-ok"></span></div></td>
+            {% else %}
+            <td><div class="circle2"><span class="glyphicon glyphicon-ok"></span></div></td>
+            {% endif %}
+          {% endif %}
+        {% endfor%}
         <td> <a href="{% url 'website:ProjectDetails' pk1=i.id %}">Details</a></td>
 
       </tr>
-{% endfor %}
+      {% endfor %}
     </tbody>
 
   </table>

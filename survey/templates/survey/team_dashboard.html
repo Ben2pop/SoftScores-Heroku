@@ -1,36 +1,40 @@
+{% load staticfiles %}
 
-
-<div class="graph-container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
-          <div class="card-body">
-            <canvas id="mainGraph" width: "1200"; height="500"></canvas>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <h5 class="card-header text-center bg-dark text-white">Members Similarities</h5>
-          <div class="card-body">
-            <canvas id="mainGraph2" width: "1200"; height="400"></canvas>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-
-
+<div class="ajaxProgress">
+  <h3>Please wait ...</h3>
+  <img src="{% static 'images/ajax-loader.gif' %}" alt="">
 </div>
 
+<div class="dashboard-container">
 
-<div class="container radar-container">
+
+    <div class="graph-container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
+              <div class="card-body">
+                <canvas id="mainGraph" width: "1200"; height="500"></canvas>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <h5 class="card-header text-center bg-dark text-white">Members Similarities</h5>
+              <div class="card-body">
+                <canvas id="mainGraph2" width: "1200"; height="400"></canvas>
+              </div>
+
+            </div>
+          </div>
+        </div></div>
+
+
+    <div class="container radar-container">
     <div class="row">
         <div class="col graph-info">
 
@@ -78,7 +82,7 @@
 </div>
 
 
-
+</div>
 
 {% block extrajs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
@@ -90,7 +94,8 @@
 
 <script>
 var endpoint = 'api/chart/data2'
-
+$('.ajaxProgress').show();
+$('.dashboard-container').hide();
 function getAvg(grades) {
   return grades.reduce(function (p, c) {
     return p + c;
@@ -146,7 +151,8 @@ $.ajax({
     var ctx4 = document.getElementById("mainGraphLine2").getContext('2d');
     var ctx5 = document.getElementById("mainGraphLine3").getContext('2d');
     var ctx6 = document.getElementById("mainGraphLine4").getContext('2d');
-
+    $('.ajaxProgress').hide();
+    $('.dashboard-container').show();
     var mainGraph = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -429,8 +435,12 @@ $.ajax({
                  },
     });
     //end graph 6//
+
+
 }
+
 })
+
 </script>
 
 

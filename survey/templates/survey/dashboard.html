@@ -1,3 +1,11 @@
+{% load staticfiles %}
+<div class="ajaxProgress">
+  <h3>Please wait ...</h3>
+  <img src="{% static 'images/ajax-loader.gif' %}" alt="">
+</div>
+
+<div class="dashboard-container">
+
 
 <div class="container">
     <div class="row">
@@ -13,8 +21,7 @@
     </div>
 </div>
 
-
-  <div class="container radar-container">
+<div class="container radar-container">
     <div class="row">
         <div class="col graph-info">
 
@@ -102,7 +109,7 @@
   </div>
 </div>
 
-
+</div>
 
 {% block extrajs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
@@ -111,7 +118,8 @@
 
 <script>
 var endpoint = 'api/chart/data'
-
+$('.ajaxProgress').show();
+$('.dashboard-container').hide();
 
 $.ajax({
   method: "GET",
@@ -175,6 +183,8 @@ $.ajax({
     var ctx3 = document.getElementById("action").getContext('2d');
     var ctx4 = document.getElementById("motivation").getContext('2d');
     var ctx5 = document.getElementById("other").getContext('2d');
+    $('.ajaxProgress').hide();
+    $('.dashboard-container').show();
 
     $(".pick-chart").change(function (e) {
         e.preventDefault();

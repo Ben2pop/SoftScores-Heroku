@@ -10,14 +10,36 @@
         </div>
     </div>
     <div class="col-4">
-        <div class="jumbotron greenback">
+      {% if score > 90 %}
+      <div class="jumbotron greenback">
+      {% elif 80 > score > 90 %}
+      <div class="jumbotron greenback">
+      {% elif 70 > score > 80 %}
+      <div class="jumbotron orangeback">
+      {% elif 60 > score > 70 %}
+      <div class="jumbotron redback">
+      {% else %}
+      <div class="jumbotron redback">
+      {% endif %}
             <div class="inner-score">
                 <div class="score-title">
                   <h6>Team Score</h6>
                 </div>
                 <div class="score-value">
                     <h2>{{score}}</h2>
-                    <h8>Cohesive team</h8>
+                    <h8>
+                      {% if score > 90 %}
+                        Very high team harmony
+                      {% elif 80 > score > 90 %}
+                      High team harmony
+                      {% elif 70 > score > 80 %}
+                      Intermediate team harmony
+                      {% elif 60 > score > 70 %}
+                      Low team harmony
+                      {% else  %}
+                      Very low team harmony
+                      {% endif %}
+                    </h8>
                 </div>
             </div>
         </div>

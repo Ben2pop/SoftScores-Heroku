@@ -25,7 +25,7 @@
                             No candidate have been invited yet
                         </div>
                       {% else %}
-                        <table class="table table-hover">
+                        <table id="myTable" class="table table-hover tablesorter">
                           <thead>
                               <tr>
                                   <th>First Name</th>
@@ -42,7 +42,7 @@
                               <tr>
                                 <td>{{key.first_name}}</td>
                                 <td>{{key.last_name}}</td>
-                                <td>17/06/86</td>
+                                <td>{{ value.2 }}</td>
                                 <td>{{ value.0 }}</td>
                                 <td>{{team_score}}</td>
                                 <td>{{ value.1 }}</td>
@@ -98,6 +98,10 @@
 
 
 </div>
-
+<script type="text/javascript">
+$(function(){
+  $("#myTable").tablesorter({ sortList: [[5,1]]});
+});
+</script>
 
 {% endblock %}

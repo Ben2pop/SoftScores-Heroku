@@ -105,6 +105,17 @@ body {
   margin-right: auto ;
   }
 
+  .circle2{
+    border-radius: 50%;
+  	width: 10px;
+  	height:10px;
+    background-color: #bb7b66;
+    color:white;
+    text-align: center;
+    margin-left: 2rem ;
+    margin-right: auto ;
+    }
+
 
 .team-container{
   text-align:center;
@@ -252,6 +263,15 @@ body {
   background-color: rgba(216, 0, 0, 0.1);
 }
 
+.darkredback{
+  background-color:rgb(244,114,70);
+}
+
+.orangeback{
+  background-color: rgb(252,240,229);
+}
+
+
 .result-link{
   font-size: 0.8rem;
 }
@@ -362,4 +382,22 @@ body {
 
 .model-list{
   margin-bottom: 30px;
+}
+
+.project_list table thead th{
+  font-weight: 500;
+}
+
+
+.ajaxProgress{
+  display: none;
+  text-align: center;
+  padding:20px;
+  width = 300px;
+}
+
+
+
+.applicant-dash .card-header{
+  font-weight:300;
 }
