@@ -424,3 +424,7 @@ header.masthead h5{
 .section-heading{
   font-weight:300;
 }
+
+.blockquote p{
+  font-weight:300;
+}
