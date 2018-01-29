@@ -61,6 +61,7 @@
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'pricing' %}">Pricing</a></li>
             {% endif %}
             {% if user.is_authenticated %}
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="#"><span class="fa fa-user-circle"></span>{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:logout'%}"><span class="fa fa-sign-out"></span>Log Out</a></li>
             {% else %}
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:HRlogin' %}"><span class="fa fa-sign-in"></span> Recruiter Area</a></li>

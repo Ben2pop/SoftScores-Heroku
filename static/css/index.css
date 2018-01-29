@@ -78,7 +78,7 @@ body {
   #mainNav .navbar-nav > li.nav-item > a.nav-link,
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
     font-size: .9rem;
-    font-weight: 400;
+    font-weight: 300;
     text-transform: uppercase;
     color: #212529; }
     #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
