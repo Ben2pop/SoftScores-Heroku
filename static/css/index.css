@@ -403,3 +403,24 @@ header.masthead h5{
   margin-right:30px;
   margin-top:40px;
 }
+
+.services{
+  background-color:rgb(246,249,252);
+  padding: padding: 4rem 0;
+}
+
+.about-section{
+  padding: 4rem 0;
+}
+
+.about-section p{
+  text-align: justify;
+}
+
+.about-section .btn{
+  padding:0.7rem 2rem;
+}
+
+.section-heading{
+  font-weight:300;
+}
