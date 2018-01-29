@@ -212,10 +212,9 @@ header.masthead {
   color: #66bb9e !important; }
 
 .btn {
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
   border: none;
-  border-radius: 300px;
    }
 
 .btn-xl {
@@ -380,4 +379,27 @@ header.masthead {
 
 header.masthead h5{
   font-weight:300;
+}
+
+.recruit-section{
+  padding-top: 55px;
+  padding-bottom: 55px;
+  background-color: rgb(246,249,252);
+}
+.text-content h2{
+  font-weight:300;
+}
+
+.text-content h4{
+  font-weight:300;
+  font-size: 1.2rem;
+}
+
+.bottom-content{
+  margin-top:30px;
+}
+
+.recruit-section a{
+  margin-right:30px;
+  margin-top:40px;
 }

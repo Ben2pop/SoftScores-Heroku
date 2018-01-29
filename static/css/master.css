@@ -401,3 +401,8 @@ body {
 .applicant-dash .card-header{
   font-weight:300;
 }
+
+.box-question h3{
+  text-decoration: underline;
+  text-decoration-color: rgb(102, 187, 158);
+}
