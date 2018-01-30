@@ -3,34 +3,55 @@
 
 {% block body %}
 
-<div class="container paddingtop100">
+<div class="container paddingtop100 invite-teammember">
   <div class="jumbotron">
     <div class="title">
-      <h2>Invite your Team members</h2>
-      <h3>You can choose up to 7 team members</h3>
+      <h2>Send Invitations</h2>
+      <hr class="title-separator2">
+      <h4>Your SoftScores workplace is almost ready to go, it is time to invite your team</h4>
+      <h6>Please provide the team members email</h6>
+    </div>
+  </div>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-6 col-bord">
+      <div class="logo">
+          <img src="{% static "images/logo-symb.png" %}" width="10%" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="team-title-text">
+        Invite members to your team
+      </div>
+
+      <div class="form-tag">
+        Email adress:
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+
+            <div class="link-formset">
+
+              {% for field in form %}
+               {{ field }}
+                   {# {{ form }} #}
+              {% endfor %}
+
+             </div>
+
+         {% endfor %}
+
+        <div class="invite-button d-flex justify-content-center">
+          <input type="submit" value="Send Invitations" class="btn btn-primary"/>
+        </div>
+
+     </form>
     </div>
   </div>
 
-     <form method="post">
-       {% csrf_token %}
+</div>
 
-       {{ formset.management_form }}
-
-       {% for form in formset %}
-           <div class="link-formset">
-
-                 {{ form.label_tag }}  {{ form }}
-
-
-            </div>
-
-        {% endfor %}
-
-       <div>
-         <input type="submit" value="Send Invitations" class="btn btn-primary"/>
-       </div>
-
-    </form>
 
 
 </div>

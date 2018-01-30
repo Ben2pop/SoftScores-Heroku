@@ -49,6 +49,12 @@ max-width: 500px;
 margin: 2em 0;
 }
 
+.title-separator2{
+border-top: 1px solid #66bb9e;
+max-width: 250px;
+margin: 2em 0;
+}
+
 /*----------------------------------------------------------------------------*/
 
 /* NavBar */
@@ -405,4 +411,54 @@ body {
 .box-question h3{
   text-decoration: underline;
   text-decoration-color: rgb(102, 187, 158);
+}
+
+
+.intr-text h4{
+  font-weight:300
+}
+
+.title-jumbo h3{
+  font-weight:300;
+}
+
+.col-bord{
+  border: 0.032rem solid #e8e8e8;
+  border-radius: 25px;
+  padding:2rem 6rem;
+}
+.invite-teammember{
+  margin-bottom:35px;
+}
+.invite-teammember .jumbotron{
+  padding: 2rem 2rem;
+}
+
+.invite-teammember .link-formset input{
+  width : 300px;
+  padding:0.5rem;
+  margin-bottom:10px;
+  font-weight:300;
+
+}
+
+.form-tag{
+  margin-bottom:5px;
+}
+
+.team-title-text{
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  margin-bottom:25px;
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:10px;
+}
+
+
+.invite-button{
+  margin-top:15px;
 }

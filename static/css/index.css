@@ -288,9 +288,13 @@ header.masthead {
 }
 
 .title{
-  color: #66bb9e;
+  color: black;
   padding: 0 1rem;
   margin-bottom: 20px;
+}
+
+.title h4, .title h2, .title h6{
+  font-weight:300;
 }
 
 .teamcontent p{
