@@ -432,3 +432,11 @@ header.masthead h5{
 .blockquote p{
   font-weight:300;
 }
+
+.box-1 p{
+  margin-top:32px;
+}
+
+.box-3 p{
+margin-top: 27px;
+}
