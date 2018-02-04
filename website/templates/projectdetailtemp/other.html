@@ -18,7 +18,7 @@
   <div class="row">
   {% for member in project.team_id.members.all %}
     <div class="col">
-      <div class="bord">
+      <div class="bord box-shad">
           <div class="profil_pic">
           {% if member.first_name == None or member.last_name == None%}
           <img src="{% static "images/peoplebw.png" %}" alt="" style="height:100px">

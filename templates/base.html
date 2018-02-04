@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static '/css/master.css' %}">
     <link href="{% static 'css/widgets.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    {% block extracss %}{% endblock %}
 
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico'%}"/>
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico'%}"/>
@@ -29,7 +30,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.29.4/js/jquery.tablesorter.js" integrity="sha256-9kqrSdgKTE8E6A94yfeahUKKP1bwZNrh4HO9H6gCz/A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.29.4/js/jquery.tablesorter.widgets.js" integrity="sha256-ulL5Ln7fwxHfXScZcGp9l0O+BiMwMBOsc5yYVdD7qdk=" crossorigin="anonymous"></script>
-    {% block extracss %}{% endblock %}
+
+    {% block extrajs %}{% endblock %}
 
   </head>
   <body id="page-top">
@@ -88,7 +90,6 @@
     {% block body %}
     {% endblock %}
 
-    {% block extrajs %}
-    {% endblock %}
+
   </body>
 </html>

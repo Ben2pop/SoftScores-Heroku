@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-<div class="container candidate_list paddingtop80 marginbottom30">
-    <div class="jumbotron greenback">
+<div class="grey_back">
+
+
+<div class="container candidate_list paddingtop80 padbot30">
+    <div class="jumbotron greenback box-shad">
       <div class="container">
         <div class="row justify-content-md-center">
 
@@ -17,7 +20,7 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            <div class="card box-shad">
                 <h6 class="card-header text-center bg-dark text-white">Candidate that responsed</h6>
                 <div class="card-body">
                       {% if app_with_resp|length == 0 %}
@@ -61,7 +64,7 @@
 
     <div class="row">
       <div class="col-md-12">
-          <div class="card">
+          <div class="card box-shad">
             <h6 class="card-header text-center bg-dark text-white">Invited candidates</h6>
             <div class="card-body">
               {% if app_without_resp|length == 0 %}
@@ -97,6 +100,7 @@
 
 
 
+</div>
 </div>
 <script type="text/javascript">
 $(function(){

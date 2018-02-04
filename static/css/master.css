@@ -205,7 +205,7 @@ body {
 }
 
 .OuterContent{
-
+  background-color:white;
   height: 100px;
 }
 
@@ -461,4 +461,59 @@ body {
 
 .invite-button{
   margin-top:15px;
+}
+
+.grey_back{
+  background-color:rgb(246,249,252);
+}
+
+.box-shad{
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1)
+}
+
+.padbot30{
+  padding-bottom: 30px;
+}
+
+h1, h2, h3, h4, h5, h6{
+font-weight:300;
+}
+
+.chart{
+  position: relative;
+}
+
+.score-text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.score-text span{
+  font-size:32px;
+}
+
+.doughnut{
+  padding:1rem 1rem;
+  display: inherit !important;
+}
+
+.score-title{
+  margin-bottom:20px;
+}
+
+.impact-card .card-body{
+  min-height:167px;
+}
+
+.impact-card .score-text{
+  top:60%
+}
+.score-text{
+  font-size: 33px;
+}
+
+.btn-success{
+  background-color: rgb(127,190,121)
 }

@@ -205,12 +205,14 @@ class CandidateDetailView(LoginRequiredMixin, generic.DetailView):
         context = super(CandidateDetailView, self).get_context_data(**kwargs)
         team_score = get_team_cohesivenss_score(self)[0]
         applicant_score = get_applicant_cohesivenss_score(self)[0][0]
+        employee_name = MyUser.objects.get(id=self.kwargs['pk2'])
         diff_score = get_applicant_cohesivenss_score(self)[0][0] - get_team_cohesivenss_score(self)[0]
         team_list_pop = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all().exclude(id=self.kwargs['pk2'])
         context['team_score'] = team_score
         context['applicant_score'] = applicant_score
         context['diff_score'] = diff_score
         context['team_list_pop'] = team_list_pop
+        context['employee_name'] = employee_name
 
         return context
 
