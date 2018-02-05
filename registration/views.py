@@ -110,7 +110,7 @@ def TeamRegister2(request, pk1):
                     'token': account_activation_token.make_token(user),
                     })
                     mail_subject = 'You have been invited to SoftScores.com please sign in to get access to the app'
-                    if a2.project_hr_admin.email == "hradmin@test.com":
+                    if Project.objects.get(id = pk1).project_hr_admin.email == "hradmin@test.com":
                         to_email = 'softscoresapp@gmail.com'
                     else:
                         to_email = user.email
