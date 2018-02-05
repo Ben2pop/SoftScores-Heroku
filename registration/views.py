@@ -109,10 +109,11 @@ def TeamRegister2(request, pk1):
                     'domain':current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': account_activation_token.make_token(user),
-                    'hr_name':hr_admin_name,
+                    })
+                    mail_subject = render_to_string('You have been invited by' + hr_admin_name + 'from' + hr_company,{
+                    'hr_admin_name':hr_admin_name,
                     'hr_company':hr_company,
                     })
-                    mail_subject = 'You have been invited by' + {{hr_name}} + 'from' + {{hr_company}}
                     if Project.objects.get(id = pk1).project_hr_admin.email == "hradmin@test.com":
                         to_email = 'softscoresapp@gmail.com'
                     else:
