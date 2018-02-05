@@ -1,6 +1,7 @@
 {% autoescape off %}
 Hi {{ user }},
-Please click on the link to confirm your registration,
+You have been invited to take the SoftScores questionnaire to assess your fit with maybe your future team.
+By registering, you agree to share your results directly with the company
 
 http://{{ domain }}{% url 'registration:CandidateSignIn' uidb64=uid token=token %}
 {% endautoescape %}
