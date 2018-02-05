@@ -1,6 +1,7 @@
 {% autoescape off %}
 Hi {{ user.first_name }},
-You have been invied to log in SoftScores.com and take the survey
+You have been invited to take the SoftScores questionnaire to assess your fit with maybe your future team.
+By registering, you agree to share your results directly with the company
 
 http://{{ domain }}{% url 'registration:HRlogin' %}
 {% endautoescape %}

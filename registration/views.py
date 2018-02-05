@@ -101,15 +101,18 @@ def TeamRegister2(request, pk1):
                     u1 = user.id #get user id
                     a2 = Project.objects.get(id = pk1).team_id  #get all project created by the user
                     a2.members.add(u1) # add the member to the team
-
+                    hr_admin_name = Project.objects.get(id = pk1).project_hr_admin.first_name + ' ' + Project.objects.get(id = pk1).project_hr_admin.last_name
+                    hr_company = Project.objects.get(id = pk1).project_hr_admin.company
                     current_site = get_current_site(request)
                     message = render_to_string('acc_active_email.html', {
                     'user':user,
                     'domain':current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': account_activation_token.make_token(user),
+                    'hr_name':hr_admin_name,
+                    'hr_company':hr_company,
                     })
-                    mail_subject = 'You have been invited to SoftScores.com please sign in to get access to the app'
+                    mail_subject = 'You have been invited by' + {{hr_name}} + 'from' + {{hr_company}}
                     if Project.objects.get(id = pk1).project_hr_admin.email == "hradmin@test.com":
                         to_email = 'softscoresapp@gmail.com'
                     else:
