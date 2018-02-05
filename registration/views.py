@@ -65,7 +65,7 @@ def HR_login(request):
 
 
 
-def TeamRegister2(request, pk1=None):
+def TeamRegister2(request, pk1):
     #heroku run --app=your-app "ipython --pdb"
     InviteFormSet = formset_factory(InviteForm2)
 
@@ -78,11 +78,8 @@ def TeamRegister2(request, pk1=None):
                 if MyUser.objects.filter(email = mail).exists():
                     user = MyUser.objects.get(email=mail)
                     u1 = user.id # get user ID
-                    a1 = MyUser.objects.get(email = request.user.email) #get user email
-                    a2 = Project.objects.filter(project_hr_admin = a1)  #get all project created by the user
-                    a3 = a2.latest('id') # extract the last project
-                    a4 = a3.team_id # extract the team linked to the project
-                    a4.members.add(user) # add the member to the team
+                    a2 = Project.objects.get(id = pk1).team_id
+                    a2.members.add(u1) # add the member to the team
 
                     invited_user = MyUser.objects.get(email = mail)
                     current_site = get_current_site(request)
@@ -102,11 +99,8 @@ def TeamRegister2(request, pk1=None):
                     user.is_employee = True
                     user.save()
                     u1 = user.id #get user id
-                    a1 = MyUser.objects.get(email = request.user.email) #get user email
-                    a2 = Project.objects.filter(project_hr_admin = a1)  #get all project created by the user
-                    a3 = a2.latest('id') # extract the last project
-                    a4 = a3.team_id # extract the team linked to the project
-                    a4.members.add(u1) # add the member to the team
+                    a2 = Project.objects.get(id = pk1).team_id  #get all project created by the user
+                    a2.members.add(u1) # add the member to the team
 
                     current_site = get_current_site(request)
                     message = render_to_string('acc_active_email.html', {
@@ -116,11 +110,14 @@ def TeamRegister2(request, pk1=None):
                     'token': account_activation_token.make_token(user),
                     })
                     mail_subject = 'You have been invited to SoftScores.com please sign in to get access to the app'
-                    to_email = user.email
+                    if a2.project_hr_admin.email == "hradmin@test.com":
+                        to_email = 'softscoresapp@gmail.com'
+                    else:
+                        to_email = user.email
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
             messages.success(request, 'testouille la fripouille')
-            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1':a3.id}))
+            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1':pk1}))
         else:
             print("The entered form is not valid")
 
