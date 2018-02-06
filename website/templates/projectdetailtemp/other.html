@@ -6,9 +6,9 @@
     </div>
     <div class="col-3">
       {% if all_user_response == 1 %}
-        <a href="{% url 'website:recruitment' pk1=project.id %}" class="btn btn-success btn-text float-right" role="button"><span class="fa fa-link"></span>   Recruitment process page</a>
+        <a href="{% url 'website:recruitment' pk1=project.id %}" class="btn btn-success btn-text float-right" role="button"><i class="fas fa-link"></i>   Recruitment process page</a>
     {% else %}
-        <a href="#" class="btn redback btn-text float-right" role="button"><span class="fa fa-link"></span>   Waiting for team members to start recruitment</a>
+        <a href="#" class="btn redback btn-text float-right" role="button"><i class="fas fa-link"></i>   Waiting for team members to start recruitment</a>
     {% endif %}
     </div>
   </div>
@@ -43,12 +43,12 @@
                 </div>
                   <div class="survey-taken">
                     {% if member.response_set.count > 0 %}
-                        Survey has been taken - <span class="fa fa-thumbs-o-up" aria-hidden="true" style="color:green"></span>
+                        Survey has been taken - <i class="fas fa-thumbs-up" style="color:green"></i>
                         <div class="result-link">
-                          <span class="fa fa-id-card-o" aria-hidden="true"><a href="{% url 'website:EmployeDetails' pk1=project.id pk2=member.id %}"> Show Results</a>
+                          <i class="fas fa-id-card"></i><a href="{% url 'website:EmployeDetails' pk1=project.id pk2=member.id %}"> Show Results</a>
                         </div>
                     {% else %}
-                        Survey has not been taken yet - <span class="fa fa-thumbs-o-down" aria-hidden="true" style="color:red"></span>
+                        Survey has not been taken yet - <i class="fas fa-thumbs-down" aria-hidden="true" style="color:red"></i>
                    {% endif %}
                   </div>
                 {% endif %}

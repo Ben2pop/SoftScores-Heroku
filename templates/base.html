@@ -15,7 +15,8 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico'%}"/>
 
     <!-- Fonts-->
-    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
@@ -30,7 +31,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.29.4/js/jquery.tablesorter.js" integrity="sha256-9kqrSdgKTE8E6A94yfeahUKKP1bwZNrh4HO9H6gCz/A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.29.4/js/jquery.tablesorter.widgets.js" integrity="sha256-ulL5Ln7fwxHfXScZcGp9l0O+BiMwMBOsc5yYVdD7qdk=" crossorigin="anonymous"></script>
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 
   </head>
@@ -60,10 +61,10 @@
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'pricing' %}">Pricing</a></li>
             {% endif %}
             {% if user.is_authenticated %}
-            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'website:hr_index'%}"><span class="fa fa-user-circle"></span>{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
-            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:logout'%}"><span class="fa fa-sign-out"></span>Log Out</a></li>
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'website:hr_index'%}"><span class="fa fa-user-circle"></span> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:logout'%}"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
             {% else %}
-            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:HRlogin' %}"><span class="fa fa-sign-in"></span> Recruiter Area</a></li>
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:HRlogin' %}"><span class="fas fa-sign-in-alt"></span> Recruiter Area</a></li>
             {% endif %}
           </ul>
         </div>
