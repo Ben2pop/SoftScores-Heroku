@@ -32,6 +32,9 @@ class SurveyDetail(View):
         categories = Category.objects.filter(survey=survey).order_by('order')
         form = ResponseForm(survey=survey, user=request.user,
                             step=kwargs.get('step', 0))
+        numb_of_questions = int(Survey.objects.get(id = kwargs['id']).questions.all().count())
+        progress_score = ((int(kwargs['step']) + 1)/numb_of_questions)*100
+
         try:
             get_scale = form.get_multiple_scale()
             widget_type = form.get_widget_type()
@@ -44,7 +47,8 @@ class SurveyDetail(View):
             'categories': categories,
             'scales': get_scale,
             'type': widget_type,
-            
+            'progress_score':progress_score,
+
         }
 
         return render(request, template_name, context)

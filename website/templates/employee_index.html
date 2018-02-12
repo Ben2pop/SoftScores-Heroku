@@ -29,7 +29,7 @@
                             In the following, you will face a serie of questions that you will have to answer. Pick the one that is closer to you and rate it using the 0-100 scale
                           </p>
                           <p>
-                            There is no right or wrong answer, just pick the one that feels right to you. 
+                            There is no right or wrong answer, just pick the one that feels right to you.
                           </p>
                           <p>
                             Nb: We built a test validation score in order to prevent users that would tend to not answer in a consistent way
@@ -37,9 +37,18 @@
                         </div>
                     </div>
                   </div>
+                  {% if user_response_count == 0 %}
                   <div class="row justify-content-center">
                     {% include "survey/list.html" %}
                   </div>
+                  {% else %}
+                  <div class="row justify-content-center">
+                    <div class="jumbotron redback">
+                      You have no questionnaire waiting for you. If you thing you should take it again, do not hesitate to contact us
+                    </div>
+
+                  </div>
+                  {% endif %}
               </div>
 
           </div>

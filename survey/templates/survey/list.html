@@ -3,7 +3,7 @@
 {% load i18n %}
 
 
-<div id="intro" class="container-fluid">
+<div id="intro" class="container-fluid listing-content">
 <div class="row">
 	<div class="col"></div>
 	<div class="col-8">
@@ -12,13 +12,12 @@
 		</div>
 
 		<div class="survey-listing">
-			<ul>
 				{% for survey in surveys %}
 				<div class="takeSurvey_btn">
 					<a href="{{ survey.get_absolute_url }}" class="btn btn-primary btn-sm btn-block">{% trans "Take the Survey"%} {{survey.name}}</a>
 				</div>
 				{% endfor %}
-			</ul>
+
 		</div>
 
 	</div>

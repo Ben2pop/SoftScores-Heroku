@@ -529,3 +529,19 @@ font-weight:300;
   animation: glowing 1000ms infinite;
   border-radius: 50%;
 }
+
+.listing-content{
+  text-align:center;
+}
+
+.progress-bar{
+  background-color: rgb(186,225,212);
+}
+
+.progress-title{
+  font-size:12px;
+}
+
+.progress-box{
+  margin-bottom:25px;
+}

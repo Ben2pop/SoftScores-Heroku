@@ -125,12 +125,18 @@ class EmployeeIndex(TemplateView):
     #import pdb; pdb.set_trace()
     template_name = "employee_index.html"
 
+    def get_object(self, queryset=None):
+        return get_object_or_404(Project,id=self.kwargs['pk2'])
+
     def get_context_data(self, **kwargs):
         context = super(EmployeeIndex, self).get_context_data(**kwargs)
         surveys = Survey.objects.filter(is_published=True)
+        user_response_count  = MyUser.objects.get(id = self.kwargs['pk2']).response_set.count()
+        #current_user = MyUser.objects.get(id = )
         if not self.request.user.is_authenticated():
             surveys = surveys.filter(need_logged_user=False)
         context['surveys'] = surveys
+        context['user_response_count'] = user_response_count
         return context
 
 class ProjectCreate(LoginRequiredMixin, CreateView):

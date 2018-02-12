@@ -51,10 +51,10 @@ def HR_login(request):
                 return HttpResponseRedirect(reverse('website:hr_index'))
             elif user.is_active & user.is_employee & user.check_password(password):
                 login(request,user)
-                return HttpResponseRedirect(reverse('website:employee_index'))
+                return HttpResponseRedirect(reverse('website:employee_index', kwargs={'pk2':user.id}))
             elif user.is_active & user.is_candidate & user.check_password(password):
                 login(request,user)
-                return HttpResponseRedirect(reverse('website:employee_index'))
+                return HttpResponseRedirect(reverse('website:employee_index', kwargs={'pk2':user.id}))
             else:
                 HttpResponse("Account not active, please contact Admin")
         else:
@@ -134,7 +134,6 @@ def applicantregister2(request, pk1):
         formset = InviteFormSet(request.POST)
 
         if(formset.is_valid()):
-
             for i in formset:
                 mail = i.cleaned_data['Email']
                 if MyUser.objects.filter(email = mail).exists():
