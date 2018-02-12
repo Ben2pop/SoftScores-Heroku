@@ -33,7 +33,7 @@ class SurveyDetail(View):
         form = ResponseForm(survey=survey, user=request.user,
                             step=kwargs.get('step', 0))
         numb_of_questions = int(Survey.objects.get(id = kwargs['id']).questions.all().count())
-        progress_score = ((int(kwargs['step']) + 1)/numb_of_questions)*100
+        progress_score = ((int(kwargs.get('step', 0)) + 1)/numb_of_questions)*100
 
         try:
             get_scale = form.get_multiple_scale()
