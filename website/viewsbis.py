@@ -115,8 +115,6 @@ class HRIndex(generic.ListView):
         return context
 
 
-
-
 class CandidateIndex(TemplateView):
     #import pdb; pdb.set_trace()
     template_name = "candidate_index.html"
@@ -221,8 +219,6 @@ class CandidateDetailView(LoginRequiredMixin, generic.DetailView):
         context['employee_name'] = employee_name
 
         return context
-
-
 
 class TeamCreate(CreateView):
 
@@ -777,7 +773,6 @@ def get_employee_action_array(self, format=None, *args, **kwargs):
 
     return action_array
 
-
 def get_action_array(array):
 
     current_response_list = array
@@ -910,7 +905,6 @@ def get_employee_behav_array(self, format=None, *args, **kwargs):
     behav_array = get_behaviour_array(response_list)
     return behav_array
 
-
 def get_behaviour_array(array):
 
     current_response_list = array
@@ -1004,8 +998,6 @@ def get_knowledge_sort2(current_response):
 
 
     return knowledge_sort_score,knowledge_sort_label
-
-
 
 ############ End To Define ##############
 
@@ -1233,9 +1225,6 @@ def get_trend(analyzed_array, index):
 
     return trend_array
 
-
-
-
 def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
     team_info_tupple =  get_employee_info_array(self)[0]
     team_motivation_tupple =  get_employee_motivation_array(self)[0]
@@ -1330,8 +1319,6 @@ def get_question_similarities(self, format=None, *args, **kwargs):
     behav_similarities = question_similarities[action_index:behav_index]
     return info_similarities,motiv_similarities,action_similarities,behav_similarities
 
-
-
 def euclid_array(answer_per_question):
     go = []
     max_dist = round(math.sqrt(len(answer_per_question[0]*(200**2))))
@@ -1370,8 +1357,6 @@ def get_dist_multiple_variable(array,index):
     euc_dist = sqrt(np.sum(list_dis))
     trend_similarity = round((1-(euc_dist/max_dist))*100)
     return trend_similarity
-
-
 
 ## Recruitment Page ##
 
