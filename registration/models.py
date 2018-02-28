@@ -49,6 +49,8 @@ class MyUser(AbstractBaseUser):
     is_hr = models.BooleanField(default=False)
     is_candidate = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
+    is_manager = models.BooleanField(defaut=False)
+    position = models.CharField(max_length=150, blank=True, null=True)
     company = models.CharField(max_length=100, blank=True, null=True)
 
     objects = MyUserManager()
