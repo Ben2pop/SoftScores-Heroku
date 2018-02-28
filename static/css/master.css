@@ -545,3 +545,7 @@ font-weight:300;
 .progress-box{
   margin-bottom:25px;
 }
+
+.score-box{
+  min-height:216px;
+}

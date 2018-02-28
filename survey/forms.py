@@ -191,7 +191,7 @@ class ResponseForm(models.ModelForm):
         :param Question question: The question to add.
         :param dict data: The pre-existing values from a post request. """
         kwargs = {"label": question.text,
-                  "required": question.required,}
+                  "required": question.required, }
         initial = self.get_question_initial(question, data)
         if initial:
             kwargs["initial"] = initial

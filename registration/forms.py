@@ -5,12 +5,14 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class HRForm(forms.ModelForm):
-    password = forms.CharField(widget= forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta():
         model = User
-        fields = ('first_name','last_name','email','password','company')
+        fields = ('first_name', 'last_name', 'email', 'password', 'company')
+
 
 class TeamMembersForm(forms.ModelForm):
 
@@ -18,12 +20,13 @@ class TeamMembersForm(forms.ModelForm):
         model = User
         fields = ('email',)
 
+
 class TeamMembersFormUpdate(forms.ModelForm):
-    password = forms.CharField(widget= forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta():
         model = User
-        fields = ('first_name','last_name','password')
+        fields = ('first_name', 'last_name', 'password')
 
 
 class InviteForm2(forms.Form):
@@ -35,6 +38,7 @@ class InviteForm2(forms.Form):
                         'placeholder': "Member's mail",
                     }),
                     required=False)
+
 
 class ApplicantForm2(forms.Form):
     """

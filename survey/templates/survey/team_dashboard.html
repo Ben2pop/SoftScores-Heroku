@@ -81,8 +81,7 @@
   </div>
 </div>
 
-
-</div>
+{% include "survey/modals-explanations.html" %}
 
 {% block extrajs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" integrity="sha256-vyehT44mCOPZg7SbqfOZ0HNYXjPKgBCaqxBkW3lh6bg=" crossorigin="anonymous"></script>
@@ -154,6 +153,7 @@ $.ajax({
     var ctx6 = document.getElementById("mainGraphLine4").getContext('2d');
     $('.ajaxProgress').hide();
     $('.dashboard-container').show();
+    var canvas = document.getElementById("mainGraph");
     var mainGraph = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -179,6 +179,57 @@ $.ajax({
                  },
     });
     //end graph 1//
+    canvas.onclick = function(evt) {
+      var activePoints = mainGraph.getElementsAtEvent(evt);
+      if (activePoints[0]) {
+        var chartData = activePoints[0]['_chart'].config.data;
+        var idx = activePoints[0]['_index'];
+
+        var label = chartData.labels[idx];
+        var str_label = label.toString()
+        console.log(str_label)
+        var value = chartData.datasets[0].data[idx];
+        if(label == "General,Details"){
+          $('#general').modal('show');
+        } else if(label == "Sameness,Difference"){
+          $('#sameness').modal('show');
+        } else if(label == "Visual,Auditory"){
+          $('#visual').modal('show');
+        } else if(label == "Static,Process"){
+          $('#static').modal('show');
+        } else if(label == "Best Scenario,Worst Scenario"){
+          $('#bestScenario').modal('show');
+        } else if(label == "Binary,Shades"){
+          $('#binary').modal('show');
+        } else if(label == "External,Internal"){
+          $('#external').modal('show');
+        } else if(label == "Go Away,Toward"){
+          $('#goAway').modal('show');
+        } else if(label == "Things"){
+          $('#things').modal('show');
+        } else if(label == "Variety,Routine"){
+          $('#variety').modal('show');
+        } else if(label == "Active,Reaction"){
+          $('#active').modal('show');
+        } else if(label == "Manager worker"){
+          $('#manager').modal('show');
+        } else if(label == "Option,Procedure"){
+          $('#option').modal('show');
+        } else if(label == "Perfection,Optimizing"){
+          $('#perfection').modal('show');
+        } else if(label == "Sensor,Intuition"){
+          $('#sensor').modal('show');
+        } else if(label == "External locus,Internal locus"){
+          $('#locus').modal('show');
+        } else if(label == "Strong Will,Compliant"){
+          $('#will').modal('show');
+        } else if(label == "In time,Through time"){
+          $('#time').modal('show');
+        } else{
+          $('#modeling').modal('show');
+        }
+    }}
+    ;
 
     //graph 2 //
     var mainGraph2 = new Chart(ctx2, {
