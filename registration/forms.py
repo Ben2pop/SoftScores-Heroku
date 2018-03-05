@@ -14,6 +14,16 @@ class HRForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email', 'password', 'company')
 
 
+class ManagerForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta():
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'company', 'position',
+                  'password',
+                  ]
+
+
 class TeamMembersForm(forms.ModelForm):
 
     class Meta():

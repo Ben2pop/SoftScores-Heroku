@@ -3,16 +3,18 @@
 
 {% block body %}
 
-<div class="container paddingtop100">
+<div class="container paddingtop25 hr-index">
+
+  <img src="{% static 'images/manager.png'%}" class="img-fluid" alt="Responsive image">
   <div class="jumbotron">
 
     <div class="row">
       <div class="col">
         <div class="title-jumbo">
-          <h3>It is time to create a new project</h3>
+          <h5>Create a new project</h5>
 
         </div>
-        <a href="{% url 'website:add_project' %}" class="btn btn-primary btn-lg btnsmallfont" role="button"><span class="glyphicon glyphicon-plus"></span>   Create a project</a>
+        <a href="{% url 'website:create_project' %}" class="btn btn-primary btn-lg btnsmallfont" role="button"><span class="glyphicon glyphicon-plus"></span>   Create a project</a>
       </div>
       <div class="col quote">
         "“Who is on a team matters less than how the team members interact, structure their work, and view their contributions"

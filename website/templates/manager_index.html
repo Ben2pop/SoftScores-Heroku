@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container paddingtop100 manager-index">
+  <img src="{% static 'images/teambuilding.jpg'%}" class="img-fluid" alt="Responsive image">
+
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col">
+        <div class="title-jumbo">
+          <h3>It is time to create a new project</h3>
+        </div>
+        <form class="form-inline" method="POST">
+            {% csrf_token %}
+            {% include 'form-template.html' %}
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-lg btnsmallfont"> Create a project</button>
+            </div>
+        </form>
+      </div>
+      <div class="col quote">
+        "“Who is on a team matters less than how the team members interact, structure their work, and view their contributions"
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

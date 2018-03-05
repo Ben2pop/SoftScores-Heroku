@@ -3,18 +3,42 @@
 
 {% block body %}
 
-<div class="container">
-  <div class="jumbotron">
-    {% if registered %}
-        <h1>Thank you for registering</h1>
-    {% endif %}
-        <h1>Register</h1>
-        <h3>Fill out the form</h3>
-        <form class="" action="" method="post">
-          {% csrf_token%}
-          {{ HR_form.as_p }}
-          <input type="submit" name="" value="Register">
-        </form>
+<div class="row">
+  <div class="col HRimg">
+
+  </div>
+  <div class="col">
+    <div class="form-area2">
+      <div class="intr-area">
+        <h2>Sign-In</h2>
+        <hr class="title-separator">
+        <h4>Please sign-in in order to access the application</h4>
+        <br>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="">
+        {% for field in Manager_form %}
+          <div class="row">
+            <div class="col-3 form-group">{{ field.label_tag }} </div>
+            <div class="col-8 form-group"> {{ field }}</div>
+          </div>
+
+
+          {% if field.help_text %}
+            <small style="display: none">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+
+        {% endfor %}
+      </div>
+        <div class="offset-md-4">
+      <button type="submit" class="btn btn-primary btn-lg btnsmallfont">Sign In</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

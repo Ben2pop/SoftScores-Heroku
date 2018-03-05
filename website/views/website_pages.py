@@ -1,15 +1,5 @@
-import json
-from math import *
-import math
-import random
-import itertools as it
-import numpy as np
-from scipy.stats.stats import pearsonr
-from collections import Counter
-from statistics import mode
-from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView
 from website.models import Project, Team
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,19 +7,15 @@ from registration.views import MyUser
 from website.forms import EditSelectTeam
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from registration.models import MyUser
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from survey.models import Question,Answer,Survey
+from survey.models import Survey
 from survey.models.response import Response
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from survey.models.response import Response as ResponseModel
-from website.serializers import MyUserSerializer, ProjectSerializer, TeamSerializer
-from rest_framework.renderers import TemplateHTMLRenderer
-from django.template.defaulttags import register
+from django.shortcuts import get_object_or_404
+import math
 from website.views.team_dashboard import *
 from website.views.candidate_dashboard import *
 from website.views.employee_dashboard import *
@@ -40,20 +26,19 @@ class LinkTeam(generic.ListView):
     template_name = 'link_project.html'
 
     def get_queryset(self):
-        #import pdb; pdb.set_trace()
-        #team2 = Team.objects.all().filter(team_hr_admin = self.request.user)
         queryset = Team.objects.filter(team_hr_admin=self.request.user)
         return queryset
 
+
 def TeamSelect(request, pk1=None):
-    #import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     if request.method == "POST":
         select_form = EditSelectTeam(request.user, request.POST)
         if select_form.is_valid():
             data = select_form.cleaned_data['team_choice']
             obj2 = Project.objects.filter(project_hr_admin=request.user)
             obj3 = obj2.latest('id')
-            if obj3.team_id == None:
+            if obj3.team_id is None:
                 obj3.team_id = data
                 obj3.save()
                 obj4 = obj3.team_id
@@ -63,40 +48,52 @@ def TeamSelect(request, pk1=None):
                     current_site = get_current_site(request)
                     message = render_to_string('acc_join_email.html', {
                         'user': i.first_name,
-                        'domain':current_site.domain,
+                        'domain': current_site.domain,
                         })
                     mail_subject = 'You have been invited to SoftScores.com please LogIn to get access to the app'
                     to_email = i.email
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
                 messages.success(request, 'test')
-                return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1':obj3.id}))
+                return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1': obj3.id}))
             else:
                 print('this project has already a team')
         else:
             print('Non Valid form')
 
     else:
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         select_form = EditSelectTeam(request.user)
     return render(request,'link_project.html',
                             {'select_form':select_form })
 
+
+class CreateProject(LoginRequiredMixin, CreateView):
+    model = Project
+    fields = ['name']
+    template_name = "create_project.html"
+
+    def form_valid(self, form):
+        form.instance.project_hr_admin = self.request.user
+        return super(CreateProject, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('website:create_team', kwargs={'pk1': self.object.pk})
+
+
 class HRIndex(generic.ListView):
-    #import pdb; pdb.set_trace()
     template_name = "HR_index.html"
     model = Project
 
-
     def get_queryset(self):
-        return Project.objects.filter(project_hr_admin_id = self.request.user).order_by('-created_at')
+        return Project.objects.filter(project_hr_admin_id=self.request.user).order_by('-created_at')
 
 
     def get_context_data(self, **kwargs):
-        #import pdb; pdb.set_trace()
-        context = super(HRIndex,self).get_context_data(**kwargs)
+        # import pdb; pdb.set_trace()
+        context = super(HRIndex, self).get_context_data(**kwargs)
         status_dict = {}
-        for project in Project.objects.filter(project_hr_admin_id = self.request.user):
+        for project in Project.objects.filter(project_hr_admin_id=self.request.user):
             proj_team_id = project.team_id
             proj_memb = proj_team_id.members.all()
             open_close = 1
@@ -105,12 +102,40 @@ class HRIndex(generic.ListView):
                     status = False
                 else:
                     status = True
-                open_close = open_close*status
+                open_close = open_close * status
 
-            status_dict.update({project.id:open_close})
+            status_dict.update({project.id: open_close})
 
         context['status_dict'] = status_dict
         return context
+
+
+class CreateTeam(CreateView):
+
+    model = Team
+    fields = ['team_name']
+    template_name = 'create_team.html'
+
+    def form_valid(self, form, *arg, **kwargs):
+        valid = super(CreateTeam, self).form_valid(form)
+        form.instance.team_hr_admin = self.request.user
+        obj = form.save()
+        # SELECT * FROM project WHERE user = 'current_user' AND team_id = NULL
+        current_project = Project.objects.get(id=self.kwargs['pk1'])
+        current_project.team_id = obj
+        current_project.save()
+        if self.request.user.is_manager:
+            user_id = self.request.user.id
+            current_team = current_project.team_id
+            current_team.members.add(user_id)
+        return valid
+        return super(TeamCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        # import pdb; pdb.set_trace()
+        project = Project.objects.get(team_id=None, project_hr_admin=self.request.user)
+        return reverse('registration:team_register3', kwargs={'pk1': project.id})
+
 
 class TeamCreate(CreateView):
 
@@ -119,14 +144,14 @@ class TeamCreate(CreateView):
     template_name = 'team_form.html'
 
     def form_valid(self, form):
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         valid = super(TeamCreate, self).form_valid(form)
         form.instance.team_hr_admin = self.request.user
         obj = form.save()
-        #SELECT * FROM project WHERE user = 'current_user' AND team_id = NULL
-        obj2 = Project.objects.get(project_hr_admin=self.request.user, team_id=None)
-        obj2.team_id = obj
-        obj2.save()
+        # SELECT * FROM project WHERE user = 'current_user' AND team_id = NULL
+        current_project = Project.objects.get(id=self.kwargs['pk1'])
+        current_project.team_id = obj
+        current_project.save()
         return valid
         return super(TeamCreate, self).form_valid(form)
 
@@ -135,9 +160,11 @@ class TeamCreate(CreateView):
         project = Project.objects.get(team_id=None, project_hr_admin=self.request.user)
         return project.get_absolute_url()
 
+
 class CandidateIndex(TemplateView):
     #import pdb; pdb.set_trace()
     template_name = "candidate_index.html"
+
 
 class EmployeeIndex(TemplateView):
     #import pdb; pdb.set_trace()
@@ -157,6 +184,7 @@ class EmployeeIndex(TemplateView):
         context['user_response_count'] = user_response_count
         return context
 
+
 class ProjectCreate(LoginRequiredMixin, CreateView):
     model = Project
     fields = ['name']
@@ -166,18 +194,18 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         form.instance.project_hr_admin = self.request.user
         return super(ProjectCreate, self).form_valid(form)
 
+
 class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
     #import pdb; pdb.set_trace()
     model = Project
     template_name = 'project_details.html'
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Project,id=self.kwargs['pk1'])
+        return get_object_or_404(Project, id=self.kwargs['pk1'])
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         try:
-
             team_name = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
             score = get_team_cohesivenss_score(self)[0]
             all_user_response = 1

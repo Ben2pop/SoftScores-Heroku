@@ -4,7 +4,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from .forms import HRForm, TeamMembersFormUpdate, InviteForm2, ApplicantForm2
+from .forms import HRForm, ManagerForm, TeamMembersFormUpdate, InviteForm2, ApplicantForm2
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -37,6 +37,28 @@ def registerHR(request):
                    'registered': registered})
 
 
+def registerManager(request):
+    registered = False
+    if request.method == "POST":
+        Manager_form = ManagerForm(data=request.POST)
+
+        if Manager_form.is_valid():
+            user = Manager_form.save()
+            user.set_password(user.password)
+            user.is_manager = True
+            user.save()
+            registered = True
+            login(request, user)
+            return HttpResponseRedirect(reverse('website:create_project'))
+        else:
+            print("Error!")
+    else:
+        Manager_form = ManagerForm()
+    return render(request, 'HR_registration_form.html',
+                  {'Manager_form': Manager_form,
+                   'registered': registered})
+
+
 @csrf_protect
 def HR_login(request):
     if request.method == 'POST':
@@ -56,6 +78,9 @@ def HR_login(request):
             elif user.is_active & user.is_candidate & user.check_password(password):
                 login(request, user)
                 return HttpResponseRedirect(reverse('website:employee_index', kwargs={'pk2': user.id}))
+            elif user.is_active & user.is_manager & user.check_password(password):
+                login(request, user)
+                return HttpResponseRedirect(reverse('website:hr_index'))
             else:
                 HttpResponse("Account not active, please contact Admin")
         else:
@@ -118,7 +143,7 @@ def TeamRegister2(request, pk1):
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
             messages.success(request, 'testouille la fripouille')
-            return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1': pk1}))
+            return HttpResponseRedirect(reverse('website:hr_index'))
         else:
             print("The entered form is not valid")
 

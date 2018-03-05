@@ -38,6 +38,16 @@ margin-top:20%;
 font-family: 'Ubuntu', sans-serif;
 }
 
+.form-area2{
+margin-right:12%;
+margin-left:8%;
+margin-top:30%;
+}
+
+.form-area2 form{
+  margin-left:10%;
+}
+
 .intr-text{
   margin-bottom: 10%;
 
@@ -548,4 +558,25 @@ font-weight:300;
 
 .score-box{
   min-height:216px;
+}
+
+.manager-index .jumbotron{
+  margin-top : 20px;
+}
+
+.invite-team .jumbotron{
+  margin-top : 20px;
+}
+
+.paddingtop80{
+  padding-top:80px;
+}
+
+.paddingtop25{
+  padding-top:25px;
+}
+
+.hr-index .jumbotron{
+   margin-top: 10px;
+   padding: 3rem 2rem;
 }
