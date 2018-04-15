@@ -55,6 +55,7 @@ requests==2.18.4
 scipy==0.19.1
 seaborn==0.8.1
 six==1.10.0
+stripe==1.79.1
 urllib3==1.22
 whitenoise==3.3.1
 wrapt==1.10.11
