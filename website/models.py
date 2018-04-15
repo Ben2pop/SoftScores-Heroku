@@ -18,8 +18,8 @@ class BaseProject(models.Model):
     name = models.CharField(max_length=250)
     team_id = models.ForeignKey(Team, blank=True, null=True)
     project_hr_admin = models.ForeignKey('registration.MyUser', blank=True, null=True)
-    candidat_answers = models.ManyToManyField('survey.response', null=True, blank=True)
-    applicant = models.ManyToManyField(MyUser, related_name="%(app_label)s_%(class)s_related", null=True, blank=True)
+    candidat_answers = models.ManyToManyField('survey.response', blank=True)
+    applicant = models.ManyToManyField(MyUser, related_name="%(app_label)s_%(class)s_related", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
