@@ -3,9 +3,50 @@
 
 {% block body %}
 
-<div class="container paddingtop25 hr-index">
+<div class="container hr-index">
+  {% if project_list.count < 1 %}
+  <div class="row demo-back">
+    <div class="col">
+      <div class="demoimg">
+        <div class="row">
+          <div class="col-4 offset-md-1">
+            <div class="text-demo">
+              <h2>We promised a demo ? </h3>
+              <h5>Here it is ....</h5>
+            </div>
 
+          </div>
+          <div class="col-2 offset-md-3">
+
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#test2">
+              Watch our demo
+            </button>
+            <!-- Modal -->
+              <div class="modal fade" id="test2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered video-demo" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/264404960?loop=1&title=0&byline=0&portrait=0" width="1200" height="675" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Create your first project</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {% else %}
   <img src="{% static 'images/manager.png'%}" class="img-fluid" alt="Responsive image">
+
+  {% endif %}
   <div class="jumbotron">
 
     <div class="row">
@@ -13,18 +54,22 @@
         <div class="title-jumbo">
           <h5>Create a new project</h5>
 
+
         </div>
+        {% if user.credit %}
         <a href="{% url 'website:create_project' %}" class="btn btn-primary btn-lg btnsmallfont" role="button"><span class="glyphicon glyphicon-plus"></span>   Create a project</a>
+        {% else %}
+        <button type="button" class="btn btn-primary btn-lg btnsmallfont" data-toggle="modal" data-target="#exampleModalCenter">
+            Create a project
+        </button>
+        {% endif %}
       </div>
       <div class="col quote">
         "“Who is on a team matters less than how the team members interact, structure their work, and view their contributions"
       </div>
     </div>
-
-
-
-
   </div>
+
 
   <div class="project_list">
     <h3 class="project-title">Project List</h3>
@@ -39,6 +84,7 @@
         </tr>
     </thead>
     <tbody>
+
 {% for i in project_list %}
       <tr>
 
@@ -54,7 +100,13 @@
             {% endif %}
           {% endif %}
         {% endfor%}
-        <td> <a href="{% url 'website:ProjectDetails' pk1=i.id %}">Details</a></td>
+
+        {% if project.team_id == None %}
+          <td> <a href="{% url 'website:create_team' pk1=i.id %}">Details</a></td>
+          
+        {% else %}
+         <td> <a href="{% url 'website:ProjectDetails' pk1=i.id %}">Details</a></td>
+        {% endif %}
 
       </tr>
       {% endfor %}
@@ -67,5 +119,51 @@
 
 </div>
 
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img class="card-img-top" src="{% static "images/manager_happy.png"%}" alt="Card image cap">
+      <div class="modal-body">
+        <h5>Improve your managerial skills by understanding who is in your team</h5>
+        <hr>
+        <div class="container">
+          <div class="row">
+            <div class="col price-value-container">
+                  <div class="price-modal-container">
+                    <span class="modal-price-title">Price:</span><span class="modal-price">60$</span><span class="modal-Oprice">299$</span><span class="modal-discount">60% off</span>
+                  </div>
+                  <div class="time-price">
+                    <i class="far fa-clock fa-spin"></i>Limited time offer discount
+                  </div>
+            </div>
+          </div>
+          <div class="row d-flex text-center button-price">
+            <div class="col">
+              <a href="{% url 'website:payment' %}" class="btn btn-primary btn-lg btnsmallfont" role="button"><span class="glyphicon glyphicon-plus"></span>  Add Credit Now</a>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-8 includes-section">
+                <div class="">Includes: </div>
+                <div class="includes-section-list">
+                  <div class=""><i class="fas fa-chart-bar"></i> Full team analysis</div>
+                  <div class=""><i class="fas fa-users"></i>  Teams up to 7 members</div>
+                  <div class=""><i class="fas fa-cogs"></i> Cognitive models explanation</div>
+                  <div class=""><i class="fas fa-comments"></i> Communication & motivation tips</div>
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="{% url 'website:payment' %}" class="btn btn-primary btn-lg btnsmallfont" role="button"><span class="glyphicon glyphicon-plus"></span>  Add Credit Now</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -84,7 +84,6 @@
 
   <script>
 
-
     $(function() {
 
       $('.chart').easyPieChart({
@@ -113,7 +112,9 @@
           $(this.el).find('.score-text').text(Math.round(percent));
     }
       });
+      $('.score-text').css("visibility", "visible");
       $('.same-height').matchHeight({ property: 'min-height' });
+
     });
 </script>
 

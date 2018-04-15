@@ -1,19 +1,29 @@
 {% load staticfiles %}
 
 <div class="ajaxProgress">
-  <h3>Please wait ...</h3>
-  <img src="{% static 'images/ajax-loader.gif' %}" alt="">
+  <div class="row justify-content-center">
+    <div class="col-md-5 ajaxprogressinner">
+      <h3>Please wait ...</h3>
+      <h4>We are loading your dashboard</h4>
+      <img src="{% static 'images/ajax-loader.gif' %}" alt="">
+    </div>
+
+  </div>
+
 </div>
 
 <div class="dashboard-container">
-
-
     <div class="graph-container">
         <div class="row">
           <div class="col-md-12">
             <div class="card box-shad">
+              <div class="card-header text-center bg-dark text-white">
+                 <div class="d-flex align-items-center">
+                      <h5 class="mx-auto w-100">Team model trends</h5>
+                      <i class="fa fa-question-circle ml-auto"></i>
+                 </div>
+              </div>
 
-                <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
 
 
               <div class="card-body">
@@ -27,7 +37,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card box-shad">
-              <h5 class="card-header text-center bg-dark text-white">Members compatibility</h5>
+              <div class="card-header text-center bg-dark text-white">
+                 <div class="d-flex align-items-center">
+                      <h5 class="mx-auto w-100">Members compatibility</h5>
+                      <i class="fa fa-question-circle ml-auto"></i>
+                 </div>
+              </div>
+
               <div class="card-body">
                 <canvas id="mainGraph2" width: "1200"; height="400"></canvas>
               </div>
@@ -39,10 +55,72 @@
 
     <div class="container radar-container">
     <div class="row">
+      <div class="col">
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/innovation2.png' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Ability to innovate</h5>
+                <p class="card-text">The team ability to innovate score exhibit your team ability to think out of the box, to look for non conventional ways to solve problems</p>
+                <div class="progress" style="height: 40px;">
+                  <div class="progress-bar" role="progressbar" style="width: {{innov_score}}%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{innov_score}}%</div>
+                </div>
+            </div>
+       </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/exec.png' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Ability to execute</h5>
+                <p class="card-text">The team ability to excute score exhibit your team ability to bridge the gap between vision and execution</p>
+                <div class="progress" style="height: 40px;">
+                  <div class="progress-bar" role="progressbar" style="width: {{exec_score}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{exec_score}}%</div>
+                </div>
+            </div>
+       </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/communication.png' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Ability to communicate</h5>
+                <p class="card-text">The team ability to communicate score exhibit your team ability to communicate without ambush, to get away from conflicts and negative silences</p>
+                <div class="progress" style="height: 40px;">
+                  <div class="progress-bar" role="progressbar" style="width: {{com_score}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{com_score}}%</div>
+                </div>
+            </div>
+       </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/selfgrowth.png' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Abitlity to motivate</h5>
+                <p class="card-text">The team ability to self-growth score exhibit your team ability to find motivation from within, to learn by itself, and to grow without too much supervision</p>
+                <div class="progress" style="height: 40px;">
+                  <div class="progress-bar" role="progressbar" style="width: {{motiv_score}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{motiv_score}}%</div>
+                </div>
+            </div>
+       </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row">
         <div class="col graph-info">
 
             <div class="card box-shad">
-              <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
+              <div class="card-header text-center bg-dark text-white">
+                 <div class="d-flex align-items-center">
+                      <h5 class="mx-auto w-100">Information processing</h5>
+                      <i class="fa fa-question-circle ml-auto"></i>
+                 </div>
+              </div>
               <div class="card-body mar20">
                 <canvas id="mainGraphLine1" height="250"></canvas>
               </div>
@@ -51,7 +129,12 @@
       </div>
       <div class="col action-info">
             <div class="card box-shad">
-              <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
+              <div class="card-header text-center bg-dark text-white">
+                 <div class="d-flex align-items-center">
+                      <h5 class="mx-auto w-100">Motivation</h5>
+                      <i class="fa fa-question-circle ml-auto"></i>
+                 </div>
+              </div>
               <div class="card-body mar20">
                 <canvas id="mainGraphLine2" height="250"></canvas>
               </div>
@@ -63,7 +146,13 @@
       <div class="col motivation-info">
 
           <div class="card box-shad">
-            <h5 class="card-header text-center bg-dark text-white">Action</h5>
+            <div class="card-header text-center bg-dark text-white">
+               <div class="d-flex align-items-center">
+                    <h5 class="mx-auto w-100">Action</h5>
+                    <i class="fa fa-question-circle ml-auto"></i>
+               </div>
+            </div>
+
             <div class="card-body">
               <canvas id="mainGraphLine3" height="250"></canvas>
             </div>
@@ -73,7 +162,12 @@
       <div class="col behaviour-info">
 
           <div class="card box-shad">
-            <h5 class="card-header text-center bg-dark text-white">To define</h5>
+            <div class="card-header text-center bg-dark text-white">
+               <div class="d-flex align-items-center">
+                    <h5 class="mx-auto w-100">Behaviour</h5>
+                    <i class="fa fa-question-circle ml-auto"></i>
+               </div>
+            </div>
             <div class="card-body">
               <canvas id="mainGraphLine4" height="250"></canvas>
             </div>
@@ -183,6 +277,7 @@ $.ajax({
     });
     //end graph 1//
     canvas.onclick = function(evt) {
+
       var activePoints = mainGraph.getElementsAtEvent(evt);
       if (activePoints[0]) {
         var chartData = activePoints[0]['_chart'].config.data;
@@ -190,7 +285,7 @@ $.ajax({
 
         var label = chartData.labels[idx];
         var str_label = label.toString()
-        console.log(str_label)
+
         var value = chartData.datasets[0].data[idx];
         if(label == "General,Details"){
           $('#general').modal('show');

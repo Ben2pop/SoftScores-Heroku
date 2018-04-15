@@ -1,8 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a255bd5d-bd4b-4f9b-bc8e-cf65b650928e" name="Default" comment="" />
+    <list default="true" id="a255bd5d-bd4b-4f9b-bc8e-cf65b650928e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Authentication_project/settings.py" afterPath="$PROJECT_DIR$/Authentication_project/settings.py" />
+      <change beforePath="$PROJECT_DIR$/SoftScores.iml" afterPath="$PROJECT_DIR$/SoftScores.iml" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change beforePath="$PROJECT_DIR$/registration/admin.py" afterPath="$PROJECT_DIR$/registration/admin.py" />
+      <change beforePath="$PROJECT_DIR$/registration/models.py" afterPath="$PROJECT_DIR$/registration/models.py" />
+      <change beforePath="$PROJECT_DIR$/registration/templates/HR_registration_form.html" afterPath="$PROJECT_DIR$/registration/templates/HR_registration_form.html" />
+      <change beforePath="$PROJECT_DIR$/registration/views.py" afterPath="$PROJECT_DIR$/registration/views.py" />
+      <change beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
+      <change beforePath="$PROJECT_DIR$/static/css/master.css" afterPath="$PROJECT_DIR$/static/css/master.css" />
+      <change beforePath="$PROJECT_DIR$/static/images/project.png" afterPath="$PROJECT_DIR$/static/images/project.png" />
+      <change beforePath="$PROJECT_DIR$/survey/templates/survey/dashboard.html" afterPath="$PROJECT_DIR$/survey/templates/survey/dashboard.html" />
+      <change beforePath="$PROJECT_DIR$/survey/templates/survey/modals-explanations.html" afterPath="$PROJECT_DIR$/survey/templates/survey/modals-explanations.html" />
+      <change beforePath="$PROJECT_DIR$/survey/templates/survey/team_dashboard.html" afterPath="$PROJECT_DIR$/survey/templates/survey/team_dashboard.html" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/base_test.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/csv/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/csv/test_survey2csv.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/custom_class_doesnt_exists.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/custom_question2tex_child.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/name_doesnt_exists.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/no_value_defined.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_conf.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_configuration_builder.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_question2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_question2tex_chart.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_question2tex_raw.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_question2tex_sankey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/exporter/tex/test_survey2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/management/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/management/commands/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/management/commands/test_exportresult.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/management/commands/test_generate_tex_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/management/test_management.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/base_model_test.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/test_answer.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/test_category.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/test_question.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/test_response.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/models/test_survey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/test_survey_auth_required.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/testdump.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/views/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/views/test_survey_detail.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/survey/tests/views/test_survey_result.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/actions.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/admin.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/csv/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/csv/survey2csv.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/survey2x.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/configuration_builder.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/default_conf.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/latex_file.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/question2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/question2tex_chart.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/question2tex_raw.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/question2tex_sankey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/sankey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/exporter/tex/survey2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/forms.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/locale/fr/LC_MESSAGES/django.mo" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/locale/fr/LC_MESSAGES/django.po" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/management/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/management/commands/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/management/commands/exportresult.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/management/commands/generate_tex_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/management/survey_command.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0001_initial.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0002_survey_template.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0003_auto_20170320_0337.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0004_polymorphic_answers_to_kiss.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0005_rename_question_related_name.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0006_add_related_name_for_categories.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0007_auto_20171015_1502.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/0008_auto_20171109_1613.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/migrations/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/answer.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/category.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/question.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/response.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/models/survey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/signals.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/css/bootstrap-theme.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/css/bootstrap.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/css/custom.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/css/widgets.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/js/bootstrap.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/js/jquery-ui.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/js/jquery.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/static/js/scale.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/base.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/completed.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/confirm.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/dashboard.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/forms/image_select.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/list.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/one_page_survey.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/question.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templates/survey/survey.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templatetags/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/templatetags/survey_extras.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/base_test.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/csv/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/csv/test_survey2csv.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/custom_class_doesnt_exists.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/custom_question2tex_child.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/name_doesnt_exists.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/no_value_defined.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_conf.yaml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_configuration_builder.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_question2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_question2tex_chart.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_question2tex_raw.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_question2tex_sankey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/exporter/tex/test_survey2tex.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/management/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/management/commands/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/management/commands/test_exportresult.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/management/commands/test_generate_tex_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/management/test_management.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/base_model_test.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/test_answer.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/test_category.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/test_question.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/test_response.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/models/test_survey.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/test_survey_auth_required.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/testdump.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/views/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/views/test_survey_detail.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/tests/views/test_survey_result.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/urls.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/confirm_view.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/index_view.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/survey_completed.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/survey_detail.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/views/survey_result.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/surveyWorking/widgets.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change beforePath="$PROJECT_DIR$/website/admin.py" afterPath="$PROJECT_DIR$/website/admin.py" />
+      <change beforePath="$PROJECT_DIR$/website/models.py" afterPath="$PROJECT_DIR$/website/models.py" />
+      <change beforePath="$PROJECT_DIR$/website/templates/HR_index.html" afterPath="$PROJECT_DIR$/website/templates/HR_index.html" />
+      <change beforePath="$PROJECT_DIR$/website/templates/create_project.html" afterPath="$PROJECT_DIR$/website/templates/create_project.html" />
+      <change beforePath="$PROJECT_DIR$/website/tests.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/website/urls.py" afterPath="$PROJECT_DIR$/website/urls.py" />
+      <change beforePath="$PROJECT_DIR$/website/views/__init__.py" afterPath="$PROJECT_DIR$/website/views/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/website/views/employee_dashboard.py" afterPath="$PROJECT_DIR$/website/views/employee_dashboard.py" />
+      <change beforePath="$PROJECT_DIR$/website/views/team_dashboard.py" afterPath="$PROJECT_DIR$/website/views/team_dashboard.py" />
+      <change beforePath="$PROJECT_DIR$/website/views/website_pages.py" afterPath="$PROJECT_DIR$/website/views/website_pages.py" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,12 +179,85 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SoftScores" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/survey/templates/survey/dashboard.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="41" column="70" lean-forward="false" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+              <folding>
+                <marker date="1522684382914" expanded="true" signature="22827:22918" ph="[...]" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/website/tests/test_views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="employee_dashboard.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/website/views/employee_dashboard.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6825">
+              <caret line="466" column="31" lean-forward="false" selection-start-line="466" selection-start-column="22" selection-end-line="466" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Alice</find>
+      <find>motivation_array</find>
+      <find>thing</find>
+      <find>conso</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/website/views/employee_dashboard.py" />
+        <option value="$PROJECT_DIR$/survey/templates/survey/dashboard.html" />
+        <option value="$PROJECT_DIR$/website/tests/test_views.py" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -26,7 +268,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="10" />
-    <option name="y" value="43" />
+    <option name="y" value="23" />
     <option name="width" value="1260" />
     <option name="height" value="689" />
   </component>
@@ -45,6 +287,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -52,19 +296,36 @@
               <item name="SoftScores" type="b2602c69:ProjectViewProjectNode" />
               <item name="SoftScores" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SoftScores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SoftScores" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SoftScores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SoftScores" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SoftScores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SoftScores" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -79,86 +340,21 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
+    <configuration name="Pytest" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
       <envs />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda/envs/myDjangoEnv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SoftScores" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -181,39 +377,59 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="868000" />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="43" width="1260" height="689" extended-state="0" />
+    <frame x="10" y="23" width="1260" height="689" extended-state="0" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5095238" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933334" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901135" sideWeight="0.4904762" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18412699" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922825" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958949" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -221,6 +437,68 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/survey/templates/survey/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding>
+            <marker date="1522684382914" expanded="true" signature="22827:22918" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/views/employee_dashboard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6990">
+          <caret line="466" column="31" lean-forward="false" selection-start-line="466" selection-start-column="22" selection-end-line="466" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/survey/templates/survey/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1522684382914" expanded="true" signature="22827:22918" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/views/employee_dashboard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6825">
+          <caret line="466" column="31" lean-forward="false" selection-start-line="466" selection-start-column="22" selection-end-line="466" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/survey/templates/survey/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="41" column="70" lean-forward="false" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+          <folding>
+            <marker date="1522684382914" expanded="true" signature="22827:22918" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/tests/test_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>

@@ -75,6 +75,8 @@ class CreateProject(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.project_hr_admin = self.request.user
+        self.request.user.credit = self.request.user.credit - 1
+        self.request.user.save()
         return super(CreateProject, self).form_valid(form)
 
     def get_success_url(self):
@@ -90,23 +92,28 @@ class HRIndex(generic.ListView):
 
 
     def get_context_data(self, **kwargs):
-        # import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         context = super(HRIndex, self).get_context_data(**kwargs)
+        project_demo_id = Project.objects.get(name="Project SoftScores").id
         status_dict = {}
-        for project in Project.objects.filter(project_hr_admin_id=self.request.user):
-            proj_team_id = project.team_id
-            proj_memb = proj_team_id.members.all()
-            open_close = 1
-            for memb in proj_memb:
-                if not list(memb.response_set.all()):
-                    status = False
-                else:
-                    status = True
-                open_close = open_close * status
+        try:
+            for project in Project.objects.filter(project_hr_admin_id=self.request.user):
+                proj_team_id = project.team_id
+                proj_memb = proj_team_id.members.all()
+                open_close = 1
+                for memb in proj_memb:
+                    if not list(memb.response_set.all()):
+                        status = False
+                    else:
+                        status = True
+                    open_close = open_close * status
 
-            status_dict.update({project.id: open_close})
+                status_dict.update({project.id: open_close})
 
-        context['status_dict'] = status_dict
+                context['status_dict'] = status_dict
+        except AttributeError:
+            pass
+        context['project_demo_id'] = project_demo_id
         return context
 
 
@@ -214,10 +221,18 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
                     all_user_response = all_user_response * 0
                 else:
                     all_user_response = all_user_response * 1
-
+            innov_score = get_innovation_score(self)
+            exec_score = get_execution_score(self)
+            com_score = get_comunication_score(self)
+            motiv_score = get_motiv_score(self)
             context['team_name'] = team_name
             context['score'] = score
             context['all_user_response'] = all_user_response
+            context['innov_score'] = innov_score
+            context['exec_score'] = exec_score
+            context['com_score'] = com_score
+            context['motiv_score'] = motiv_score
+
         except AttributeError:
             pass
         return context

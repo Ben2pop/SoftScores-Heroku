@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap4 %}
+
 
 {% block body %}
 
@@ -8,37 +10,46 @@
 
   </div>
   <div class="col">
-    <div class="form-area2">
-      <div class="intr-area">
-        <h2>Sign-In</h2>
-        <hr class="title-separator">
-        <h4>Please sign-in in order to access the application</h4>
-        <br>
-      </div>
-      <form method="post">
-        {% csrf_token %}
-        <div class="">
-        {% for field in Manager_form %}
-          <div class="row">
-            <div class="col-3 form-group">{{ field.label_tag }} </div>
-            <div class="col-8 form-group"> {{ field }}</div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="form-area2">
+          <div class="intr-area">
+            <h2>Sign-In</h2>
+            <hr class="title-separator">
+            <h5>Please sign-in in order to access the application</h5>
+            <br>
           </div>
+          <form method="post">
+            {% csrf_token %}
+            <div class="">
+              {% bootstrap_form Manager_form layout='inline' %}
+              
+          <!--  {% for field in Manager_form %}
 
 
-          {% if field.help_text %}
-            <small style="display: none">{{ field.help_text }}</small>
-          {% endif %}
-          {% for error in field.errors %}
-            <p style="color: red">{{ error }}</p>
-          {% endfor %}
+              <div class="row">
+                <div class="col-3">{{ field.label_tag }} </div>
+                <div class="col-8"> {{ field }}</div>
+              </div>
 
-        {% endfor %}
-      </div>
-        <div class="offset-md-4">
-      <button type="submit" class="btn btn-primary btn-lg btnsmallfont">Sign In</button>
+              {% if field.help_text %}
+                <small style="display: none">{{ field.help_text }}</small>
+              {% endif %}
+              {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+
+            {% endfor %} -->
+          </div>
+            <div class="offset-md-4">
+          <button type="submit" class="btn btn-primary btn-lg btnsmallfont">Sign In</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
+
+
   </div>
 </div>
 

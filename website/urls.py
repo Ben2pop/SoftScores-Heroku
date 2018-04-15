@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
-#from website import views
 from website.views import *
+from website import views
 
 app_name = 'website'
 urlpatterns = [
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^project/applicant/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/$',CandidateDetailView.as_view(), name='CandidateDetails'),
     url(r'^project/employee/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/api/chart/data/$',EmployeeChartData.as_view(), name='EmployeeChartData'),
     url(r'^project/applicant/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)/api/chart/data3/$',applicantChartData.as_view(), name='CandidateChartData'),
-    url(r'^project/(?P<pk1>[0-9]+)/recruitment/$', RecruitmentPage.as_view(), name='recruitment')
-
-
+    url(r'^project/(?P<pk1>[0-9]+)/recruitment/$', RecruitmentPage.as_view(), name='recruitment'),
+    url(r'^payment_form/$', payment_form.as_view(), name='payment'),
+    url(r'^checkout/$', views.checkout, name="checkout_page"),
 ]

@@ -64,7 +64,8 @@
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'website:hr_index'%}"><span class="fa fa-user-circle"></span> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
             <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:logout'%}"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
             {% else %}
-            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger" href="{% url 'registration:HRlogin' %}"><span class="fas fa-sign-in-alt"></span> Recruiter Area</a></li>
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger signin" href="{% url 'registration:manager_register' %}"><span class="fas fa-sign-in-alt"></span> SignIn</a></li>
+            <li class="nav-item green-menu"><a class="nav-link js-scroll-trigger login" href="{% url 'registration:HRlogin' %}"><span class="fas fa-sign-in-alt"></span> Login</a></li>
             {% endif %}
           </ul>
         </div>

@@ -24,16 +24,18 @@ class TeamChartData(APIView):
 
     def get(self, request, format=None, *args, **kwargs):
 
-        chunk_team = get_team_info_score(self)
+        #chunk_team = get_team_info_score(self)
         motiv_team = get_team_motivation_score(self)
         action_team = get_team_action_score(self)
         behav_team = get_behaviour_action_score(self)
-        team_complete = get_team_complete_data(self)
-        cohesiveness_score = get_team_cohesivenss_score(self)
-        info_dist = get_question_similarities(self)[0]
-        motiv_dist = get_question_similarities(self)[1]
-        action_dist = get_question_similarities(self)[2]
-        behav_dist = get_question_similarities(self)[3]
+        team_complete = get_team_complete_data(self)  #ok
+        cohesiveness_score = get_team_cohesivenss_score(self) #ok
+        question_similarities = get_question_similarities(self)
+        info_dist = get_question_similarities(self)[0] #ok
+        motiv_dist = get_question_similarities(self)[1] #ok
+        action_dist = get_question_similarities(self)[2] #ok
+        behav_dist = get_question_similarities(self)[3] #ok
+
 
         processing_information_label = [
                                        ["General", "Details"],
@@ -85,18 +87,14 @@ class TeamChartData(APIView):
                          ]
 
         data = {
-            "team_info_score": chunk_team,
-            "team_motiv_score": motiv_team,
-            "team_action_score": action_team,
-            "team_behaviour_score": behav_team,
             "team_complete": team_complete,
-            "cohesiveness_score": cohesiveness_score[0],
             "users": cohesiveness_score[1],
             "user_dist": cohesiveness_score[2],
-            "info_dist": info_dist,
-            "motiv_dist": motiv_dist,
-            "action_dist": action_dist,
-            "behav_dist": behav_dist,
+            "info_dist": question_similarities[0],
+            "motiv_dist": question_similarities[1],
+            "action_dist": question_similarities[2],
+            "behav_dist": question_similarities[3],
+
             "complete_label": complete_label,
             "info_label": processing_information_label,
             "motivation_label": motivation_label,
@@ -114,6 +112,7 @@ def get_team_complete_data(self, format=None, *args, **kwargs):
                    get_team_motivation_score(self)[0],
                    get_team_action_score(self)[0],
                    get_behaviour_action_score(self)[0]]
+
     complete_array = []
     for i in total_array:
         complete_array = complete_array + i
@@ -178,7 +177,6 @@ def get_team_action_score(self, format=None, *args, **kwargs):
     team_action_array = team_action_tupple[0]
     team_action_values = team_action_array.values()
     team_values = list(team_action_values)
-
     action_scores = get_weighted_average_array(team_values)
     analyzed_array = get_employee_action_array(self)
     action = get_trend(analyzed_array, 1)
@@ -282,7 +280,7 @@ def get_team_cohesivenss_score2(array_dict):
     return team_score, users, dist_list
 
 
-def get_question_similarities(self, format=None, *args, **kwargs):
+def get_compelete_team_scores(self, format=None, *args, **kwargs):
     team_info_tupple = get_employee_info_array(self)[0]
     team_motivation_tupple = get_employee_motivation_array(self)[0]
     team_action_tupple = get_employee_action_array(self)[0]
@@ -295,17 +293,30 @@ def get_question_similarities(self, format=None, *args, **kwargs):
         z = team_behaviour_tupple[a]
         merged_array = w + x + y + z
         dict_user_answers.update({a: merged_array})
+    return dict_user_answers
 
-    numb_answers = len(list(dict_user_answers.values())[0])
-    list_answers_values = list(dict_user_answers.values())
 
+def get_answers_per_question(answer_list, numb_questions):
     answer_per_question = []
-    for number in range(0, numb_answers):
+    for number in range(0, numb_questions):
         temp_array = []
-        for val in list_answers_values:
+        for val in answer_list:
             answer_value = val[number]
             temp_array.append(answer_value)
         answer_per_question.append(temp_array)
+    return answer_per_question
+
+
+def get_question_similarities(self, format=None, *args, **kwargs):
+    compelete_team_scores = get_compelete_team_scores(self)
+    # print("compelete_team_scores: {}".format(compelete_team_scores))
+    team_info_tupple = get_employee_info_array(self)[0]
+    team_motivation_tupple = get_employee_motivation_array(self)[0]
+    team_action_tupple = get_employee_action_array(self)[0]
+    team_behaviour_tupple = get_employee_behav_array(self)[0]
+    numb_answers = len(list(compelete_team_scores.values())[0])
+    list_answers_values = list(compelete_team_scores.values())
+    answer_per_question = get_answers_per_question(list_answers_values, numb_answers)
     question_similarities = euclid_array(answer_per_question)
     motiv_trend = get_dist_multiple_variable(get_employee_motivation_array(self), 2)
     question_similarities[8] = motiv_trend
@@ -329,7 +340,6 @@ def euclid_array(answer_per_question):
     max_dist = round(math.sqrt(len(answer_per_question[0]*(200**2))))
     for i in answer_per_question:
         combi = list(it.combinations(i, 2))
-
         sum_diff = 0
         for lst in combi:
             diff = (lst[0] - lst[1])**2
@@ -363,4 +373,124 @@ def get_dist_multiple_variable(array, index):
     return trend_similarity
 
 
-# 14
+def get_ponderation_total(pond_dict):
+    total = 0
+    for x, y in pond_dict.items():
+        total = total + y
+    return total
+
+
+def get_innovation_score(self):
+    team_model_score = get_compelete_team_scores(self)
+    print(team_model_score)
+    pond = {0: 2, 1: 3, 3: 2, 5: 1, 12: 3, 14: 1}
+    tot_pond = get_ponderation_total(pond)
+    user_score = 0
+    for x, y in team_model_score.items():
+        if y[0] > 0:
+            val = pond[0] * y[0]
+        else:
+            val = 0
+
+        if y[1] > 0:
+            val2 = 0
+        else:
+            val2 = -pond[1] * y[1]
+
+        if y[3] > 0:
+            val3 = 0
+        else:
+            val3 = -pond[3] * y[3]
+
+        if y[5] > 0:
+            val4 = 0
+        else:
+            val4 = -pond[5] * y[5]
+
+        if y[12] > 0:
+            val5 = pond[12] * y[12]
+        else:
+            val5 = 0
+
+        if y[14] > 0:
+            val6 = 0
+        else:
+            val6 = -pond[14] * y[14]
+
+        score = round((val + val2 + val3 + val4 + val5 + val6) / tot_pond)
+        user_score = user_score + score
+    innov_score = round(user_score / len(team_model_score))
+    return innov_score
+
+
+def get_execution_score(self):
+    team_model_score = get_compelete_team_scores(self)
+    pond = {0: 1, 1: 2, 6: 1, 8: 2, 10: 4, 12: 4, 16: 3}
+    tot_pond = get_ponderation_total(pond)
+    user_score = 0
+    for x, y in team_model_score.items():
+        if y[0] > 0:
+            val = 0
+        else:
+            val = -pond[0] * y[0]
+
+        if y[1] > 0:
+            val2 = pond[1] * y[1]
+        else:
+            val2 = 0
+
+        if y[6] > 0:
+            val3 = 0
+        else:
+            val3 = -pond[6] * y[6]
+
+        if y[10] > 0:
+            val4 = pond[10] * y[10]
+        else:
+            val4 = 0
+
+        if y[12] > 0:
+            val5 = 0
+        else:
+            val5 = -pond[12] * y[12]
+
+        if y[16] > 0:
+            val6 = 0
+        else:
+            val6 = -pond[16] * y[16]
+
+        score = round((val + val2 + val3 + val4 + val5 + val6) / tot_pond)
+        user_score = user_score + score
+    exec_score = round(user_score / len(team_model_score))
+    return exec_score
+
+
+def get_distance_score(self, list_id_pond):
+    # list_id_pond is a dict such as {id:ponderation}
+    compelete_team_scores = get_compelete_team_scores(self)
+    list_answers_values = list(compelete_team_scores.values())
+    numb_answers = len(list(compelete_team_scores.values())[0])
+    pond = list_id_pond
+    answer_per_question = get_answers_per_question(list_answers_values,
+                                                   numb_answers)
+    question_distance = euclid_array(answer_per_question)
+    score = 0
+    for x, y in pond.items():
+        value = question_distance[x] * y
+        score = score + value
+    total_ponderation = get_ponderation_total(pond)
+    final_score = round(score / total_ponderation)
+    return final_score
+
+
+def get_comunication_score(self):
+    pond = {0: 3, 1: 2, 3: 2, 4: 5, 11: 2, 12: 1, 13: 2, 15: 2, 16: 3}
+    com_score = get_distance_score(self, pond)
+    return com_score
+
+
+def get_motiv_score(self):
+    pond = {1: 2, 5: 3, 6: 3, 9: 5, 14: 2}
+    motiv_score = get_distance_score(self, pond)
+    return motiv_score
+#14

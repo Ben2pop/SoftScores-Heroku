@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'registration',
     'website',
     'django_extensions',
-    'crispy_forms',
     'survey',
     'bootstrapform',
     'rosetta',
     'rest_framework',
+    'bootstrap4',
 
 ]
 
@@ -134,3 +134,8 @@ AUTH_USER_MODEL = 'registration.MyUser'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_SECRET_KEY",
+                                   "pk_test_iQl1EHL5IG4DT949U1RzJdF4")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY",
+                                   "sk_test_gWV6WkeELpsIwIwfPcpgmRBu")

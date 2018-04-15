@@ -1,7 +1,14 @@
 {% load staticfiles %}
 <div class="ajaxProgress">
-  <h3>Please wait ...</h3>
-  <img src="{% static 'images/ajax-loader.gif' %}" alt="">
+  <div class="row justify-content-center">
+    <div class="col-md-5 ajaxprogressinner">
+      <h3>Please wait ...</h3>
+      <h4>We are loading your dashboard</h4>
+      <img src="{% static 'images/ajax-loader.gif' %}" alt="">
+    </div>
+
+  </div>
+
 </div>
 
 <div class="dashboard-container">
@@ -11,7 +18,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card box-shad">
-          <h5 class="card-header text-center bg-dark text-white">Complete models list</h5>
+          <div class="card-header text-center bg-dark text-white">
+             <div class="d-flex align-items-center">
+                  <h5 class="mx-auto w-100">Complete models list</h5>
+                  <i class="fa fa-question-circle ml-auto"></i>
+             </div>
+          </div>
+
           <div class="card-body">
             <canvas id="mainGraph" width: "1200"; height="500"></canvas>
           </div>
@@ -26,7 +39,12 @@
         <div class="col graph-info">
 
             <div class="card box-shad">
-              <h5 class="card-header text-center bg-dark text-white">Information processing</h5>
+              <div class="card-header text-center bg-dark text-white">
+                <div class="d-flex align-items-center">
+                    <h5 class="mx-auto w-100">Information processing</h5>
+                    <i class="fa fa-question-circle ml-auto"></i>
+                </div>
+              </div>
               <div class="card-body">
                 <div class="dropdown-container">
           				<form>
@@ -46,7 +64,13 @@
       </div>
       <div class="col action-info">
             <div class="card box-shad">
-              <h5 class="card-header text-center bg-dark text-white">Motivation</h5>
+              <div class="card-header text-center bg-dark text-white">
+                <div class="d-flex align-items-center">
+                    <h5 class="mx-auto w-100">Motivation</h5>
+                    <i class="fa fa-question-circle ml-auto"></i>
+                </div>
+              </div>
+
               <div class="card-body">
                 <div class="dropdown-container">
           				<form>
@@ -64,11 +88,67 @@
 
       </div>
     </div>
+
+    <div class="row">
+      <div class="col">
+          <div class="card box-shad">
+            <h6 class="card-header text-center greenback-header">How to Communicate<span id="info-head"></span></h6>
+            <div class="card-body">
+              <div class="explanation">
+                <div  class="ops" id="ops-info-container">
+                  <div class="explanation-title">
+                    Contradicting Models:
+                  </div>
+                  <div  id="ops-info"></div>
+                </div>
+                <div  class="diff" id="dif-info-container">
+                  <div class="explanation-title">
+                    Challenging Models:
+                  </div>
+                  <div id="dif-info"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="col">
+
+          <div class="card box-shad">
+            <h6 class="card-header text-center greenback-header">How to Communicate<span id="motiv-head"></span></h6>
+            <div class="card-body">
+                <div class="explanation">
+                  <div class="ops" id="ops-motiv-container">
+                    <div class="explanation-title">
+                      Contradicting Models:
+                    </div>
+                    <div id="ops-motiv"></div>
+                  </div>
+                  <div class="diff" id="dif-motiv-container">
+                    <div class="explanation-title">
+                      Challenging Models:
+                    </div>
+                    <div id="dif-motiv"></div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+
+
     <div class="row">
       <div class="col motivation-info">
 
           <div class="card box-shad">
-            <h5 class="card-header text-center bg-dark text-white">Action</h5>
+            <div class="card-header text-center bg-dark text-white">
+              <div class="d-flex align-items-center">
+                  <h5 class="mx-auto w-100">Action</h5>
+                  <i class="fa fa-question-circle ml-auto"></i>
+              </div>
+            </div>
+
             <div class="card-body">
               <div class="dropdown-container">
                 <form>
@@ -88,7 +168,12 @@
       <div class="col behaviour-info">
 
           <div class="card box-shad">
-            <h5 class="card-header text-center bg-dark text-white">Behaviour</h5>
+            <div class="card-header text-center bg-dark text-white">
+              <div class="d-flex align-items-center">
+                  <h5 class="mx-auto w-100">Behaviour</h5>
+                  <i class="fa fa-question-circle ml-auto"></i>
+              </div>
+            </div>
             <div class="card-body">
               <div class="dropdown-container">
                 <form>
@@ -106,6 +191,55 @@
 
       </div>
     </div>
+
+    <div class="row">
+      <div class="col">
+          <div class="card box-shad">
+            <h6 class="card-header text-center greenback-header">How to Communicate<span id="action-head"></span></h6>
+            <div class="card-body">
+              <div class="explanation">
+                <div class="ops" id="ops-action-container">
+                  <div class="explanation-title">
+                    Contradicting Models:
+                  </div>
+                  <div id="ops-action"></div>
+                </div>
+                <div class="diff" id="dif-action-container">
+                  <div class="explanation-title">
+                    Challenging Models:
+                  </div>
+                  <div id="dif-action"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="col">
+
+          <div class="card box-shad">
+            <h6 class="card-header text-center greenback-header">How to Communicate<span id="behav-head"></span></h6>
+            <div class="card-body">
+              <div class="explanation">
+                <div class="ops" id="ops-behav-container">
+                  <div class="explanation-title">
+                    Contradicting Models:
+                  </div>
+                  <div id="ops-behav"></div>
+                </div>
+                <div class="diff" id="dif-behav-container">
+                  <div class="explanation-title">
+                    Opposed Models:
+                  </div>
+                  <div id="dif-behav"></div>
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+</div>
+    </div>
+
   </div>
 </div>
 
@@ -121,6 +255,7 @@ var endpoint = 'api/chart/data'
 $('.ajaxProgress').show();
 $('.dashboard-container').hide();
 
+
 $.ajax({
   method: "GET",
   url: endpoint,
@@ -132,15 +267,18 @@ $.ajax({
     motivation_label = data.motivation_label,
     action_label = data.action_label,
     other_data_label = data.other_data_label,
-
+    opposed_model = data.explanation[0]
+    differ_model = data.explanation[1]
 
     //Data comming from wevsite.views//
     complete = data.complete
     info_array = data.info_array2[0]
     motivation_array = data.motivation_array2[0]
+    motivation_pref_label = data.motivation_array2[2]
     action_array = data.action_array2[0]
+    action_pref_label = data.action_array2[2]
     behaviour_array = data.behav_array2[0]
-
+    behaviour_pref_label = data.behav_array2[2]
     team_name_list2 = data.team_name_list2
 
     current_user = data.current_user
@@ -150,6 +288,59 @@ $.ajax({
     motivation_fixed_array = motivation_array[current_user]
     action_fixed_array = action_array[current_user]
     behaviour_fixed_array = behaviour_array[current_user]
+
+    function modelContent(fName){
+      model_content = {
+              0:["<p>As a specific oriented person you tend to be more comfortable with handling small piece of information first and tend to focus on details.</p><p> On the opposite General people oritented like"+ fName +"tend to be more comfortable with overview and concentrate on the big picture. Even if they can deal small details, they will tend to be irritated by it on a long period.</p> <p> When communicating, negotiating or problem solving with " + fName + ", you  need to  show him/her the big picture before diving with him/her into details. Don’t start out  with specific examples or she/he will stop listening. In team meetings don’t hesitate to ask him/her, his/her point of view relating to macro related stuff he/she will be in his/her comfort zone and may provide valuable insights</p>",
+                  "<p>As a general oriented person you tend to be more comfortable with handling big chunk of informations. You can easily see the big picture and tend to be motivated by grabbing it before diving into details.</p><p>When communicating with details oriented person you should try the opposite. They are interested first by diving into details, get concrete examples. Don’t start too big or you will bore them, and you may look like a bullshiter.</p><p>In team meetings do not hesitate to empower them and give them lead with micro related stuff.  He/she will be in his/her comfort zone and may provide valuable insights</p>"],
+              1:["<p>As a matching oriented person, your natural tendency is to react to external stimulus by finding common patterns, or common similitude. </p> <p>On the opposite of you, "+ fName + " tend to have a mismatching tendency and while communicating, will tend to contradict you. Don’t get frustrated ! It does not  mean that he/she totally disagreeing with you. It means that he/she does not fully agree with some part of your argument. He/she  may even only disagree on 10% of what you said but will focus on that part, and will answer with, 'I don't agree with you'</p><p> When communicating try to break what you said in small pieces in order to understand on which part he/she disagree exactly.</p>",
+                  "<p>As a mismatching oriented person you tend to look for differences, for divergences but it does not mean that you are in complete contradiction, it means that your way to make the debate move forward is to concentrate on the part of the argument that you do not agree with. Bear in mind that for " + fName + " your way to react may be interpreted as 'in contradiction', which may be very frustrating in the long term, and lead to negative silence. What is the point to say something to be directly contradicted, right ? </p> <p>If you want to communicate properly with him/her, pause for a second and assess the part you agree with and the part that you disagree with and react accordingly with something, “I agree with .. but I think that .. “ Train yourself to react with “I agree with you on that part” even if you don’t it will soften communication.</p>"],
+              2:["<p> As a visual oriented person, you tend to represent the word around you through pictures, which mean that when offered an idea you will unconsciously create a mental picture representing what was just said.</p><p>"+ fName +" tend to be less visual than you are, and will tend to process information easily based on sound. Do not hesitate to use words related to sounds such as “How does it sound ?”, “Does it ring a bell?” you may be surprised how it may improved your communication and your persuasion skills.</p>",
+                  "<p> As an auditory oriented person, you tend to represent the world around you through sounds which means that when offered an idea or a suggestion you may unconsciously relate to sounds around that same ideas.</p><p>"+ fName +" tend to be much more visual than you are and relate much more to visual pictures than with sound. When communicating with him/her do not hesitate to stimulate his visual mind by using visual words such as: “ Do you see what I mean ? “</p>"],
+              3:["<p>As a static oriented person you tend to conceptualized the world around you as something static or changing very very slowly.  People are the way they are, situation and context tend to stay like they are.</p><p> In "+ fName + "’s world things, people and situation are moving much faster and are less static.  When communicating with her try to embrace his/her  world, the world around you may be less static than you think.</p><p>As a recommendation try to assess any situation by pondering if you ever experienced a situation different than the one you are in right now.<br> Example: Static situation, “I am shy”.<br> Have you ever ever been in a context where you felt not shy ? Yes so try to convert that static situation into a process --> example: “ Time to open yourself to other”.</p>",
+                  "<p>As a process oriented person you tend to see the world as an always moving and evolving place. Very few things are fixed, and every reality can be bent.</p><p>But don’t go to fast, for "+ fName + " , situations tend to change at a much slower pace. When communicating with him/her don’t get frustrated. Try to show him/her contradicting situations.</p> <p>Static situation: 'I am shy, it is the way I am. At my age we don’t change anymore..' <br>Question: 'Have you ever been in a context where  you felt NOT shy' ? Yes <br>From static to process: Shy → Time to open yourself to other (process)</p>"],
+              4:["<p>Attribution style filters deals with your prefered way to look at challenging situation. As a worst case oriented person you tend to first look at problems, danger, threats and difficulties. <br>It has nothing to do with pessimism because you may be very optimistic at solving those problems. It has to do with your way to first react when exposed to challenges.</p><p>"+ fName +"’s first way to react will be to look at the best scenario possible but by looking at problems you may be seen as pessimistic or boring.<br> When communicating with "+ fName + " expose your point of view but don’t forget to expose as well if you believe they can be solve or not</p>",
+                  "<p>Attribution style filters deals with our prefered way to look at challenging situation. As a best case  oriented person you tend to  first look at the good things about that challenges. <br>Your appreciated enthusiasm may increase motivation in the team but may blind you to the real success probability of that challenge. </p><p>" + fName + "’s  first way to react is to look at problems. You may interpret it as strong pessimism but it is not always the case and he may be very optimistic at solving those problems.</p><p> When communicating with him/her make him/her express their point of view about the success probability of solving those problems.</p>"],
+              5:["<p>As a binary oriented person you tend to process every context with very distincts and opposite situation. black VS  white, bad product vs good product,  bad music vs good music, and nothing in between.</p> <p>However " + fName + " tends to have a much more granular way of thinking and will compare everything.<br> Is 1.85 tall ? Maybe for you Yes. For him it depends, compared to NBA players 1.85 is average.</p><p> When communicating with, if he contradicts you or tend to not fully grasp what you said, bear in mind that for him everything has to be compared to something. In team meeting do not hesitate to value his ability because it may give you perspectives you may not have thought about</p>",
+                  "<p>As a shades oriented person you tend to process information in a very granular way, and tend to evaluate situations by comparing them using words such as 'better than' or 'worst than'.</p> <p>Some people such as "+ fName + " tends to process information in a different way as you do. For him/her every context has two distinct opposite situation.  He/she  tend to be binary, good vs bad, black vs white, good music vs bad music.</p><p> When communicating with him her, she/he might have difficulties to define and evaluate diferent situation within a context and would definitly prefer to get a finite answer 'is it' or 'is it not' ? Try to match their world before introducing nuences.</p>"],
+              6:["<p>Internal oriented person like you, rely mostly on themselves to evaluate a situation, an experience or an idea and won’t necessarily need external opinion.</p> <p>However some people like "+ fName +" do not rely completely on themselves to assess and evaluate situations. Even if you underestimate its utility because you don’t rely on it, giving him/her constant feedbacks will make her/him much stronger and will make you much more appreciated if you find the right words.</p>",
+                  "<p>External oriented person enjoy to get feedbacks in order to  assess where they stand. After all, society shaped us to be feedback oriented (school grades). </p><p>However people like "+ fName + " tends to assess and evaluate situation based on their internal representation and may relate less to your feedbacks. </p> <p>When communicating with him/her, giving too much feedback won’t improve the situation and may even be misinterpreted. Instead of offering them first your feedbacks, ask them what they think about their work, this way they will look inside for an answer and will then, give you the opportunity to give your feedback.</p>"],
+              7:["<p>As an away from oriented person you tend to get motivated to take action by avoiding problems. For example most away from people in the context of health will tend to exercise not because it is healthier but in order to get away from putting on weight.</p><p>For "+ fName + " her way to get motivated to take action is to move forward a goal. When trying to motivate him/her to take action do not hesitate to mention what he she will gain from doing it, and the intrinsic value associated to it</p>",
+                  "<p>As a Toward oriented person you tend to get motivated to take action by appreciating the intrinsic value of doing something more than taking action to get away from a situation.<br>In the context of health you will watch you diet “in order to” have more energy whereas an away from oriented person will watch his diet to not get fat.</p><p> When trying to motivate " + fName + " try to list the bad things that could occur if he/she do not take action to prevent it. You may be surprised by the results. </p>"],
+              8:["<p>People have different preferences regarding their prefered interest.</p><p>While some people are more interested by people, things, or learning experiences, others like "+ fName + " tend to give a lots of importance to the place they evolve in.</p><p>If the 'where' is a motivation argument for them, do not hesitate to always improve your workplace to make him/her feel more comfortable</p>",
+                  "<p>People have different preferences regarding their prefered interest.</p><p>While some people are more interested by the place, the things or learning experiences, others like "+ fName + " tend to give a lots of importance to the people they evolve with. They will always consider who is involve in a certain task before even knowing the task itself. </p><p>On one side, they tend to understand better people, reducing conflicts but on the other side they tend to feel frustrated by people that may not give them enough attention</p>",
+                  "<p>People have different preferences regarding their prefered interest.</p><p> While some people are more interested by people, places, or learning experiences, others like "+ fName + " tend to give a lots of importance to the things they will do.</p><p> The 'what' in the motivation equation matter the most for them. They constantly search for entertainement and challenges. Failing to giving them non interesting things to do, may be a great deal for them.</p>",
+                  "<p>People have different preferences regarding their prefered interest.</p><p> While some people are more interested by people, places, or thing, others like "+ fName + " tend to give a lots of importance to the learning experiences. </p><p>The 'what' in the motivation equation matter the most for them but has to be linked to improving their skills or learning something new. They constantly search for new things to hear about, learn or get better.<p>"
+              ],
+              9:["<p>People like " + fName + " tend to be motivated by working on different stuff. Doing the same thing over and over again may bore them. Even if you may think that routine activities is the best way to improve any skills, when you focus on quality, they tend to focus on quantity.</p><p>If you want to keep them motivated don’t make them work too long on the same thing.</p> ",
+                  "<p>People like " + fName + " tend to be motivated by working on a specific range of task and tend to be expert in those fields. </p><p> When you may enjoy variety, knowing and doing a very large spectrum of things," + fName + " tend to enjoy to do the same things, go much deeper and become very skilled in it.<br> They are not interested in quantity or volume but on quality </p>"],
+              10:["<p>Active and reactive action filter deal with your velocity to take action. As an active oriented person you will tend to size a situation and take action very quickly even if it means that you will have to learn from your mistakes or do unnecessary things.</p> <p>Bear in minds that some people such as " + fName + " do not tend to act as quickly as you, and will need more time to take action, trying to weight the pros an cons, the possible outcomes, the best way to take action.</p> <p> Don’t get frustrated, two options lie in front of you:<br>Slow it down a little bit, don’t forget that you are as fast as your slowest team member</br>Divide the challenge/project between action tasks and reflection task and assign accordingly</p>",
+                  "<p>Active and reactive action filter deal with your velocity to take action. As a reactive oriented person you tend to pause before taking action, in order to assess the situation, maybe to weight the pros and cons, understand the possible outcomes and define an action plan.</p><p>" + fName + " prefers on his end tend to take action at much  faster pace even if it means to make mistakes and learn from those mistakes. <br>This velocity disequilibrium may frutrate " + fName + " and demotivate him/her</p><p>Do not hesitate to give him/her interesting task that require taking action, there is nothing wrong with making mistakes for people perfecting trial and error mode.</p>"],
+              11:["test1",
+                  "test2",
+                  "test3",
+                  ],
+              12:["<p>As a process oriented person, you tend to be more comfortable following specific set of steps that you defined or was defined in order to reach a specific goals. You tend to work in a very structured way, each step has a before and after known step.</p><p>" + fName + ", however tend to be less process oriented and even tend to be bored by such processes. People such as " + fName + " would rather use their creativity, think out of the box in order to reach their goal. </p><p>Using such mind may open your mind to new perspective, if you are open enough to listen and move away a bit from processes. Failing to listen to an option oriented mind may result in frustration & demotivation</p>",
+                  "<p>As an option oriented person, you tend to be more comfortable improvising, and using your creative mind in order to reach a specific goal or specific outcome. You tend to work in an unstructured way, keeping your options open. </p><p>Process oriented person may find difficulties to follow you, needing more structure, knowing what was before and what was next. <br>As a process oriented person " + fName + " may lost trust in your way of handling things.. she/he needs more structure. </p><p>In communicating with them try to expose your creative idea through planning to give a sense of control and not complete improvisation.</p>"],
+              13:["<p>As a perfection oriented person you tend to strive for “perfection”. Flawless outcome. You tend to never feel satisfied with your performance always seeking for supreme quality. Handing in something not fully done without any error is not even a possibility.</p><p>The thing is as a perfectionist you tend to set very high standards for yourself but as well for others which may lead to frustration for you and your peers.</p><p>Some people such as " + fName + " are more pragmatic and move toward their goal optimizing. Optimizing require moving forward using small steps and constant feedbacks.</p><p> When communicating with optimizing people try to understand at which step do they stand. Because when you expect to discuss about a 100% done project, they intend to discuss a 60% done project moving slowly but surely.</p>",
+                  "<p>As an optimizing oriented person you tend to move toward your goals using small steps and constant feedbacks, always optimizing the previous step in order to reach a perfect outcome. Even if moving that way may seems to you themost efficient way to ensure that everyone stand on the same line regarding quality, some people do not exactly operate in the same way and tend to move toward perfection.<br> When you have one ending goal and many smaller steps to get to that goal, they have only one perfect ending goal and nothing in between.</p><p>This disequilibrium may lead to frustrations because when you intend to discuss about a project done at 60%, they intend to discuss it only when it is perfectly done at 100%.</p> <p> When discussing with them make it very clear at what step you intend to discuss and why it is important. </p>"],
+              14:["<p>Information gathering filters deal with your way to gather information to reach a decision or make your mind. As a sensor oriented person you tend to gather information based on concrete facts, numbers, expert in their fields, in other words you use your senses (see, hear, feel) to make up your mind.</p> <p>Some people such as " + fName + " are less inclined to use they senses and make up their mind based on intuition. They tend to function abstractly. Don’t be surprised if they if they question numbers or expert point of view if it does not feel right to them.</p><p>When communicating and trying to convince them, try to understand what is their intuition on the topic discussed. Don’t overload them with numbers and statistics it may not help.</p>",
+                  "<p>Information gathering filters deal with your way to gather information to reach a decision or make your mind. As an intuitor you tend to gather information and make up your mind by trusting your intuition. You may be more interested by what something may become rather than what something is.</p><p> Some people however, tend to trust less they intuition and need concrete informations that they gather information such as looking at numbers or fact, hearing expert opinion. </p><p>When trying to convince them do not try impose your intuition on them, they may not get it, the will need something much more tangible.</p>"],
+              15:["<p>Locus of control refers to how you interpret the cause of what is happened, happen and will happen to you. As an internal locus of control oriented person you tend to take entire responsibility for what happen in your daily life. Even if you acknowledge that external parameters may have an impact on any outcome, you do believe that you can some kind if control on such parameters such as luck. </p><>Other people such as " + fName + " tend to give too much credit to those external parameters and may be inclined to say things such as “It was not my fault.. It was .. “. </p><p>When communicating with them try to raise their awareness about the fact that even when external factors may impact any outcome we may still have a part of responsibility.</p>",
+                  "<p>Locus of control refers to how you interpret the cause of what is happened, happen and will happen to you. As an external locus of control oriented person even if acknowledge you have some control over the outcome of any event you tend to give much credit to external factors such as luck, people and co.</p><p> As a very internal locus of control " + fName + " tend to take responsibility for every outcome. Even if you may think that too much locus of control is self flagellation when communicating with " + fName + " even if you mention external factor, don’t forget to express your part of responsibility. <br>You will gain her/his trust</p>"],
+              16:["<p>Temper to instruction, refers to the way we react when face-to-face with someone telling us something<br>How do we respond when someone order or instruct us.</p><p>As a 'strong will' oriented person, " + fName + " tends to have a natural tendency to question or resist the information presented. </p><p>When communicating with " + fName + " try to not use too direct words such as 'do' or 'tell' but more pacing words such as 'suggest'</p>",
+                  "<p>Temper to instruction</p>"],
+              17:["<p>Time filters assess how do we experience our sense of “time”, past, present and future in our brain. <br>Through time people tend to experience time in a different way than you are. Past present and future is in  front of them from left to right. Since all the time-line is in sight they are at ease to estimate what is before and what is after. They tend to like list, organisation and precise timing.</p><p> When working with through-time people try to be on time, you will gain their trust. They may pressure you that you will be late when you feel that you have plenty on time. Don’t hesitate to ask for some space, and reassure them that they can trust you.</p> ",
+                  "<p>Time filters assess how do we experience our sense of “time”, past, present and future in our brain. <br>People “In time” tend to store their past behind them and their future in front of them. Since past is behind and is out of sight, In time people tend to live in the present moment.</p><p>They are less at ease with precise timing. Don’t be surprise to be late they have been caught up in the moment. They tend to be less organised than you but it does not mean that they are less efficient. The fact that they do not organise everything in their calendar does not mean that they will miss meeting or deadlines.</p><p>Give them some space before blaming.</p>"],
+              18:["<p>People like " + fName + " tend to learn by modeling others. They look externally to those who have both the knowledge and the ability to produce.</p><p> If you want " + fName + " to acquire a new skill or learn something. Let them take the lead or drive them to the right expert/mentor they will learn faster from them, copy and master that specific skill.</p>",
+                  "<p>People like " + fName + " tend to learn new things by studying, researching. They tend to be at ease with books, or tutorials.</p><p>If you want " + fName + " to learn new skills, do not hesitate to give them some materials or point them to where they can find it.<br> They will take it from there and do not need any supervision.  Sitting them in classroom may bore them. They need to feel in control of what they learn</p>",
+                  "<p>People like " + fName + " tend to learn new things via demonstration. They need some structure, a classroom a teacher a methodology. They find difficulties to learn by themselves. Being in a classroom motivate them.</p><p>If you want " + fName + " to learn something you will need to sit with them and demonstrate or enroll them in a classroom.</p>",
+                  "<p>People like " + fName + " tend to learn new things by experiencing. They gather information by doing, they are doers by nature. They love trial and error. Do not demonstrate them, you will bore them, they want to try.</p><p> Give them the all the tools needed to succeed and they will find their ways alone.</p>"]
+            };
+       return model_content
+    }
+
+
 
     var array = [];
     var bar_color = [
@@ -168,11 +359,11 @@ $.ajax({
         'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)',
         'rgba(255, 220, 89, 0.2)',
-        'rgba(255, 192, 35, 0.2)',
+        'rgba(255, 192, 35, 0.2)'
     ]
 
     function random_color(){
-      var color = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256))+ ',' + 0.2 + ')';
+      color = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256))+ ',' + 0.2 + ')';
     return color
     }
 
@@ -185,26 +376,157 @@ $.ajax({
     var ctx5 = document.getElementById("other").getContext('2d');
     $('.ajaxProgress').hide();
     $('.dashboard-container').show();
-
-    $(".pick-chart").change(function (e) {
+    $("#flip").click(function(){
+        $("#content").toggle("slow");
+  });
+    $(".pick-chart").change(function(e) {
         e.preventDefault();
         var val = $(this).val();
         if (val != 0) {
                     info_process.data.datasets[1].data = info_array[val];
                     info_process.update();
+                    var name2 = $('option[value='+val+']').text();
+                    var fName = name2.split(' ')[0];
+                    $("#ops-info").empty()
+                    $("#dif-info").empty()
+                    $("#info-head").empty()
+                    ops = opposed_model[val]
+                    dif = differ_model[val]
+
+                    $("#info-head").append(" with "+ fName);
+
+                    for(var x = 0; x < ops.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[ops[x]]
+                      if (ops[x] <= 5){
+                          if (complete[ops[x]] > 0){
+                              inner_text_content = text_content[0];
+                            } else {
+                              inner_text_content = text_content[1];
+                            }
+                        $("#ops-info").append(
+                        "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + ops[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                        + complete_label[ops[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                        "<div class='collapse' id='collapseExample" + ops[x]+ "'"  + "'><div class='card card-body'>"+ inner_text_content +"</div></div>"
+                              );
+                            }
+                          }
+                    for(var x = 0; x < dif.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[dif[x]]
+                      if (dif[x] <= 5){
+                        if (complete[dif[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }
+                        $("#dif-info").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + dif[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[dif[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + dif[x]+ "'"  + "'><div class='card card-body'>"+ inner_text_content +"</div></div>"
+                        );
+                        }
+                    }
                 } else {
             info_process.data.datasets[1].data = [];
+            $("#info-head").empty()
+            if (document.getElementById("ops-info") !== null){
+              document.getElementById("ops-info").innerHTML = "";
+            }
+            if (document.getElementById("dif-info") !== null){
+              document.getElementById("dif-info").innerHTML = "";
+            }
+
         }
         info_process.update();
     });
-    $(".pick-chart2").change(function (e) {
+
+    $(".pick-chart2").change(function(e) {
         e.preventDefault();
         var val = $(this).val();
         if (val != 0) {
                     motivation.data.datasets[1].data = motivation_array[val];
                     motivation.update();
+                    var name2 = $('option[value='+val+']').text();
+                    var fName = name2.split(' ')[0];
+                    $("#ops-motiv").empty()
+                    $("#dif-motiv").empty()
+                    $("#motiv-head").empty()
+                    ops = opposed_model[val]
+                    dif = differ_model[val]
+                    $("#motiv-head").append(" with "+fName);
+                    for(var x = 0; x < ops.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[ops[x]]
+                      if (ops[x] === 6 || ops[x] === 7 || ops[x] === 9){
+                        if (complete[ops[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }}
+
+                       if (ops[x]===8){
+                          if (motivation_pref_label="Things"){
+                              inner_text_content = text_content[0]
+                          } else if (motivation_pref_label="Place") {
+                              inner_text_content = text_content[1]
+                          } else if (motivation_pref_label="People") {
+                              inner_text_content = text_content[2]
+                          } else {
+                              inner_text_content = text_content[3]
+                          }
+
+                       }
+
+                      if (ops[x] === 6 || ops[x] === 7 || ops[x] === 9){
+                        $("#ops-motiv").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + ops[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[ops[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + ops[x]+ "'"  + "'><div class='card card-body'>"+ inner_text_content +"</div></div>"
+                        );
+                      }
+                    }
+                    for(var x = 0; x < dif.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[dif[x]]
+                       if (dif[x] === 6 || dif[x] === 7 || dif[x] === 9){
+                        if (complete[dif[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }}
+
+                       if (dif[x]===8){
+                          if (motivation_pref_label="Things"){
+                              inner_text_content = text_content[0]
+                          } else if (motivation_pref_label="Place") {
+                              inner_text_content = text_content[1]
+                          } else if (motivation_pref_label="People") {
+                              inner_text_content = text_content[2]
+                          } else {
+                              inner_text_content = text_content[3]
+                          }
+
+                       }
+
+                      if (dif[x] >= 6 && dif[x] <= 9){
+                        $("#dif-motiv").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + dif[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[dif[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + dif[x]+ "'"  + "'><div class='card card-body'>" + inner_text_content +"</div></div>"
+                        );
+                      }
+                    }
                 } else {
             motivation.data.datasets[1].data = [];
+            $("#motiv-head").empty()
+            if (document.getElementById("ops-motiv") !== null){
+              document.getElementById("ops-motiv").innerHTML = "";
+            }
+            if (document.getElementById("dif-motiv") !== null){
+              document.getElementById("dif-motiv").innerHTML = "";
+            }
+
         }
         motivation.update();
     });
@@ -214,8 +536,81 @@ $.ajax({
         if (val != 0) {
                     action.data.datasets[1].data = action_array[val];
                     action.update();
+                    var name2 = $('option[value='+val+']').text();
+                    var fName = name2.split(' ')[0];
+                    $("#ops-action").empty()
+                    $("#dif-action").empty()
+                    $("#action-head").empty()
+                    ops = opposed_model[val]
+                    dif = differ_model[val]
+                    $("#action-head").append(" with "+fName);
+                    for(var x = 0; x < ops.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[ops[x]]
+                      if (ops[x] === 10 || ops[x] === 12 || ops[x] === 13 || ops[x] === 14){
+                        if (complete[ops[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }
+                        if (ops[x]===11){
+                           if (motivation_pref_label="Things"){
+                               inner_text_content = "Things"
+                           } else if (motivation_pref_label="Place") {
+                               inner_text_content = "Place"
+                           } else if (motivation_pref_label="People") {
+                               inner_text_content = "People"
+                           } else {
+                               inner_text_content = "Intellect"
+                           }
+
+                        }
+                        $("#ops-action").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + ops[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[ops[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + ops[x]+ "'"  + "'><div class='card card-body'>"+ inner_text_content +"</div></div>"
+                        );
+                        }
+                    }
+                    for(var x = 0; x < dif.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[dif[x]]
+                      if (dif[x] >= 10 && dif[x] <= 14){
+                        if (complete[dif[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }
+                      if (dif[x]===8){
+                        if (motivation_pref_label="Things"){
+                           inner_text_content = "Things"
+                        } else if (motivation_pref_label="Place") {
+                           inner_text_content = "Place"
+                        } else if (motivation_pref_label="People") {
+                           inner_text_content = "People"
+                        } else {
+                           inner_text_content = "Intellect"
+                        }
+
+                        }
+
+                        $("#diff-action").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + dif[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[dif[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + dif[x]+ "'"  + "'><div class='card card-body'>test</div></div>"
+                        );
+                        }
+                    }
                 } else {
                   action.data.datasets[1].data = [];
+                  $("#action-head").empty()
+                  if (document.getElementById("ops-action") !== null){
+                    document.getElementById("ops-action").innerHTML = "";
+                  }
+                  if (document.getElementById("diff-action") !== null){
+                    document.getElementById("diff-action").innerHTML = "";
+                  }
+
         }
         action.update();
     });
@@ -225,8 +620,55 @@ $.ajax({
         if (val != 0) {
                     other.data.datasets[1].data = behaviour_array[val];
                     other.update();
+                    var name2 = $('option[value='+val+']').text();
+                    var fName = name2.split(' ')[0];
+                    $("#ops-behav").empty()
+                    $("#dif-behav").empty()
+                    $("#behav-head").empty()
+                    ops = opposed_model[val]
+                    dif = differ_model[val]
+                    $("#behav-head").append(" with "+fName);
+                    for(var x = 0; x < ops.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[ops[x]]
+                      if (ops[x] >= 15){
+                        if (complete[ops[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }
+                        $("#ops-behav").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + ops[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[ops[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + ops[x]+ "'"  + "'><div class='card card-body'>" + inner_text_content + "</div></div>"
+                        );
+                        }
+                    }
+                    for(var x = 0; x < dif.length; x++){
+                      content = modelContent(fName)
+                      text_content = content[dif[x]]
+                      if (dif[x] >= 15){
+                        if (complete[dif[x]] > 0){
+                          inner_text_content = text_content[0];
+                        } else {
+                          inner_text_content = text_content[1];
+                        }
+                        $("#diff-behav").append(
+                          "<div class='collapsediv' data-toggle='collapse' href='#collapseExample" + dif[x] + "' + 'role=button' aria-expanded='false' aria-controls='collapseExample'>"
+                          + complete_label[dif[x]] + "<img src='{% static 'images/expand.png' %}' class='float-right'>" + "</div>"+
+                          "<div class='collapse' id='collapseExample" + dif[x]+ "'"  + "'><div class='card card-body'>"+ inner_text_content +"</div></div>"
+                        );
+                        }
+                    }
                 } else {
                   other.data.datasets[1].data = [];
+                  $("#behav-head").empty()
+                  if (document.getElementById("ops-behav") !== null){
+                    document.getElementById("ops-behav").innerHTML = "";
+                  }
+                  if (document.getElementById("diff-action") !== null){
+                    document.getElementById("diff-action").innerHTML = "";
+                  }
         }
         other.update();
     });
@@ -294,7 +736,7 @@ $.ajax({
                }
         });
         //end graph 2//
-    //end graph 2//
+
 
     //graph 3//
     var motivation = new Chart(ctx3,{

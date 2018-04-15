@@ -38,6 +38,7 @@ def registerHR(request):
 
 
 def registerManager(request):
+    #import pdb; pdb.set_trace()
     registered = False
     if request.method == "POST":
         Manager_form = ManagerForm(data=request.POST)
@@ -49,7 +50,9 @@ def registerManager(request):
             user.save()
             registered = True
             login(request, user)
-            return HttpResponseRedirect(reverse('website:create_project'))
+            demoProject = Project.objects.get(name="Project SoftScores")
+            request.user.project_set.add(demoProject)
+            return HttpResponseRedirect(reverse('website:hr_index'))
         else:
             print("Error!")
     else:

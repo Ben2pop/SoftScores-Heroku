@@ -1,0 +1,662 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ba-throttle-debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">11%</span>
+        </h1>
+
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+
+<div id="index">
+    <table class="index">
+        <thead>
+            
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>3084</td>
+                <td>2742</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="342 3084">11%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+            <tr class="file">
+                <td class="name left"><a href="Authentication_project___init___py.html">Authentication_project/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Authentication_project_local_py.html">Authentication_project/local.py</a></td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 5">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Authentication_project_prod_py.html">Authentication_project/prod.py</a></td>
+                <td>17</td>
+                <td>17</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 17">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="SurveyApp___init___py.html">SurveyApp/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="SurveyApp_manage_py.html">SurveyApp/manage.py</a></td>
+                <td>6</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 6">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration___init___py.html">registration/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_admin_py.html">registration/admin.py</a></td>
+                <td>43</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="32 43">74%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_forms_py.html">registration/forms.py</a></td>
+                <td>28</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 28">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_models_py.html">registration/models.py</a></td>
+                <td>40</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="25 40">62%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_tests_py.html">registration/tests.py</a></td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 1">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_tokens_py.html">registration/tokens.py</a></td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 6">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="registration_views_py.html">registration/views.py</a></td>
+                <td>188</td>
+                <td>163</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="25 188">13%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey___init___py.html">survey/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_actions_py.html">survey/actions.py</a></td>
+                <td>10</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 10">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_admin_py.html">survey/admin.py</a></td>
+                <td>40</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 40">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter___init___py.html">survey/exporter/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_csv___init___py.html">survey/exporter/csv/__init__.py</a></td>
+                <td>8</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 8">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_csv_survey2csv_py.html">survey/exporter/csv/survey2csv.py</a></td>
+                <td>55</td>
+                <td>55</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 55">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_survey2x_py.html">survey/exporter/survey2x.py</a></td>
+                <td>50</td>
+                <td>50</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 50">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex___init___py.html">survey/exporter/tex/__init__.py</a></td>
+                <td>8</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 8">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_configuration_py.html">survey/exporter/tex/configuration.py</a></td>
+                <td>103</td>
+                <td>103</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 103">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_configuration_builder_py.html">survey/exporter/tex/configuration_builder.py</a></td>
+                <td>28</td>
+                <td>28</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 28">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_latex_file_py.html">survey/exporter/tex/latex_file.py</a></td>
+                <td>43</td>
+                <td>43</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 43">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_question2tex_py.html">survey/exporter/tex/question2tex.py</a></td>
+                <td>89</td>
+                <td>89</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 89">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_question2tex_chart_py.html">survey/exporter/tex/question2tex_chart.py</a></td>
+                <td>89</td>
+                <td>89</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 89">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_question2tex_raw_py.html">survey/exporter/tex/question2tex_raw.py</a></td>
+                <td>13</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 13">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_question2tex_sankey_py.html">survey/exporter/tex/question2tex_sankey.py</a></td>
+                <td>34</td>
+                <td>34</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 34">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_sankey_py.html">survey/exporter/tex/sankey.py</a></td>
+                <td>94</td>
+                <td>94</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 94">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_exporter_tex_survey2tex_py.html">survey/exporter/tex/survey2tex.py</a></td>
+                <td>82</td>
+                <td>82</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 82">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_forms_py.html">survey/forms.py</a></td>
+                <td>160</td>
+                <td>160</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 160">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_management___init___py.html">survey/management/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_management_commands___init___py.html">survey/management/commands/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_management_commands_exportresult_py.html">survey/management/commands/exportresult.py</a></td>
+                <td>47</td>
+                <td>47</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 47">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_management_commands_generate_tex_configuration_py.html">survey/management/commands/generate_tex_configuration.py</a></td>
+                <td>20</td>
+                <td>20</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 20">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_management_survey_command_py.html">survey/management/survey_command.py</a></td>
+                <td>32</td>
+                <td>32</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 32">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models___init___py.html">survey/models/__init__.py</a></td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="14 14">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models_answer_py.html">survey/models/answer.py</a></td>
+                <td>56</td>
+                <td>35</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 56">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models_category_py.html">survey/models/category.py</a></td>
+                <td>20</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 20">90%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models_question_py.html">survey/models/question.py</a></td>
+                <td>214</td>
+                <td>151</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="63 214">29%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models_response_py.html">survey/models/response.py</a></td>
+                <td>20</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 20">90%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_models_survey_py.html">survey/models/survey.py</a></td>
+                <td>26</td>
+                <td>7</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="19 26">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_signals_py.html">survey/signals.py</a></td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 5">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_templatetags___init___py.html">survey/templatetags/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_templatetags_survey_extras_py.html">survey/templatetags/survey_extras.py</a></td>
+                <td>22</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 22">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views___init___py.html">survey/views/__init__.py</a></td>
+                <td>8</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 8">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views_confirm_view_py.html">survey/views/confirm_view.py</a></td>
+                <td>11</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 11">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views_index_view_py.html">survey/views/index_view.py</a></td>
+                <td>15</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 15">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views_survey_completed_py.html">survey/views/survey_completed.py</a></td>
+                <td>13</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 13">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views_survey_detail_py.html">survey/views/survey_detail.py</a></td>
+                <td>70</td>
+                <td>70</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 70">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_views_survey_result_py.html">survey/views/survey_result.py</a></td>
+                <td>25</td>
+                <td>25</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 25">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="survey_widgets_py.html">survey/widgets.py</a></td>
+                <td>19</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 19">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website___init___py.html">website/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_admin_py.html">website/admin.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_forms_py.html">website/forms.py</a></td>
+                <td>11</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 11">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_models_py.html">website/models.py</a></td>
+                <td>36</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 36">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_serializers_py.html">website/serializers.py</a></td>
+                <td>25</td>
+                <td>25</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 25">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views___init___py.html">website/views/__init__.py</a></td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 5">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_candidate_dashboard_py.html">website/views/candidate_dashboard.py</a></td>
+                <td>120</td>
+                <td>120</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 120">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_employee_dashboard_py.html">website/views/employee_dashboard.py</a></td>
+                <td>500</td>
+                <td>500</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 500">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_payment_views_py.html">website/views/payment_views.py</a></td>
+                <td>30</td>
+                <td>30</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 30">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_team_dashboard_py.html">website/views/team_dashboard.py</a></td>
+                <td>244</td>
+                <td>244</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 244">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_website_front_py.html">website/views/website_front.py</a></td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 5">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="website_views_website_pages_py.html">website/views/website_pages.py</a></td>
+                <td>226</td>
+                <td>226</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 226">0%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.4.1</a>,
+            created at 2018-04-02 08:58
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

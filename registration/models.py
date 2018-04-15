@@ -52,6 +52,7 @@ class MyUser(AbstractBaseUser):
     is_manager = models.BooleanField(default=False)
     position = models.CharField(max_length=150, blank=True, null=True)
     company = models.CharField(max_length=100, blank=True, null=True)
+    credit = models.IntegerField(default=0)
 
     objects = MyUserManager()
 

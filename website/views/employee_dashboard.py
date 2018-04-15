@@ -45,7 +45,7 @@ class EmployeeChartData(APIView):
         motivation_label = [
                            ["External", "Internal"],
                            ["Go Away", "Toward"],
-                           [label_pref],
+                           ["Preference filter", label_pref],
                            ["Variety", "Routine"],
                            ]
 
@@ -68,24 +68,24 @@ class EmployeeChartData(APIView):
         ]
 
         complete_label = [
-                         ["General", "Details"],
-                         ["Sameness", "Difference"],
-                         ["Visual", "Auditory"],
-                         ["Static", "Process"],
-                         ["Best Scenario", "Worst Scenario"],
-                         ["Binary", "Shades"],
-                         ["External", "Internal"],
-                         ["Go Away", "Toward"],
-                         [label_pref],
-                         ["Variety", "Routine"],
-                         ["Active", "Reaction"],
+                         ["General/", "Details"],
+                         ["Sameness/", "Difference"],
+                         ["Visual/", "Auditory"],
+                         ["Static/", "Process"],
+                         ["Best Scenario/", "Worst Scenario"],
+                         ["Binary/", "Shades"],
+                         ["External/", "Internal"],
+                         ["Go Away/", "Toward"],
+                         ["Preference filter:", label_pref],
+                         ["Variety/", "Routine"],
+                         ["Active/", "Reaction"],
                          [affiliation_label],
-                         ["Option", "Procedure"],
-                         ["Perfection", "Optimizing"],
-                         ["Sensor", "Intuition"],
-                         ["External locus", "Internal locus"],
-                         ["Strong Will", "Compliant"],
-                         ["In time", "Through time"],
+                         ["Option/", "Procedure"],
+                         ["Perfection/", "Optimizing"],
+                         ["Sensor/", "Intuition"],
+                         ["External locus/", "Internal locus"],
+                         ["Strong Will/", "Compliant"],
+                         ["In time/", "Through time"],
                          [knowledge_label]
                          ]
 
@@ -514,7 +514,6 @@ def get_openess2(current_response):
 def get_employee_action_array(self, format=None, *args, **kwargs):
     response_list = get_current_team(self)
     action_array = get_action_array(response_list)
-
     return action_array
 
 
@@ -754,24 +753,33 @@ def get_team_model_array(self, format=None, *args, **kwargs):
     action = get_employee_action_array(self)
     behave = get_employee_behav_array(self)
     user_id = list(info[0].keys())
-    user_combination = list(it.combinations(user_id, 2))
+    x = list(info[0].keys())
+    x.remove(int(self.kwargs['pk2']))
+    user_combi = []
+    for i in x:
+        user_combi.append(tuple((int(self.kwargs['pk2']), i)))
+
     value_array = []
     for val in user_id:
         complete = info[0][val] + motiv[0][val] + action[0][val] + behave[0][val]
         value_array.append({val: complete})
-    return value_array, user_combination
+    return value_array, user_combi
 
 
 def get_explanation(self, format=None, *args, **kwargs):
-    team_array = get_team_model_array(self)[0]
+    team_array_list = get_team_model_array(self)[0]
     user_combi = get_team_model_array(self)[1]
-    team_dict = {}
-    for val in team_array:
-        team_dict.update(val)
+    motiv_labels = get_employee_motivation_array(self)[2]
+    action_labels = get_employee_action_array(self)[2]
+    behav_labels = get_employee_behav_array(self)[2]
+
+    team_array_dict = {}  # transforming team_array_list to a dict
+    for val in team_array_list:
+        team_array_dict.update(val)
 
     dic_combi_value = {}
     for i in user_combi:
-        combi_val = list(zip(team_dict[i[0]], team_dict[i[1]]))
+        combi_val = list(zip(team_array_dict[i[0]], team_array_dict[i[1]]))
         dic_combi_value.update({i: combi_val})
 
     opposed_model = {}
@@ -780,13 +788,29 @@ def get_explanation(self, format=None, *args, **kwargs):
         list_index_opposed = []
         list_index_differ = []
         for index, val in enumerate(y):
-            if (val[0] ^ val[1]) >= 0:
-                if ((val[0] - val[1]) ** 2) > 900:
-                    list_index_differ.append(index)
+            if index == 8 or index == 11 or index == 18:
+                if index == 8:
+                    if motiv_labels[x[0]] != motiv_labels[x[1]]:
+                        list_index_opposed.append(index)
+                        print("motiv model added to opposed")
+                if index == 11:
+                    if action_labels[x[0]] != motiv_labels[x[1]]:
+                        list_index_opposed.append(index)
+                        print("action model added to opposed")
+                if index == 18:
+                    if behav_labels[x[0]] != motiv_labels[x[1]]:
+                        list_index_opposed.append(index)
+                        print("behav model added to opposed")
             else:
-                list_index_opposed.append(index)
-        opposed_model.update({str(x): list_index_opposed})
-        differ_model.update({str(x): list_index_differ})
+                if (val[0] ^ val[1]) >= 0:
+                    if ((val[0] - val[1]) ** 2) > 900:
+                        list_index_differ.append(index)
+                else:
+                    list_index_opposed.append(index)
+        opposed_model.update({str(x[1]): list_index_opposed})
+        print("opposed:{}".format(opposed_model))
+        differ_model.update({str(x[1]): list_index_differ})
+
     return opposed_model, differ_model
 
 
