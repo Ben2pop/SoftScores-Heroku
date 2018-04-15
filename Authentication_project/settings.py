@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'bootstrapform',
     'rosetta',
     'rest_framework',
-    'bootstrap4',
 
 ]
 
