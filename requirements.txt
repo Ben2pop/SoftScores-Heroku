@@ -72,7 +72,6 @@ pyparsing==2.2.0
 pytest==3.4.2
 pytest-cov==2.5.1
 pytest-django==3.1.2
-pytest-ipdb==0.1
 python-dateutil==2.6.1
 python-mimeparse==1.6.0
 pytz==2017.2
