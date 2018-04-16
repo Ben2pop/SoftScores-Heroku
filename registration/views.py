@@ -50,9 +50,9 @@ def registerManager(request):
             user.save()
             registered = True
             login(request, user)
-            # demoProject = Project.objects.get(name="Project SoftScores")
-            # request.user.project_set.add(demoProject)
-            messages.success(request, 'Yay, Welcome to SoftScores !')
+            messages.success(request,
+                             'Yay, Welcome to SoftScores !',
+                             extra_tags='project')
             return HttpResponseRedirect(reverse('website:hr_index'))
         else:
             print("Error!")
@@ -95,7 +95,7 @@ def HR_login(request):
 
 
 def TeamRegister2(request, pk1):
-
+    #import pdb; pdb.set_trace()
     InviteFormSet = formset_factory(InviteForm2)
 
     if request.method == 'POST':
@@ -146,7 +146,9 @@ def TeamRegister2(request, pk1):
                         to_email = user.email
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
-            messages.success(request, 'testouille la fripouille')
+            messages.success(request,
+                             'You are all set',
+                             extra_tags='team')
             return HttpResponseRedirect(reverse('website:hr_index'))
         else:
             print("The entered form is not valid")
@@ -157,7 +159,7 @@ def TeamRegister2(request, pk1):
 
 
 def applicantregister2(request, pk1):
-    # import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     InviteFormSet = formset_factory(ApplicantForm2)
 
     if request.method == 'POST':
@@ -204,7 +206,6 @@ def applicantregister2(request, pk1):
                     to_email = user.email
                     email = EmailMessage(mail_subject, message, to=[to_email])
                     email.send()
-            messages.success(request, 'testouille la fripouille')
             return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs= {'pk1': pk1}))
         else:
             print("The entered form is not valid")

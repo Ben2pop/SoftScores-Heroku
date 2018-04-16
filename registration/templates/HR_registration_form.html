@@ -23,23 +23,7 @@
             {% csrf_token %}
             <div class="">
               {% bootstrap_form Manager_form layout='inline' %}
-              
-          <!--  {% for field in Manager_form %}
 
-
-              <div class="row">
-                <div class="col-3">{{ field.label_tag }} </div>
-                <div class="col-8"> {{ field }}</div>
-              </div>
-
-              {% if field.help_text %}
-                <small style="display: none">{{ field.help_text }}</small>
-              {% endif %}
-              {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-              {% endfor %}
-
-            {% endfor %} -->
           </div>
             <div class="offset-md-4">
           <button type="submit" class="btn btn-primary btn-lg btnsmallfont">Sign In</button>

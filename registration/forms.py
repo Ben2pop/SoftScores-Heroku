@@ -58,7 +58,7 @@ class TeamMembersFormUpdate(forms.ModelForm):
 
     class Meta():
         model = User
-        fields = ('first_name', 'last_name', 'password')
+        fields = ('first_name', 'last_name', 'gender', 'position', 'password')
 
 
 class InviteForm2(forms.Form):
