@@ -254,9 +254,13 @@ header.masthead {
 }
 
 .title-jumbo{
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
+.title-jumbo{
+  font-size:10px;
+  font-style: italic;
+}
 .quote{
   border-left:1px solid #000;
   margin-top:auto;
