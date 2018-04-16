@@ -962,3 +962,20 @@ margin-top: 5px;
 .green-color{
   color: #66bb9e;
 }
+
+.form-area2 .title-separator{
+  margin:0px;
+}
+
+
+.welcome-arrow{
+  color: #66bb9e;
+margin-top: 20px;
+font-size: 25px;
+font-style: italic;
+text-align: center;
+}
+
+.welcome-content{
+  margin-top:10px;
+}

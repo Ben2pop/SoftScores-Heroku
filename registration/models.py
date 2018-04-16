@@ -42,6 +42,10 @@ class MyUser(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -53,6 +57,7 @@ class MyUser(AbstractBaseUser):
     position = models.CharField(max_length=150, blank=True, null=True)
     company = models.CharField(max_length=100, blank=True, null=True)
     credit = models.IntegerField(default=0)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
 
     objects = MyUserManager()
 

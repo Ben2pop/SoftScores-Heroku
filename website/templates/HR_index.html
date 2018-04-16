@@ -2,6 +2,35 @@
 {% load staticfiles %}
 
 {% block body %}
+{% if messages %}
+<div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <img class="card-img-top" src="{% static "images/welcome-img.png"%}" alt="Card image cap">
+      <div class="modal-body">
+          <div class="messages">
+            {% for message in messages %}
+              <h4 class="{{ message.tags }}">{{ message }}</h1>
+            {% endfor %}
+            <div class="welcome-content">
+                <p>
+                  We are glad to know that your team is important to you !
+                </p>
+                <div class="">
+                  You just accessed your project list page. Here you will be able to access all your project and create new one.
+                </div>
+                <div class="welcome-arrow">
+                  Next step <i class="fas fa-arrow-circle-right"></i> Create your first project</div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 <div class="container hr-index">
   {% if project_list.count < 1 %}
@@ -166,5 +195,11 @@
     </div>
   </div>
 </div>
+
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('#modal-message').modal({show:true});
+    });
+</script>
 
 {% endblock %}

@@ -94,7 +94,6 @@ class HRIndex(generic.ListView):
     def get_context_data(self, **kwargs):
         #import pdb; pdb.set_trace()
         context = super(HRIndex, self).get_context_data(**kwargs)
-        project_demo_id = Project.objects.get(name="Project SoftScores").id
         status_dict = {}
         try:
             for project in Project.objects.filter(project_hr_admin_id=self.request.user):
@@ -113,7 +112,6 @@ class HRIndex(generic.ListView):
                 context['status_dict'] = status_dict
         except AttributeError:
             pass
-        context['project_demo_id'] = project_demo_id
         return context
 
 

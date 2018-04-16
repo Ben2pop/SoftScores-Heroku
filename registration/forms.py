@@ -20,8 +20,30 @@ class ManagerForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ['email', 'first_name', 'last_name', 'company', 'position',
-                  'password',
+                  'gender', 'password',
                   ]
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        email = email.lower()
+        print(email)
+        return email
+
+    def clean(self):
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+        company = self.cleaned_data.get('company')
+        position = self.cleaned_data.get('position')
+        gender = self.cleaned_data.get('gender')
+
+        if not first_name or not last_name or not company or not position or not gender:
+            raise forms.ValidationError(
+                'You have empty values, please enter a valid value for each field'
+            )
+
+        return self.cleaned_data
+
+
 
 
 class TeamMembersForm(forms.ModelForm):

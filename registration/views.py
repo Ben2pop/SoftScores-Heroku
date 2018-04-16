@@ -50,8 +50,9 @@ def registerManager(request):
             user.save()
             registered = True
             login(request, user)
-            demoProject = Project.objects.get(name="Project SoftScores")
-            request.user.project_set.add(demoProject)
+            # demoProject = Project.objects.get(name="Project SoftScores")
+            # request.user.project_set.add(demoProject)
+            messages.success(request, 'Yay, Welcome to SoftScores !')
             return HttpResponseRedirect(reverse('website:hr_index'))
         else:
             print("Error!")

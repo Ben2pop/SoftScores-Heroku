@@ -18,7 +18,7 @@ class UserCreationForm(forms.ModelForm):
         model = MyUser
         fields = ('email', 'is_active', 'is_hr', 'is_candidate',
                   'is_employee', 'company', 'first_name', 'last_name',
-                  'position', 'is_manager','credit')
+                  'position', 'is_manager', 'credit', 'gender')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -48,7 +48,7 @@ class UserChangeForm(forms.ModelForm):
         model = MyUser
         fields = ('email', 'password', 'is_active', 'is_admin', 'is_hr',
                   'is_candidate', 'is_employee', 'company', 'first_name',
-                  'last_name', 'position', 'is_manager', 'credit')
+                  'last_name', 'position', 'is_manager', 'credit', 'gender')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -67,11 +67,11 @@ class UserAdmin(BaseUserAdmin):
     # that reference specific fields on auth.User.
     list_display = ('email', 'is_admin', 'is_active', 'is_admin', 'is_hr',
                     'is_candidate', 'is_employee', 'company', 'first_name',
-                    'last_name', 'position', 'is_manager', 'credit')
+                    'last_name', 'position', 'is_manager', 'credit', 'gender')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'company', 'first_name',
-                'last_name', 'position',  'credit')}),
+                'last_name', 'position', 'credit', 'gender')}),
         ('Permissions', {'fields': ('is_admin', 'is_active', 'is_hr',
                                     'is_candidate', 'is_employee',
                                     'is_manager')}),
