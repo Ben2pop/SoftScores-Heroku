@@ -309,7 +309,6 @@ def get_answers_per_question(answer_list, numb_questions):
 
 def get_question_similarities(self, format=None, *args, **kwargs):
     compelete_team_scores = get_compelete_team_scores(self)
-    # print("compelete_team_scores: {}".format(compelete_team_scores))
     team_info_tupple = get_employee_info_array(self)[0]
     team_motivation_tupple = get_employee_motivation_array(self)[0]
     team_action_tupple = get_employee_action_array(self)[0]
@@ -382,7 +381,6 @@ def get_ponderation_total(pond_dict):
 
 def get_innovation_score(self):
     team_model_score = get_compelete_team_scores(self)
-    print(team_model_score)
     pond = {0: 2, 1: 3, 3: 2, 5: 1, 12: 3, 14: 1}
     tot_pond = get_ponderation_total(pond)
     user_score = 0

@@ -22,50 +22,50 @@ from website.views.employee_dashboard import *
 from website.views.team_dashboard import *
 
 
-class LinkTeam(generic.ListView):
-    template_name = 'link_project.html'
-
-    def get_queryset(self):
-        queryset = Team.objects.filter(team_hr_admin=self.request.user)
-        return queryset
-
-
-def TeamSelect(request, pk1=None):
-    # import pdb; pdb.set_trace()
-    if request.method == "POST":
-        select_form = EditSelectTeam(request.user, request.POST)
-        if select_form.is_valid():
-            data = select_form.cleaned_data['team_choice']
-            obj2 = Project.objects.filter(project_hr_admin=request.user)
-            obj3 = obj2.latest('id')
-            if obj3.team_id is None:
-                obj3.team_id = data
-                obj3.save()
-                obj4 = obj3.team_id
-                obj5 = obj4.members.all()
-
-                for i in obj5:
-                    current_site = get_current_site(request)
-                    message = render_to_string('acc_join_email.html', {
-                        'user': i.first_name,
-                        'domain': current_site.domain,
-                        })
-                    mail_subject = 'You have been invited to SoftScores.com please LogIn to get access to the app'
-                    to_email = i.email
-                    email = EmailMessage(mail_subject, message, to=[to_email])
-                    email.send()
-                messages.success(request, 'test')
-                return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1': obj3.id}))
-            else:
-                print('this project has already a team')
-        else:
-            print('Non Valid form')
-
-    else:
-        # import pdb; pdb.set_trace()
-        select_form = EditSelectTeam(request.user)
-    return render(request,'link_project.html',
-                            {'select_form':select_form })
+# class LinkTeam(generic.ListView):
+#     template_name = 'link_project.html'
+#
+#     def get_queryset(self):
+#         queryset = Team.objects.filter(team_hr_admin=self.request.user)
+#         return queryset
+#
+#
+# def TeamSelect(request, pk1=None):
+#     # import pdb; pdb.set_trace()
+#     if request.method == "POST":
+#         select_form = EditSelectTeam(request.user, request.POST)
+#         if select_form.is_valid():
+#             data = select_form.cleaned_data['team_choice']
+#             obj2 = Project.objects.filter(project_hr_admin=request.user)
+#             obj3 = obj2.latest('id')
+#             if obj3.team_id is None:
+#                 obj3.team_id = data
+#                 obj3.save()
+#                 obj4 = obj3.team_id
+#                 obj5 = obj4.members.all()
+#
+#                 for i in obj5:
+#                     current_site = get_current_site(request)
+#                     message = render_to_string('acc_join_email.html', {
+#                         'user': i.first_name,
+#                         'domain': current_site.domain,
+#                     })
+#                     mail_subject = 'You have been invited to SoftScores.com please LogIn to get access to the app'
+#                     to_email = i.email
+#                     email = EmailMessage(mail_subject, message, to=[to_email])
+#                     email.send()
+#                 messages.success(request, 'test')
+#                 return HttpResponseRedirect(reverse('website:ProjectDetails', kwargs={'pk1': obj3.id}))
+#             else:
+#                 print('this project has already a team')
+#         else:
+#             print('Non Valid form')
+#
+#     else:
+#         # import pdb; pdb.set_trace()
+#         select_form = EditSelectTeam(request.user)
+#     return render(request,'link_project.html',
+#                             {'select_form':select_form })
 
 
 class CreateProject(LoginRequiredMixin, CreateView):
@@ -235,6 +235,7 @@ class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
             pass
         return context
 
+
 class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
     #import pdb; pdb.set_trace()
     model = MyUser
@@ -250,12 +251,19 @@ class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
         team_list = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
         team_list_pop = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all().exclude(id=self.kwargs['pk2'])
 
-        context={
-            'employee_name' : employee_name,
-            'team_list' : team_list,
-            'team_list_pop' : team_list_pop,
+        context = {
+            'employee_name': employee_name,
+            'team_list': team_list,
+            'team_list_pop': team_list_pop,
         }
         return context
+
+    def pronoun(self, possessive=False):
+        if possessive:
+            return "his" if self.gender == 'male' else "her" if self.gender == 'female' else "their"
+        else:
+            return "he" if self.gender == 'male' else "she" if self.gender == 'female' else "they"
+
 
 class CandidateDetailView(LoginRequiredMixin, generic.DetailView):
     #import pdb; pdb.set_trace()
@@ -279,6 +287,7 @@ class CandidateDetailView(LoginRequiredMixin, generic.DetailView):
         context['employee_name'] = employee_name
 
         return context
+
 
 class RecruitmentPage(generic.ListView):
     #import pdb; pdb.set_trace()

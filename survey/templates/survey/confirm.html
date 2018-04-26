@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "Survey submitted" %}{% endblock title %}
 
 {% block body %}
 <h1>{% trans "Survey submitted"%}</h1>
+<div class="container paddingtop80">
+  <div class="row">
+      <div class="col">
+        <img src="{% static "images/end-survey.png" %}" class="img-fluid" alt="Responsive image">
+        <div class="suveysubmit">
+          <div class="surveysubmitcontent">
+            <p>
+              <div class="alert alert-success">
+                 {% trans "Thanks! Your answers have been saved" %}
+              </div>
 
-  <div class="suveysubmit">
-    <div class="surveysubmitcontent">
-      <p>
-        <div class="alert alert-success">
-           {% trans "Thanks! Your answers have been saved" %}
+            </p>
+          </div>
+          <div class="backbutton offset-md-10">
+            <a class="btn btn-primary" href="{% url 'index' %}" role="button">Back to index</a>
+          </div>
         </div>
-        <div class="alert alert-info">
-           {% trans "You can always come back and change them." %}
-        </div>
-      </p>
-    </div>
-    <div class="backbutton offset-md-10">
-      <a class="btn btn-primary" href="{% url 'index' %}" role="button">Back to index</a>
-    </div>
-
+      </div>
   </div>
+
+</div>
+
 
 {% endblock %}

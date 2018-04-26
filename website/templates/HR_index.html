@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block body %}
 
@@ -37,7 +37,8 @@
                         When you and your team will be finished answering the survey you will then access your dashboard
                       </div>
                       <div class="welcome-arrow">
-                        Next step <i class="fas fa-arrow-circle-right"></i> Answer your survey</div>
+                        Next step: <a class="btn btn-danger btn-xs btn-survey" href="{% url 'website:employee_index' pk2=user.id %}"><i class="fas fa-arrow-right arrow-left"></i>Take the survey<i class="fas fa-arrow-left arrow-right"></i></a>
+                      </div>
                   </div>
                 {% endif %}
 

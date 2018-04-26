@@ -5,11 +5,11 @@
 <div class="grey_back">
 
 
-<div class="container paddingtop80 padbot30">
-    <div class="row">
-        {% if project.has_member_responses %}
-    <div class="col-8">
-        <div class="jumbotron greenback same-height bord">
+  <div class="container paddingtop80 padbot30">
+      <div class="row">
+      {% if all_user_response == 1 %}
+          <div class="col-8">
+            <div class="jumbotron greenback same-height bord">
             <h4>Welcome to the Project test "{{  project.name }}" Detail page</h4>
         </div>
     </div>
@@ -63,7 +63,7 @@
     {% endif %}
 
 
-{% if project.has_member_responses  %}
+{% if all_user_response == 1  %}
   {% include "survey/team_dashboard.html" %}
 {% elif project.team_id and project.team_id.members.count > 0 %}
   <div class="jumbotron redback bord">

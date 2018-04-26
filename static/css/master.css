@@ -983,3 +983,20 @@ text-align: center;
 .form-container-candidate{
   margin-top:60px;
 }
+
+
+.arrow-left{
+  margin-right:25px;
+}
+
+.arrow-right{
+  margin-left:25px;
+}
+
+.btn-survey{
+  background-color:rgb(238,148,140)
+}
+
+.register{
+  font-size:14px;
+}

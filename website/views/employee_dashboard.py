@@ -32,6 +32,7 @@ class EmployeeChartData(APIView):
         knowledge_label = get_employee_behav_array(self)[2][int(self.kwargs['pk2'])]
         team_model_array = get_team_model_array(self)
         explanation = get_explanation(self)
+        gender = get_gender(self)
 
         processing_information_label = [
                                         ["General", "Details"],
@@ -103,7 +104,8 @@ class EmployeeChartData(APIView):
             "action_array2": action_array2,
             'behav_array2': behav_array2,
             "team_model_array": team_model_array,
-            "explanation": explanation
+            "explanation": explanation,
+            "gender": gender,
 
         }
         return Response(data)
@@ -792,15 +794,15 @@ def get_explanation(self, format=None, *args, **kwargs):
                 if index == 8:
                     if motiv_labels[x[0]] != motiv_labels[x[1]]:
                         list_index_opposed.append(index)
-                        print("motiv model added to opposed")
+
                 if index == 11:
                     if action_labels[x[0]] != motiv_labels[x[1]]:
                         list_index_opposed.append(index)
-                        print("action model added to opposed")
+
                 if index == 18:
                     if behav_labels[x[0]] != motiv_labels[x[1]]:
                         list_index_opposed.append(index)
-                        print("behav model added to opposed")
+
             else:
                 if (val[0] ^ val[1]) >= 0:
                     if ((val[0] - val[1]) ** 2) > 900:
@@ -808,10 +810,16 @@ def get_explanation(self, format=None, *args, **kwargs):
                 else:
                     list_index_opposed.append(index)
         opposed_model.update({str(x[1]): list_index_opposed})
-        print("opposed:{}".format(opposed_model))
         differ_model.update({str(x[1]): list_index_differ})
-
     return opposed_model, differ_model
 
 
+def get_gender(self):
+    gender_array = {}
+    current_team = Project.objects.get(id=self.kwargs['pk1']).team_id.members.all()
+    for i in current_team:
+        user_id = i.id
+        user_gender = i.gender
+        gender_array.update({user_id: user_gender})
+    return gender_array
 # 34

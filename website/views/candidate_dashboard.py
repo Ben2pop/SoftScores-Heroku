@@ -60,7 +60,7 @@ class applicantChartData(APIView):
         complete_label = [
                          ["General", "Details"],
                          ["Sameness", "Difference"],
-                         ["Visual",  "Auditory"],
+                         ["Visual", "Auditory"],
                          ["Static", "Process"],
                          ["Best Scenario", "Worst Scenario"],
                          ["Binary", "Shades"],
@@ -74,7 +74,7 @@ class applicantChartData(APIView):
                          ["Perfection", "Optimizing"],
                          ["Sensor", "Intuition"],
                          ["External locus", "Internal locus"],
-                         ["Strong Will",  "Compliant"],
+                         ["Strong Will", "Compliant"],
                          ["In time", "Through time"],
                          ["[behav_team[1]['label']]"]
                          ]
