@@ -243,7 +243,6 @@ def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
         z = team_behaviour_tupple[a]
         test = w + x + y + z
         array_dict.update({a: test})
-
     score = get_team_cohesivenss_score2(array_dict)
     return score
 
@@ -251,7 +250,6 @@ def get_team_cohesivenss_score(self, format=None, *args, **kwargs):
 def get_team_cohesivenss_score2(array_dict):
     list_keys = list(array_dict.keys())
     list_combi = list(it.combinations(list_keys, 2))
-
     final_dic = []
     for i in list_combi:
         temp_dict = {}
@@ -275,7 +273,6 @@ def get_team_cohesivenss_score2(array_dict):
         user_pair = user_1 + ' - ' + user_2
         users.append(user_pair)
         similarity_dict.update({user_pair: dist_score})
-
     team_score = round(np.mean(dist_list))
     return team_score, users, dist_list
 
